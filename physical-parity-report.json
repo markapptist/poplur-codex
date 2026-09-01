@@ -1,0 +1,19 @@
+{
+  "generatedAt": "2026-08-01T15:58:36.567Z",
+  "source": "main project build numbers and physical device package metadata",
+  "android": {
+    "status": "current",
+    "serial": "R9TX30MHRSR",
+    "expectedVersion": "2",
+    "installedVersion": "2",
+    "launchers": [
+      "com.apptists.poplur2025/.MainActivity"
+    ]
+  },
+  "ios": {
+    "status": "current",
+    "expectedVersion": "6",
+    "installedVersion": "6"
+  },
+  "status": "current"
+}

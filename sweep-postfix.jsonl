@@ -1,0 +1,22 @@
+{"tab":"feed","wheel":["Open LIKE subscreen","Open COMMENT subscreen","Open PROFILE subscreen","Open TV GUIDE subscreen","Open CC OFF subscreen"],"settledAfterCount":5}
+{"tab":"feed","item":"Open LIKE subscreen","kind":"not a subscreen — acted in place (toggle/navigation)","text":"CH 101 FOOD ◆ reached you from 13.8 mi 101 RADIUS ◆ 26.0mi of 3,959 mi 128 nearby ONLINE NOW 1.2M users in reach LIVE PR"}
+{"tab":"feed","item":"Open COMMENT subscreen","kind":"not a subscreen — acted in place (toggle/navigation)","text":"CH 101 FOOD ◆ reached you from 13.8 mi @nightmarket this is exactly my block 😭 @poutine.patrol the gravy shot at 0:12 i"}
+{"tab":"feed","item":"Open PROFILE subscreen","kind":"not a subscreen — acted in place (toggle/navigation)","text":"SAUCEBOSS Media Messages Saved CH 101 CH 104 CH 107 CH 110 CH 112 CH 113 CH 114 CH 115 CH 111 CH 118 CH 121 CH 124 CH 12"}
+{"tab":"feed","item":"Open TV GUIDE subscreen","dialog":"TV Guide","nodes":660,"canvases":7,"videos":2,"playing":0,"closers":1,"text":"CH 101 FOOD ◆ reached you from 13.8 mi 101 RADIUS ◆ 26.0mi of 3,959 mi 128 nearby ONLINE NOW 1.2M users in reach LIVE PR"}
+{"tab":"feed","item":"Open CC OFF subscreen","kind":"not a subscreen — acted in place (toggle/navigation)","text":"CH 101 FOOD ◆ reached you from 13.8 mi 101 RADIUS ◆ 26.0mi of 3,959 mi 128 nearby ONLINE NOW 1.2M users in reach LIVE PR"}
+{"tab":"profile","wheel":["Open MAIL subscreen","Open STORE subscreen","Open PHONE subscreen","Open SETTINGS subscreen","Open HEY POPLUR subscreen"],"settledAfterCount":5}
+{"tab":"profile","item":"Open MAIL subscreen","dialog":"MAIL Rough Copy subscreen","nodes":190,"canvases":4,"videos":0,"playing":0,"closers":1,"text":"IFRAME: "}
+{"tab":"profile","item":"Open STORE subscreen","dialog":"STORE Rough Copy subscreen","nodes":190,"canvases":4,"videos":0,"playing":0,"closers":1,"text":"IFRAME: (cross-origin — content not readable)"}
+{"tab":"profile","item":"Open PHONE subscreen","dialog":"PHONE Rough Copy subscreen","nodes":190,"canvases":4,"videos":0,"playing":0,"closers":1,"text":"IFRAME: (cross-origin — content not readable)"}
+{"tab":"profile","item":"Open SETTINGS subscreen","dialog":"SETTINGS Rough Copy subscreen","nodes":196,"canvases":4,"videos":0,"playing":0,"closers":1,"text":"IFRAME: (cross-origin — content not readable)"}
+{"tab":"profile","item":"Open HEY POPLUR subscreen","kind":"not a subscreen — acted in place (toggle/navigation)","text":"🔔 USERNAME Media Messages Saved CH 101 CH 104 CH 107 CH 110 CH 112 CH 113 CH 114 CH 115 CH 111 CH 118 CH 121 CH 124 CH "}
+{"tab":"map","wheel":["Open RADIO subscreen"],"settledAfterCount":1}
+{"tab":"map","item":"Open RADIO subscreen","FAILURE":"button vanished from wheel"}
+{"tab":"map","FAILURE":"could not return to wheel"}
+{"tab":"camera","wheel":["Open PHOTO subscreen","Open VIDEO subscreen","Open LIVE subscreen","Open GAMES subscreen","Open STUDIO subscreen"],"settledAfterCount":5}
+{"tab":"camera","item":"Open PHOTO subscreen","kind":"not a subscreen — acted in place (toggle/navigation)","text":"Camera Roll 25 captures ▶ 0:31 ▶ 0:24 ▶ 0:18 ▶ 0:27 ▶ 0:21 ▶ 0:19 ▶ 0:22 ▶ 0:14 ▶ 0:16 ▶ 0:29 ▶ 0:25 ▲ ▼ FLIPS BACK TO T"}
+{"tab":"camera","item":"Open VIDEO subscreen","kind":"not a subscreen — acted in place (toggle/navigation)","text":"Camera Roll 24 captures ▶ 0:31 ▶ 0:24 ▶ 0:18 ▶ 0:27 ▶ 0:21 ▶ 0:19 ▶ 0:22 ▶ 0:14 ▶ 0:16 ▶ 0:29 ▶ 0:25 ▲ ▼ FLIPS BACK TO T"}
+{"tab":"camera","item":"Open LIVE subscreen","kind":"not a subscreen — acted in place (toggle/navigation)","text":"Camera Roll 24 captures ▶ 0:31 ▶ 0:24 ▶ 0:18 ▶ 0:27 ▶ 0:21 ▶ 0:19 ▶ 0:22 ▶ 0:14 ▶ 0:16 ▶ 0:29 ▶ 0:25 ▲ ▼ FLIPS BACK TO T"}
+{"tab":"camera","item":"Open GAMES subscreen","kind":"not a subscreen — acted in place (toggle/navigation)","text":"Camera Roll 24 captures ▶ 0:31 ▶ 0:24 ▶ 0:18 ▶ 0:27 ▶ 0:21 ▶ 0:19 ▶ 0:22 ▶ 0:14 ▶ 0:16 ▶ 0:29 ▶ 0:25 ▲ ▼ FLIPS BACK TO T"}
+{"tab":"camera","item":"Open STUDIO subscreen","kind":"not a subscreen — acted in place (toggle/navigation)","text":"Camera Roll 24 captures ▶ 0:31 ▶ 0:24 ▶ 0:18 ▶ 0:27 ▶ 0:21 ▶ 0:19 ▶ 0:22 ▶ 0:14 ▶ 0:16 ▶ 0:29 ▶ 0:25 ▲ ▼ FLIPS BACK TO T"}
+{"done":true,"at":"2026-07-31T17:57:50.817Z"}

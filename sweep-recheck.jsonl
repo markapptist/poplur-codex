@@ -1,0 +1,9 @@
+{"tab":"map","wheel":["Open RADIO subscreen"],"settledAfterCount":1}
+{"tab":"map","item":"Open RADIO subscreen","dialog":"Poplur Radio","nodes":308,"canvases":11,"videos":0,"playing":0,"closers":1,"text":"1 RADIUS ◆ 26.0mi of 3,959 mi 128 nearby ONLINE NOW 1.2M users in reach LIVE PRESENCE poplur radio STANDBY CH --- POPLUR"}
+{"tab":"camera","wheel":["Open PHOTO subscreen","Open VIDEO subscreen","Open LIVE subscreen","Open GAMES subscreen","Open STUDIO subscreen"],"settledAfterCount":5}
+{"tab":"camera","item":"Open PHOTO subscreen","kind":null,"FAILURE":"clicked and nothing changed"}
+{"tab":"camera","item":"Open VIDEO subscreen","kind":null,"FAILURE":"clicked and nothing changed"}
+{"tab":"camera","item":"Open LIVE subscreen","kind":null,"FAILURE":"clicked and nothing changed"}
+{"tab":"camera","item":"Open GAMES subscreen","kind":null,"FAILURE":"clicked and nothing changed"}
+{"tab":"camera","item":"Open STUDIO subscreen","kind":null,"FAILURE":"clicked and nothing changed"}
+{"done":true,"at":"2026-07-31T12:16:45.965Z"}

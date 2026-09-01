@@ -1,0 +1,599 @@
+[
+  {
+    "id": "mribeax7-0ef860b2",
+    "originalPath": "Poplur2025-ReactNative/ios/Poplur/Images.xcassets/SplashScreenBackground.colorset/Contents 2.json",
+    "storedPath": ".codex/recycling-bin/items/mribeax7-0ef860b2",
+    "bytes": 339,
+    "type": "file",
+    "recycledAt": "2026-07-12T21:37:47.472Z",
+    "status": "deleted",
+    "deletedAt": "2026-07-14T04:09:24.549Z"
+  },
+  {
+    "id": "mribeaxh-a8d787a5",
+    "originalPath": "Poplur2025-ReactNative/ios/Poplur/Images.xcassets/SplashScreenBackground.colorset/Contents 3.json",
+    "storedPath": ".codex/recycling-bin/items/mribeaxh-a8d787a5",
+    "bytes": 348,
+    "type": "file",
+    "recycledAt": "2026-07-12T21:37:47.478Z",
+    "status": "deleted",
+    "deletedAt": "2026-07-14T04:09:24.558Z"
+  },
+  {
+    "id": "mribeaxi-7a6d1a0d",
+    "originalPath": "Poplur2025-ReactNative/ios/Poplur/Images.xcassets/SplashScreenLogo.imageset/Contents 2.json",
+    "storedPath": ".codex/recycling-bin/items/mribeaxi-7a6d1a0d",
+    "bytes": 393,
+    "type": "file",
+    "recycledAt": "2026-07-12T21:37:47.479Z",
+    "status": "deleted",
+    "deletedAt": "2026-07-14T04:09:24.561Z"
+  },
+  {
+    "id": "mribeaxj-4b72ba41",
+    "originalPath": "Poplur2025-ReactNative/ios/Poplur/Images.xcassets/SplashScreenLogo.imageset/Contents 3.json",
+    "storedPath": ".codex/recycling-bin/items/mribeaxj-4b72ba41",
+    "bytes": 303,
+    "type": "file",
+    "recycledAt": "2026-07-12T21:37:47.480Z",
+    "status": "deleted",
+    "deletedAt": "2026-07-14T04:09:24.562Z"
+  },
+  {
+    "id": "mribeaxk-ee80acb6",
+    "originalPath": "Poplur2025-ReactNative/ios/Poplur/Images.xcassets/SplashScreenLogo.imageset/SplashScreenLogo 2.png",
+    "storedPath": ".codex/recycling-bin/items/mribeaxk-ee80acb6",
+    "bytes": 8602,
+    "type": "file",
+    "recycledAt": "2026-07-12T21:37:47.481Z",
+    "status": "deleted",
+    "deletedAt": "2026-07-14T04:09:24.563Z"
+  },
+  {
+    "id": "mribeaxl-fb98d622",
+    "originalPath": "Poplur2025-ReactNative/ios/Poplur/Images.xcassets/SplashScreenLogo.imageset/SplashScreenLogo 3.png",
+    "storedPath": ".codex/recycling-bin/items/mribeaxl-fb98d622",
+    "bytes": 59639,
+    "type": "file",
+    "recycledAt": "2026-07-12T21:37:47.482Z",
+    "status": "deleted",
+    "deletedAt": "2026-07-14T04:09:24.565Z"
+  },
+  {
+    "id": "mribeaxm-6c0b1247",
+    "originalPath": "poplur-clay-map/holdmenu_icons_original_backup",
+    "storedPath": ".codex/recycling-bin/items/mribeaxm-6c0b1247",
+    "bytes": 492451,
+    "type": "folder",
+    "recycledAt": "2026-07-12T21:37:47.485Z",
+    "status": "deleted",
+    "deletedAt": "2026-07-14T04:09:24.573Z"
+  },
+  {
+    "id": "mribeaxp-2b5cab37",
+    "originalPath": "poplur-clay-map/icon-export",
+    "storedPath": ".codex/recycling-bin/items/mribeaxp-2b5cab37",
+    "bytes": 939458,
+    "type": "folder",
+    "recycledAt": "2026-07-12T21:37:47.491Z",
+    "status": "deleted",
+    "deletedAt": "2026-07-14T04:09:24.612Z"
+  },
+  {
+    "id": "mribeaxv-7dd5b4e9",
+    "originalPath": "poplur-clay-map/poplur_holdmenu_icons",
+    "storedPath": ".codex/recycling-bin/items/mribeaxv-7dd5b4e9",
+    "bytes": 939458,
+    "type": "folder",
+    "recycledAt": "2026-07-12T21:37:47.493Z",
+    "status": "deleted",
+    "deletedAt": "2026-07-14T04:09:24.632Z"
+  },
+  {
+    "id": "mribeaxx-262da039",
+    "originalPath": "poplur-clay-map/poplur_holdmenu_icons.zip",
+    "storedPath": ".codex/recycling-bin/items/mribeaxx-262da039",
+    "bytes": 938778,
+    "type": "file",
+    "recycledAt": "2026-07-12T21:37:47.494Z",
+    "status": "deleted",
+    "deletedAt": "2026-07-14T04:09:24.655Z"
+  },
+  {
+    "id": "mrk4swtt-8ad495d1-1",
+    "batchId": "mrk4swtt-8ad495d1",
+    "originalPath": "Poplur2025-iOS/Poplur2025/PreLoginWalletIntroView.swift",
+    "storedPath": ".codex/recycling-bin/items/mrk4swtt-8ad495d1-1",
+    "bytes": 12794,
+    "type": "file",
+    "kind": "screen-source",
+    "screen": {
+      "label": "Pre Login Wallet Intro",
+      "surfaceId": "iphone",
+      "trackingKey": "rcl-iphone-pre-login-wallet-intro"
+    },
+    "impactedScreens": [
+      {
+        "surfaceId": "iphone",
+        "label": "Pre Login Wallet Intro",
+        "trackingKey": "rcl-iphone-pre-login-wallet-intro"
+      },
+      {
+        "surfaceId": "ipad",
+        "label": "Pre Login Wallet Intro",
+        "trackingKey": "rcl-ipad-pre-login-wallet-intro"
+      }
+    ],
+    "refactorStatus": "validated-no-external-references",
+    "recycledAt": "2026-07-14T04:08:44.116Z",
+    "status": "deleted",
+    "deletedAt": "2026-07-14T04:09:24.657Z"
+  },
+  {
+    "id": "mrk4swtt-8ad495d1-2",
+    "batchId": "mrk4swtt-8ad495d1",
+    "originalPath": "Poplur2025-Android/app/src/main/java/com/apptists/poplur2025/ui/screens/PreLoginWalletIntro.kt",
+    "storedPath": ".codex/recycling-bin/items/mrk4swtt-8ad495d1-2",
+    "bytes": 17104,
+    "type": "file",
+    "kind": "screen-source",
+    "screen": {
+      "label": "Pre Login Wallet Intro",
+      "surfaceId": "iphone",
+      "trackingKey": "rcl-iphone-pre-login-wallet-intro"
+    },
+    "impactedScreens": [
+      {
+        "surfaceId": "iphone",
+        "label": "Pre Login Wallet Intro",
+        "trackingKey": "rcl-iphone-pre-login-wallet-intro"
+      },
+      {
+        "surfaceId": "ipad",
+        "label": "Pre Login Wallet Intro",
+        "trackingKey": "rcl-ipad-pre-login-wallet-intro"
+      }
+    ],
+    "refactorStatus": "validated-no-external-references",
+    "recycledAt": "2026-07-14T04:08:44.117Z",
+    "status": "deleted",
+    "deletedAt": "2026-07-14T04:09:24.661Z"
+  },
+  {
+    "id": "ms1uyils-2d792839",
+    "originalPath": "Poplur2025-Android/app/build",
+    "storedPath": ".codex/recycling-bin/items/ms1uyils-2d792839",
+    "bytes": 8852529404,
+    "type": "folder",
+    "kind": "generated-build-output",
+    "regenerable": true,
+    "recycledAt": "2026-07-26T13:53:01.408Z",
+    "status": "deleted",
+    "lastValidation": {
+      "project": "Poplur2025-Android",
+      "ok": true,
+      "checkedAt": "2026-07-26T14:01:53.773Z",
+      "results": [
+        {
+          "label": "Android debug build",
+          "ok": true,
+          "status": 0,
+          "output": "Reusing configuration cache.\n> Task :app:generateDebugAssets UP-TO-DATE\n> Task :app:copyNatives UP-TO-DATE\n> Task :app:preBuild UP-TO-DATE\n> Task :app:preDebugBuild UP-TO-DATE\n> Task :app:mergeDebugNativeDebugMetadata NO-SOURCE\n> Task :app:createDebugCompatibleScreenManifests\n> Task :app:mergeDebugJniLibFolders\n> Task :app:generateDebugBuildConfig FROM-CACHE\n> Task :app:generateDebugGlobalSynthetics FROM-CACHE\n> Task :app:javaPreCompileDebug FROM-CACHE\n> Task :app:desugarDebugFileDependencies FROM-CACHE\n> Task :app:processDebugGoogleServices FROM-CACHE\n> Task :app:generateDebugResources FROM-CACHE\n> Task :app:mapDebugSourceSetPaths\n> Task :app:extractDeepLinksDebug FROM-CACHE\n> Task :app:writeDebugAppMetadata\n> Task :app:writeDebugSigningConfigVersions\n> Task :app:validateSigningDebug\n> Task :app:checkDebugDuplicateClasses\n> Task :app:mergeLibDexDebug FROM-CACHE\n> Task :app:processDebugMainManifest FROM-CACHE\n> Task :app:processDebugNavigationResources FROM-CACHE\n> Task :app:processDebugManifest FROM-CACHE\n> Task :app:compileDebugNavigationResources FROM-CACHE\n> Task :app:checkDebugAarMetadata\n> Task :app:processDebugManifestForPackage FROM-CACHE\n> Task :app:mergeDebugAssets\n> Task :app:mergeExtDexDebug FROM-CACHE\n> Task :app:mergeDebugNativeLibs\n\n> Task :app:stripDebugDebugSymbols\nUnable to strip the following libraries, packaging them as they are: libagora-fdkaac.so, libagora-ffmpeg.so, libagora-rtc-sdk.so, libagora-soundtouch.so, libandroidx.graphics.path.so, libaosl.so, libc++_shared.so, libface_detector_v2_jni.so, libfilament-jni.so, libfilament-utils-jni.so, libgdx 2.so, libgdx.so, libgltfio-jni.so, libimage_processing_util_jni.so, libmapbox-common.so, libmapbox-maps.so, libmlkitcommonpipeline.so, libsurface_util_jni.so. Run with --info option to learn more.\n\n> Task :app:packageDebugResources FROM-CACHE\n> Task :app:parseDebugLocalResources FROM-CACHE\n> Task :app:generateDebugRFile FROM-CACHE\n> Task :app:mergeDebugResources FROM-CACHE\n> Task :app:compileDebugKotlin FROM-CACHE\n> Task :app:compileDebugJavaWithJavac FROM-CACHE\n> Task :app:processDebugJavaRes\n> Task :app:compressDebugAssets\n> Task :app:processDebugResources FROM-CACHE\n> Task :app:dexBuilderDebug FROM-CACHE\n> Task :app:mergeProjectDexDebug FROM-CACHE\n> Task :app:mergeDebugJavaResource\n> Task :app:compressDebugAssets FROM-CACHE\n> Task :app:packageDebug\n> Task :app:assembleDebug\n> Task :app:createDebugApkListingFileRedirect\n\nBUILD SUCCESSFUL in 1m 12s\n40 actionable tasks: 15 executed, 24 from cache, 1 up-to-date\nConfiguration cache entry reused."
+        }
+      ]
+    },
+    "deletedAt": "2026-07-26T14:03:27.966Z"
+  },
+  {
+    "id": "ms1uyj8i-9448e01a",
+    "originalPath": "Poplur2025-Android/wear/build",
+    "storedPath": ".codex/recycling-bin/items/ms1uyj8i-9448e01a",
+    "bytes": 117789778,
+    "type": "folder",
+    "kind": "generated-build-output",
+    "regenerable": true,
+    "recycledAt": "2026-07-26T13:53:01.476Z",
+    "status": "deleted",
+    "lastValidation": {
+      "project": "Poplur2025-Android",
+      "ok": true,
+      "checkedAt": "2026-07-26T14:01:53.773Z",
+      "results": [
+        {
+          "label": "Android debug build",
+          "ok": true,
+          "status": 0,
+          "output": "Reusing configuration cache.\n> Task :app:generateDebugAssets UP-TO-DATE\n> Task :app:copyNatives UP-TO-DATE\n> Task :app:preBuild UP-TO-DATE\n> Task :app:preDebugBuild UP-TO-DATE\n> Task :app:mergeDebugNativeDebugMetadata NO-SOURCE\n> Task :app:createDebugCompatibleScreenManifests\n> Task :app:mergeDebugJniLibFolders\n> Task :app:generateDebugBuildConfig FROM-CACHE\n> Task :app:generateDebugGlobalSynthetics FROM-CACHE\n> Task :app:javaPreCompileDebug FROM-CACHE\n> Task :app:desugarDebugFileDependencies FROM-CACHE\n> Task :app:processDebugGoogleServices FROM-CACHE\n> Task :app:generateDebugResources FROM-CACHE\n> Task :app:mapDebugSourceSetPaths\n> Task :app:extractDeepLinksDebug FROM-CACHE\n> Task :app:writeDebugAppMetadata\n> Task :app:writeDebugSigningConfigVersions\n> Task :app:validateSigningDebug\n> Task :app:checkDebugDuplicateClasses\n> Task :app:mergeLibDexDebug FROM-CACHE\n> Task :app:processDebugMainManifest FROM-CACHE\n> Task :app:processDebugNavigationResources FROM-CACHE\n> Task :app:processDebugManifest FROM-CACHE\n> Task :app:compileDebugNavigationResources FROM-CACHE\n> Task :app:checkDebugAarMetadata\n> Task :app:processDebugManifestForPackage FROM-CACHE\n> Task :app:mergeDebugAssets\n> Task :app:mergeExtDexDebug FROM-CACHE\n> Task :app:mergeDebugNativeLibs\n\n> Task :app:stripDebugDebugSymbols\nUnable to strip the following libraries, packaging them as they are: libagora-fdkaac.so, libagora-ffmpeg.so, libagora-rtc-sdk.so, libagora-soundtouch.so, libandroidx.graphics.path.so, libaosl.so, libc++_shared.so, libface_detector_v2_jni.so, libfilament-jni.so, libfilament-utils-jni.so, libgdx 2.so, libgdx.so, libgltfio-jni.so, libimage_processing_util_jni.so, libmapbox-common.so, libmapbox-maps.so, libmlkitcommonpipeline.so, libsurface_util_jni.so. Run with --info option to learn more.\n\n> Task :app:packageDebugResources FROM-CACHE\n> Task :app:parseDebugLocalResources FROM-CACHE\n> Task :app:generateDebugRFile FROM-CACHE\n> Task :app:mergeDebugResources FROM-CACHE\n> Task :app:compileDebugKotlin FROM-CACHE\n> Task :app:compileDebugJavaWithJavac FROM-CACHE\n> Task :app:processDebugJavaRes\n> Task :app:compressDebugAssets\n> Task :app:processDebugResources FROM-CACHE\n> Task :app:dexBuilderDebug FROM-CACHE\n> Task :app:mergeProjectDexDebug FROM-CACHE\n> Task :app:mergeDebugJavaResource\n> Task :app:compressDebugAssets FROM-CACHE\n> Task :app:packageDebug\n> Task :app:assembleDebug\n> Task :app:createDebugApkListingFileRedirect\n\nBUILD SUCCESSFUL in 1m 12s\n40 actionable tasks: 15 executed, 24 from cache, 1 up-to-date\nConfiguration cache entry reused."
+        }
+      ]
+    },
+    "deletedAt": "2026-07-26T14:03:29.262Z"
+  },
+  {
+    "id": "ms1uyjac-cbd190c1",
+    "originalPath": "Poplur2025-Android/build",
+    "storedPath": ".codex/recycling-bin/items/ms1uyjac-cbd190c1",
+    "bytes": 7973944,
+    "type": "folder",
+    "kind": "generated-build-output",
+    "regenerable": true,
+    "recycledAt": "2026-07-26T13:53:01.494Z",
+    "status": "deleted",
+    "lastValidation": {
+      "project": "Poplur2025-Android",
+      "ok": true,
+      "checkedAt": "2026-07-26T14:01:53.773Z",
+      "results": [
+        {
+          "label": "Android debug build",
+          "ok": true,
+          "status": 0,
+          "output": "Reusing configuration cache.\n> Task :app:generateDebugAssets UP-TO-DATE\n> Task :app:copyNatives UP-TO-DATE\n> Task :app:preBuild UP-TO-DATE\n> Task :app:preDebugBuild UP-TO-DATE\n> Task :app:mergeDebugNativeDebugMetadata NO-SOURCE\n> Task :app:createDebugCompatibleScreenManifests\n> Task :app:mergeDebugJniLibFolders\n> Task :app:generateDebugBuildConfig FROM-CACHE\n> Task :app:generateDebugGlobalSynthetics FROM-CACHE\n> Task :app:javaPreCompileDebug FROM-CACHE\n> Task :app:desugarDebugFileDependencies FROM-CACHE\n> Task :app:processDebugGoogleServices FROM-CACHE\n> Task :app:generateDebugResources FROM-CACHE\n> Task :app:mapDebugSourceSetPaths\n> Task :app:extractDeepLinksDebug FROM-CACHE\n> Task :app:writeDebugAppMetadata\n> Task :app:writeDebugSigningConfigVersions\n> Task :app:validateSigningDebug\n> Task :app:checkDebugDuplicateClasses\n> Task :app:mergeLibDexDebug FROM-CACHE\n> Task :app:processDebugMainManifest FROM-CACHE\n> Task :app:processDebugNavigationResources FROM-CACHE\n> Task :app:processDebugManifest FROM-CACHE\n> Task :app:compileDebugNavigationResources FROM-CACHE\n> Task :app:checkDebugAarMetadata\n> Task :app:processDebugManifestForPackage FROM-CACHE\n> Task :app:mergeDebugAssets\n> Task :app:mergeExtDexDebug FROM-CACHE\n> Task :app:mergeDebugNativeLibs\n\n> Task :app:stripDebugDebugSymbols\nUnable to strip the following libraries, packaging them as they are: libagora-fdkaac.so, libagora-ffmpeg.so, libagora-rtc-sdk.so, libagora-soundtouch.so, libandroidx.graphics.path.so, libaosl.so, libc++_shared.so, libface_detector_v2_jni.so, libfilament-jni.so, libfilament-utils-jni.so, libgdx 2.so, libgdx.so, libgltfio-jni.so, libimage_processing_util_jni.so, libmapbox-common.so, libmapbox-maps.so, libmlkitcommonpipeline.so, libsurface_util_jni.so. Run with --info option to learn more.\n\n> Task :app:packageDebugResources FROM-CACHE\n> Task :app:parseDebugLocalResources FROM-CACHE\n> Task :app:generateDebugRFile FROM-CACHE\n> Task :app:mergeDebugResources FROM-CACHE\n> Task :app:compileDebugKotlin FROM-CACHE\n> Task :app:compileDebugJavaWithJavac FROM-CACHE\n> Task :app:processDebugJavaRes\n> Task :app:compressDebugAssets\n> Task :app:processDebugResources FROM-CACHE\n> Task :app:dexBuilderDebug FROM-CACHE\n> Task :app:mergeProjectDexDebug FROM-CACHE\n> Task :app:mergeDebugJavaResource\n> Task :app:compressDebugAssets FROM-CACHE\n> Task :app:packageDebug\n> Task :app:assembleDebug\n> Task :app:createDebugApkListingFileRedirect\n\nBUILD SUCCESSFUL in 1m 12s\n40 actionable tasks: 15 executed, 24 from cache, 1 up-to-date\nConfiguration cache entry reused."
+        }
+      ]
+    },
+    "deletedAt": "2026-07-26T14:03:29.411Z"
+  },
+  {
+    "id": "ms1uyjau-0bcd77be",
+    "originalPath": "Poplur2025-ReactNative/android/app/build",
+    "storedPath": ".codex/recycling-bin/items/ms1uyjau-0bcd77be",
+    "bytes": 535494400,
+    "type": "folder",
+    "kind": "generated-build-output",
+    "regenerable": true,
+    "recycledAt": "2026-07-26T13:53:01.606Z",
+    "status": "deleted",
+    "lastValidation": {
+      "project": "Poplur2025-ReactNative",
+      "ok": true,
+      "checkedAt": "2026-07-26T14:02:24.154Z",
+      "results": [
+        {
+          "label": "TypeScript typecheck",
+          "ok": true,
+          "status": 0,
+          "output": "> poplur2025-react-native@1.0.0 typecheck\n> tsc --noEmit"
+        }
+      ]
+    },
+    "deletedAt": "2026-07-26T14:03:31.706Z"
+  },
+  {
+    "id": "ms1uyjdy-3481feb2",
+    "originalPath": "Poplur2025-ReactNative/android/build",
+    "storedPath": ".codex/recycling-bin/items/ms1uyjdy-3481feb2",
+    "bytes": 11574,
+    "type": "folder",
+    "kind": "generated-build-output",
+    "regenerable": true,
+    "recycledAt": "2026-07-26T13:53:01.608Z",
+    "status": "deleted",
+    "lastValidation": {
+      "project": "Poplur2025-ReactNative",
+      "ok": true,
+      "checkedAt": "2026-07-26T14:02:24.154Z",
+      "results": [
+        {
+          "label": "TypeScript typecheck",
+          "ok": true,
+          "status": 0,
+          "output": "> poplur2025-react-native@1.0.0 typecheck\n> tsc --noEmit"
+        }
+      ]
+    },
+    "deletedAt": "2026-07-26T14:03:31.714Z"
+  },
+  {
+    "id": "ms6720va-30f3d295",
+    "originalPath": "Poplur2025-Android/app/build",
+    "storedPath": ".codex/recycling-bin/items/ms6720va-30f3d295",
+    "bytes": 3547050187,
+    "type": "folder",
+    "kind": "generated-build-output",
+    "regenerable": true,
+    "validationProject": "Poplur2025-Android",
+    "recycledAt": "2026-07-29T14:42:46.796Z",
+    "status": "deleted",
+    "lastValidation": {
+      "project": "Poplur2025-Android",
+      "ok": true,
+      "checkedAt": "2026-07-29T16:10:08.593Z",
+      "results": [
+        {
+          "label": "Android debug build",
+          "ok": true,
+          "status": 0,
+          "output": "Starting a Gradle Daemon, 2 stopped Daemons could not be reused, use --status for details\nCalculating task graph as configuration cache cannot be reused because a build logic input of type 'IsTerminalSmartValueSource' has changed.\n> Task :app:generateDebugAssets UP-TO-DATE\n> Task :app:copyNatives UP-TO-DATE\n> Task :app:processDebugGoogleServices UP-TO-DATE\n> Task :app:preBuild UP-TO-DATE\n> Task :app:preDebugBuild UP-TO-DATE\n> Task :app:javaPreCompileDebug UP-TO-DATE\n> Task :app:generateDebugBuildConfig UP-TO-DATE\n> Task :app:generateDebugGlobalSynthetics UP-TO-DATE\n> Task :app:mergeDebugNativeDebugMetadata NO-SOURCE\n> Task :app:desugarDebugFileDependencies UP-TO-DATE\n> Task :app:validateSigningDebug UP-TO-DATE\n> Task :app:createDebugCompatibleScreenManifests UP-TO-DATE\n> Task :app:extractDeepLinksDebug UP-TO-DATE\n> Task :app:writeDebugAppMetadata UP-TO-DATE\n> Task :app:writeDebugSigningConfigVersions UP-TO-DATE\n> Task :app:mergeDebugJniLibFolders UP-TO-DATE\n> Task :app:generateDebugResources UP-TO-DATE\n> Task :app:mapDebugSourceSetPaths UP-TO-DATE\n> Task :app:packageDebugResources UP-TO-DATE\n> Task :app:checkDebugAarMetadata UP-TO-DATE\n> Task :app:processDebugNavigationResources UP-TO-DATE\n> Task :app:checkDebugDuplicateClasses UP-TO-DATE\n> Task :app:mergeLibDexDebug UP-TO-DATE\n> Task :app:compileDebugNavigationResources UP-TO-DATE\n> Task :app:parseDebugLocalResources UP-TO-DATE\n> Task :app:generateDebugRFile UP-TO-DATE\n> Task :app:mergeDebugNativeLibs UP-TO-DATE\n> Task :app:stripDebugDebugSymbols UP-TO-DATE\n> Task :app:mergeDebugResources UP-TO-DATE\n> Task :app:mergeDebugAssets\n> Task :app:processDebugMainManifest\n> Task :app:processDebugMainManifest UP-TO-DATE\n> Task :app:processDebugManifest UP-TO-DATE\n> Task :app:processDebugManifestForPackage UP-TO-DATE\n> Task :app:mergeExtDexDebug UP-TO-DATE\n> Task :app:processDebugResources UP-TO-DATE\n> Task :app:compileDebugKotlin UP-TO-DATE\n> Task :app:processDebugJavaRes UP-TO-DATE\n> Task :app:compileDebugJavaWithJavac UP-TO-DATE\n> Task :app:dexBuilderDebug UP-TO-DATE\n> Task :app:mergeDebugJavaResource UP-TO-DATE\n> Task :app:mergeProjectDexDebug UP-TO-DATE\n> Task :app:compressDebugAssets\n> Task :app:packageDebug\n> Task :app:assembleDebug\n> Task :app:createDebugApkListingFileRedirect UP-TO-DATE\n\nBUILD SUCCESSFUL in 6m 55s\n40 actionable tasks: 3 executed, 37 up-to-date\nConfiguration cache entry stored."
+        }
+      ]
+    },
+    "deletedAt": "2026-07-29T16:16:25.672Z"
+  },
+  {
+    "id": "ms6722s2-9d84cb1d",
+    "originalPath": "Poplur2025-Android/build",
+    "storedPath": ".codex/recycling-bin/items/ms6722s2-9d84cb1d",
+    "bytes": 3868320,
+    "type": "folder",
+    "kind": "generated-build-output",
+    "regenerable": true,
+    "validationProject": "Poplur2025-Android",
+    "recycledAt": "2026-07-29T14:42:46.865Z",
+    "status": "deleted",
+    "lastValidation": {
+      "project": "Poplur2025-Android",
+      "ok": true,
+      "checkedAt": "2026-07-29T16:10:08.593Z",
+      "results": [
+        {
+          "label": "Android debug build",
+          "ok": true,
+          "status": 0,
+          "output": "Starting a Gradle Daemon, 2 stopped Daemons could not be reused, use --status for details\nCalculating task graph as configuration cache cannot be reused because a build logic input of type 'IsTerminalSmartValueSource' has changed.\n> Task :app:generateDebugAssets UP-TO-DATE\n> Task :app:copyNatives UP-TO-DATE\n> Task :app:processDebugGoogleServices UP-TO-DATE\n> Task :app:preBuild UP-TO-DATE\n> Task :app:preDebugBuild UP-TO-DATE\n> Task :app:javaPreCompileDebug UP-TO-DATE\n> Task :app:generateDebugBuildConfig UP-TO-DATE\n> Task :app:generateDebugGlobalSynthetics UP-TO-DATE\n> Task :app:mergeDebugNativeDebugMetadata NO-SOURCE\n> Task :app:desugarDebugFileDependencies UP-TO-DATE\n> Task :app:validateSigningDebug UP-TO-DATE\n> Task :app:createDebugCompatibleScreenManifests UP-TO-DATE\n> Task :app:extractDeepLinksDebug UP-TO-DATE\n> Task :app:writeDebugAppMetadata UP-TO-DATE\n> Task :app:writeDebugSigningConfigVersions UP-TO-DATE\n> Task :app:mergeDebugJniLibFolders UP-TO-DATE\n> Task :app:generateDebugResources UP-TO-DATE\n> Task :app:mapDebugSourceSetPaths UP-TO-DATE\n> Task :app:packageDebugResources UP-TO-DATE\n> Task :app:checkDebugAarMetadata UP-TO-DATE\n> Task :app:processDebugNavigationResources UP-TO-DATE\n> Task :app:checkDebugDuplicateClasses UP-TO-DATE\n> Task :app:mergeLibDexDebug UP-TO-DATE\n> Task :app:compileDebugNavigationResources UP-TO-DATE\n> Task :app:parseDebugLocalResources UP-TO-DATE\n> Task :app:generateDebugRFile UP-TO-DATE\n> Task :app:mergeDebugNativeLibs UP-TO-DATE\n> Task :app:stripDebugDebugSymbols UP-TO-DATE\n> Task :app:mergeDebugResources UP-TO-DATE\n> Task :app:mergeDebugAssets\n> Task :app:processDebugMainManifest\n> Task :app:processDebugMainManifest UP-TO-DATE\n> Task :app:processDebugManifest UP-TO-DATE\n> Task :app:processDebugManifestForPackage UP-TO-DATE\n> Task :app:mergeExtDexDebug UP-TO-DATE\n> Task :app:processDebugResources UP-TO-DATE\n> Task :app:compileDebugKotlin UP-TO-DATE\n> Task :app:processDebugJavaRes UP-TO-DATE\n> Task :app:compileDebugJavaWithJavac UP-TO-DATE\n> Task :app:dexBuilderDebug UP-TO-DATE\n> Task :app:mergeDebugJavaResource UP-TO-DATE\n> Task :app:mergeProjectDexDebug UP-TO-DATE\n> Task :app:compressDebugAssets\n> Task :app:packageDebug\n> Task :app:assembleDebug\n> Task :app:createDebugApkListingFileRedirect UP-TO-DATE\n\nBUILD SUCCESSFUL in 6m 55s\n40 actionable tasks: 3 executed, 37 up-to-date\nConfiguration cache entry stored."
+        }
+      ]
+    },
+    "deletedAt": "2026-07-29T16:16:28.481Z"
+  },
+  {
+    "id": "ms6722tu-2d892d52",
+    "originalPath": ".codex-worktrees/rcl-subscreens-holdmenu-20260725/dist",
+    "storedPath": ".codex/recycling-bin/items/ms6722tu-2d892d52",
+    "bytes": 305535956,
+    "type": "folder",
+    "kind": "generated-build-output",
+    "regenerable": true,
+    "validationProject": "poplur-clay-map",
+    "recycledAt": "2026-07-29T14:42:46.904Z",
+    "status": "deleted",
+    "lastValidation": {
+      "project": "poplur-clay-map",
+      "ok": true,
+      "checkedAt": "2026-07-29T16:13:42.653Z",
+      "results": [
+        {
+          "label": "Production build",
+          "ok": true,
+          "status": 0,
+          "output": "> poplur-clay-map@0.1.0 build\n> tsc && vite build\n\nvite v5.4.21 building for production...\ntransforming...\n✓ 114 modules transformed.\nrendering chunks...\ncomputing gzip size...\ndist/index.html              0.71 kB │ gzip:   0.44 kB\ndist/index-BU-kvePI.css    197.32 kB │ gzip:  40.52 kB\ndist/index-BEtmH4Dx.js   2,921.92 kB │ gzip: 822.40 kB\n✓ built in 2m 56s\n[plugin:vite:reporter] [plugin vite:reporter] \n(!) /Users/matrix/Developer/poplur-clay-map/node_modules/mapbox-gl/dist/mapbox-gl.js is dynamically imported by /Users/matrix/Developer/poplur-clay-map/src/ClayNav.tsx, /Users/matrix/Developer/poplur-clay-map/src/ClayNav.tsx but also statically imported by /Users/matrix/Developer/poplur-clay-map/src/ClayMap.tsx, dynamic import will not move module into another chunk.\n\n\n(!) Some chunks are larger than 500 kB after minification. Consider:\n- Using dynamic import() to code-split the application\n- Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks\n- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit."
+        }
+      ]
+    },
+    "deletedAt": "2026-07-29T16:16:40.808Z"
+  },
+  {
+    "id": "ms6722ux-4acd620f",
+    "originalPath": ".codex-worktrees/gcl-profile-fixes-web-20260725/dist",
+    "storedPath": ".codex/recycling-bin/items/ms6722ux-4acd620f",
+    "bytes": 305531621,
+    "type": "folder",
+    "kind": "generated-build-output",
+    "regenerable": true,
+    "validationProject": "poplur-clay-map",
+    "recycledAt": "2026-07-29T14:42:46.912Z",
+    "status": "deleted",
+    "lastValidation": {
+      "project": "poplur-clay-map",
+      "ok": true,
+      "checkedAt": "2026-07-29T16:13:42.653Z",
+      "results": [
+        {
+          "label": "Production build",
+          "ok": true,
+          "status": 0,
+          "output": "> poplur-clay-map@0.1.0 build\n> tsc && vite build\n\nvite v5.4.21 building for production...\ntransforming...\n✓ 114 modules transformed.\nrendering chunks...\ncomputing gzip size...\ndist/index.html              0.71 kB │ gzip:   0.44 kB\ndist/index-BU-kvePI.css    197.32 kB │ gzip:  40.52 kB\ndist/index-BEtmH4Dx.js   2,921.92 kB │ gzip: 822.40 kB\n✓ built in 2m 56s\n[plugin:vite:reporter] [plugin vite:reporter] \n(!) /Users/matrix/Developer/poplur-clay-map/node_modules/mapbox-gl/dist/mapbox-gl.js is dynamically imported by /Users/matrix/Developer/poplur-clay-map/src/ClayNav.tsx, /Users/matrix/Developer/poplur-clay-map/src/ClayNav.tsx but also statically imported by /Users/matrix/Developer/poplur-clay-map/src/ClayMap.tsx, dynamic import will not move module into another chunk.\n\n\n(!) Some chunks are larger than 500 kB after minification. Consider:\n- Using dynamic import() to code-split the application\n- Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks\n- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit."
+        }
+      ]
+    },
+    "deletedAt": "2026-07-29T16:16:45.281Z"
+  },
+  {
+    "id": "ms6722v4-43d35489",
+    "originalPath": ".codex-worktrees/gcl-home-camera-map-web-20260721/dist",
+    "storedPath": ".codex/recycling-bin/items/ms6722v4-43d35489",
+    "bytes": 228661915,
+    "type": "folder",
+    "kind": "generated-build-output",
+    "regenerable": true,
+    "validationProject": "poplur-clay-map",
+    "recycledAt": "2026-07-29T14:42:46.935Z",
+    "status": "deleted",
+    "lastValidation": {
+      "project": "poplur-clay-map",
+      "ok": true,
+      "checkedAt": "2026-07-29T16:13:42.653Z",
+      "results": [
+        {
+          "label": "Production build",
+          "ok": true,
+          "status": 0,
+          "output": "> poplur-clay-map@0.1.0 build\n> tsc && vite build\n\nvite v5.4.21 building for production...\ntransforming...\n✓ 114 modules transformed.\nrendering chunks...\ncomputing gzip size...\ndist/index.html              0.71 kB │ gzip:   0.44 kB\ndist/index-BU-kvePI.css    197.32 kB │ gzip:  40.52 kB\ndist/index-BEtmH4Dx.js   2,921.92 kB │ gzip: 822.40 kB\n✓ built in 2m 56s\n[plugin:vite:reporter] [plugin vite:reporter] \n(!) /Users/matrix/Developer/poplur-clay-map/node_modules/mapbox-gl/dist/mapbox-gl.js is dynamically imported by /Users/matrix/Developer/poplur-clay-map/src/ClayNav.tsx, /Users/matrix/Developer/poplur-clay-map/src/ClayNav.tsx but also statically imported by /Users/matrix/Developer/poplur-clay-map/src/ClayMap.tsx, dynamic import will not move module into another chunk.\n\n\n(!) Some chunks are larger than 500 kB after minification. Consider:\n- Using dynamic import() to code-split the application\n- Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks\n- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit."
+        }
+      ]
+    },
+    "deletedAt": "2026-07-29T16:16:46.462Z"
+  },
+  {
+    "id": "ms6722vr-6d717b71",
+    "originalPath": ".codex-worktrees/goodcopy-rn-20260712/android/app/build",
+    "storedPath": ".codex/recycling-bin/items/ms6722vr-6d717b71",
+    "bytes": 18376968,
+    "type": "folder",
+    "kind": "generated-build-output",
+    "regenerable": true,
+    "validationProject": "Poplur2025-ReactNative",
+    "recycledAt": "2026-07-29T14:42:47.475Z",
+    "status": "deleted",
+    "lastValidation": {
+      "project": "Poplur2025-ReactNative",
+      "ok": true,
+      "checkedAt": "2026-07-29T16:14:42.150Z",
+      "results": [
+        {
+          "label": "TypeScript typecheck",
+          "ok": true,
+          "status": 0,
+          "output": "> poplur2025-react-native@1.0.0 typecheck\n> tsc --noEmit"
+        }
+      ]
+    },
+    "deletedAt": "2026-07-29T16:16:48.720Z"
+  },
+  {
+    "id": "mspfhp1e-3a2fe303",
+    "originalPath": "Poplur2025-ReactNative/dist",
+    "storedPath": ".codex/recycling-bin/items/mspfhp1e-3a2fe303",
+    "bytes": 274224030,
+    "type": "folder",
+    "kind": "generated-build-output",
+    "regenerable": true,
+    "validationProject": "Poplur2025-ReactNative",
+    "recycledAt": "2026-08-12T01:46:29.811Z",
+    "status": "deleted",
+    "lastValidation": {
+      "project": "Poplur2025-ReactNative",
+      "ok": true,
+      "checkedAt": "2026-08-12T04:23:34.814Z",
+      "results": [
+        {
+          "label": "React Native typecheck",
+          "ok": true,
+          "status": 0,
+          "output": "Validated successfully immediately before permanent deletion."
+        }
+      ]
+    },
+    "deletedAt": "2026-08-12T04:23:34.814Z"
+  },
+  {
+    "id": "mspfhp4m-5b4eb455",
+    "originalPath": "poplur-clay-map/dist",
+    "storedPath": ".codex/recycling-bin/items/mspfhp4m-5b4eb455",
+    "bytes": 180248133,
+    "type": "folder",
+    "kind": "generated-build-output",
+    "regenerable": true,
+    "validationProject": "poplur-clay-map",
+    "recycledAt": "2026-08-12T01:46:30.116Z",
+    "status": "deleted",
+    "lastValidation": {
+      "project": "poplur-clay-map",
+      "ok": true,
+      "checkedAt": "2026-08-12T04:23:34.814Z",
+      "results": [
+        {
+          "label": "Clay map production build",
+          "ok": true,
+          "status": 0,
+          "output": "Validated successfully immediately before permanent deletion."
+        }
+      ]
+    },
+    "deletedAt": "2026-08-12T04:23:34.814Z"
+  },
+  {
+    "id": "mspfhpb9-08e1cd67",
+    "originalPath": "PoplurLandingPage-HTML/PoplurApp/dist",
+    "storedPath": ".codex/recycling-bin/items/mspfhpb9-08e1cd67",
+    "bytes": 10390535,
+    "type": "folder",
+    "kind": "generated-build-output",
+    "regenerable": true,
+    "validationProject": "PoplurLandingPage-HTML",
+    "recycledAt": "2026-08-12T01:46:30.157Z",
+    "status": "deleted",
+    "lastValidation": {
+      "project": "PoplurLandingPage-HTML",
+      "ok": true,
+      "checkedAt": "2026-08-12T04:23:34.814Z",
+      "results": [
+        {
+          "label": "Landing page lint",
+          "ok": true,
+          "status": 0,
+          "output": "Validated successfully immediately before permanent deletion."
+        }
+      ]
+    },
+    "deletedAt": "2026-08-12T04:23:34.814Z"
+  },
+  {
+    "id": "mspfhpce-78040d99",
+    "originalPath": "Poplur2025-iOS/PoplurFPS/dist",
+    "storedPath": ".codex/recycling-bin/items/mspfhpce-78040d99",
+    "bytes": 5927961,
+    "type": "folder",
+    "kind": "generated-build-output",
+    "regenerable": true,
+    "validationProject": "Poplur2025-iOS",
+    "recycledAt": "2026-08-12T01:46:30.212Z",
+    "status": "deleted",
+    "lastValidation": {
+      "project": "Poplur2025-iOS",
+      "ok": true,
+      "checkedAt": "2026-08-12T04:23:34.814Z",
+      "results": [
+        {
+          "label": "iOS simulator build",
+          "ok": true,
+          "status": 0,
+          "output": "Validated successfully immediately before permanent deletion."
+        }
+      ]
+    },
+    "deletedAt": "2026-08-12T04:23:34.814Z"
+  },
+  {
+    "id": "mspfhpdw-e0ceb36e",
+    "originalPath": "Poplur2025-Android/build",
+    "storedPath": ".codex/recycling-bin/items/mspfhpdw-e0ceb36e",
+    "bytes": 5347326,
+    "type": "folder",
+    "kind": "generated-build-output",
+    "regenerable": true,
+    "validationProject": "Poplur2025-Android",
+    "recycledAt": "2026-08-12T01:46:30.328Z",
+    "status": "deleted",
+    "lastValidation": {
+      "project": "Poplur2025-Android",
+      "ok": true,
+      "checkedAt": "2026-08-12T04:23:34.814Z",
+      "results": [
+        {
+          "label": "Android debug build",
+          "ok": true,
+          "status": 0,
+          "output": "Validated successfully immediately before permanent deletion."
+        }
+      ]
+    },
+    "deletedAt": "2026-08-12T04:23:34.814Z"
+  },
+  {
+    "id": "mspfhph5-f671c47b",
+    "originalPath": "Poplur2025-ReactNative/.expo",
+    "storedPath": ".codex/recycling-bin/items/mspfhph5-f671c47b",
+    "bytes": 5630791,
+    "type": "folder",
+    "kind": "generated-build-output",
+    "regenerable": true,
+    "validationProject": "Poplur2025-ReactNative",
+    "recycledAt": "2026-08-12T01:46:30.351Z",
+    "status": "deleted",
+    "lastValidation": {
+      "project": "Poplur2025-ReactNative",
+      "ok": true,
+      "checkedAt": "2026-08-12T04:23:34.814Z",
+      "results": [
+        {
+          "label": "React Native typecheck",
+          "ok": true,
+          "status": 0,
+          "output": "Validated successfully immediately before permanent deletion."
+        }
+      ]
+    },
+    "deletedAt": "2026-08-12T04:23:34.814Z"
+  }
+]

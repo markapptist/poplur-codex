@@ -1,0 +1,13 @@
+{
+  "version": 1,
+  "protected": true,
+  "prototype": ".claude/artifacts/gcl-prototype.html",
+  "prototypeHash": "9b446789f2c24cb0ba9096c8778d19ad5e5dec26c6444cc5d195ef9d2827b94f",
+  "handedOffAt": "2026-08-12T06:35:53.578Z",
+  "commands": [
+    "sync-gcl-downstream --force",
+    "generate-gcl-screen-tracking",
+    "generate-gcl-catalog-data"
+  ],
+  "summary": "The protected GCL prototype now exposes the full Poplur app across phone and tablet modes; downstream app bundles, screen tracking, and the complete asset catalog were refreshed."
+}

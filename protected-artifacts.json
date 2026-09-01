@@ -1,0 +1,10 @@
+{
+  "version": 1,
+  "artifacts": {
+    ".claude/artifacts/gcl-prototype.html": {
+      "protected": true,
+      "policy": "Read-only. Changes require exact user approval naming the prototype replacement in the current task.",
+      "handoff": ".codex/handoff-gcl-prototype.mjs"
+    }
+  }
+}

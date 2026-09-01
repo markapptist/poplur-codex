@@ -1,0 +1,29 @@
+{
+  "note": "Which hold-menu subscreen sources were last measured PASSING by the thermal gate, and when. Delete this file to force a full re-measurement; it drains at the per-run cap.",
+  "screens": {
+    "profile-stats": {
+      "hash": "e5f2a89812424fcc",
+      "measuredAt": "2026-09-01T19:05:32.751Z"
+    },
+    "profile-wallet": {
+      "hash": "dfe99f386d1be5af",
+      "measuredAt": "2026-09-01T18:08:23.548Z"
+    },
+    "feed-casino": {
+      "hash": "bc8c333c87d05e7c",
+      "measuredAt": "2026-09-01T18:00:41.554Z"
+    },
+    "profile-trophies": {
+      "hash": "31756135af751ea5",
+      "measuredAt": "2026-09-01T18:27:31.366Z"
+    },
+    "profile-messages": {
+      "hash": "3240828ce9976fd2",
+      "measuredAt": "2026-09-01T18:18:01.144Z"
+    },
+    "feed-apps": {
+      "hash": "f09e939193c8bfb8",
+      "measuredAt": "2026-09-01T17:43:15.569Z"
+    }
+  }
+}

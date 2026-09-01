@@ -1,0 +1,45 @@
+# What this repo is for: the workbench TOOLCHAIN — the build, sync, probe and
+# retention scripts, their configs, and the written protocols/results that
+# explain them. Everything a script PRODUCES stays out, however valuable it is
+# to have on disk.
+#
+# The rule of thumb when adding to this file: if deleting it would only cost a
+# re-run, ignore it. If deleting it would lose a decision or a method, track it.
+
+# ── Build output ────────────────────────────────────────────────────────────
+# Derived data, one timestamped tree per build; prune-build-products.sh owns
+# its retention. 12G at the time this repo was created.
+build-products/
+
+# Git worktrees belonging to OTHER repositories. Tracking these would nest
+# repos inside this one.
+worktrees/
+
+# ── Large binaries and third-party tooling ──────────────────────────────────
+whisper-models/
+gltf-tools/
+prelogin-assets-compressed/
+landmark-refs/
+backups/
+
+# ── Generated evidence and captures ─────────────────────────────────────────
+# The soak PROTOCOL, verdicts and written results ARE tracked (they carry the
+# method and the conclusions); only the raw per-run capture stream is not.
+thermal-soak/raw/
+evidence/
+visualizations/
+artifact-workbench/
+recycling-bin/items/
+
+# ── Logs, traces, runtime state ─────────────────────────────────────────────
+*.log
+*.pid
+*.trace
+gcl-sync-state.json
+gcl-downstream-sync-state.json
+
+# ── Editor / OS / backup noise ──────────────────────────────────────────────
+.DS_Store
+*.bak
+*.bak-*
+node_modules/

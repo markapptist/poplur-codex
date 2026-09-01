@@ -1,0 +1,79 @@
+{
+  "version": 1,
+  "generatedAt": "2026-07-18T06:15:25.490Z",
+  "method": "render-and-capture for review; git status is NOT accepted as evidence, and no automatic parity verdict is claimed",
+  "verdictPolicy": "coarseHint is unreliable for this screen (measured: broken 0.1054 vs fixed 0.1029). A human or vision model must judge the captured image.",
+  "devices": {
+    "android": "R9TX30MHRSR",
+    "iosSimulator": null
+  },
+  "tally": {
+    "review": 1,
+    "uncovered": 9
+  },
+  "results": [
+    {
+      "screen": "prelogin-welcome",
+      "platform": "Android",
+      "status": "review",
+      "actual": "/private/tmp/poplur-screen-parity/prelogin-welcome.android.png",
+      "reference": "/private/tmp/poplur-screen-parity/prelogin-welcome.ref.png",
+      "coarseHint": {
+        "distance": 0.1069,
+        "verdict": "drift",
+        "channels": [
+          0.1206,
+          0.0961,
+          0.104
+        ],
+        "grid": "16x32"
+      }
+    },
+    {
+      "screen": "prelogin-welcome",
+      "platform": "iOS",
+      "status": "uncovered",
+      "reason": "no booted iOS simulator"
+    },
+    {
+      "screen": "prelogin-launch",
+      "status": "uncovered",
+      "reason": "reference is HTML (good-copy-launch.html) and must be rasterised; headless rasterisation not wired up yet"
+    },
+    {
+      "screen": "prelogin-splash",
+      "status": "uncovered",
+      "reason": "reference is HTML (good-copy-splash.html) and must be rasterised; headless rasterisation not wired up yet"
+    },
+    {
+      "screen": "prelogin-auth",
+      "status": "uncovered",
+      "reason": "reference is HTML (poplur-prelogin-flow.html) and must be rasterised; headless rasterisation not wired up yet"
+    },
+    {
+      "screen": "map",
+      "status": "uncovered",
+      "reason": "backed by poplur-clay-map source (index.html/package.json), no approved reference image"
+    },
+    {
+      "screen": "watch-radius",
+      "status": "uncovered",
+      "reason": "reference is HTML (good-copy-watch-radius.html) and must be rasterised; headless rasterisation not wired up yet"
+    },
+    {
+      "screen": "web-live-site",
+      "status": "uncovered",
+      "reason": "backed by .tsx/.css source; a web page, not a native screen"
+    },
+    {
+      "screen": "web-beta-invite",
+      "status": "uncovered",
+      "reason": "backed by .ts email template; not a native screen"
+    },
+    {
+      "screen": "web-forgot-password",
+      "status": "uncovered",
+      "reason": "backed by a Docs HTML preview; not a native screen"
+    }
+  ]
+}

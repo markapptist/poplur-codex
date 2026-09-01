@@ -1,0 +1,31 @@
+#!/bin/bash
+# Poplur pre-push: keep Android lag visible at the moment work leaves the machine.
+#
+# Deliberately NON-BLOCKING. A push is not a build, so there is no fresh APK to
+# measure here — blocking a push on a phone being plugged in would be hostile,
+# and a hook people rip out protects nothing. So this does two cheap things:
+#   1. warns if the LAST recorded profile was a regression (instant, reads history)
+#   2. kicks off a fresh profile in the background against whatever build is on
+#      the device, so the record stays current
+# Install: .codex/install-a03-hooks.sh
+HISTORY=/Users/matrix/Developer/.codex/a03-perf-history.jsonl
+SCRIPT=/Users/matrix/Developer/.codex/profile-a03.sh
+
+if [ -f "$HISTORY" ]; then
+  # Compare the two most recent samples of the map — the screen that has
+  # historically regressed first on low-tier hardware.
+  read -r prev last <<<"$(grep '"screen":"map"' "$HISTORY" 2>/dev/null | tail -2 |
+    sed -n 's/.*"p50":\([0-9]*\).*/\1/p' | tr '\n' ' ')"
+  if [ -n "$prev" ] && [ -n "$last" ] && [ "$prev" -gt 0 ] 2>/dev/null; then
+    if [ "$last" -gt "$prev" ] && [ $(( (last - prev) * 100 / prev )) -gt 20 ]; then
+      echo "warning: A03 map frame time regressed ${prev}ms -> ${last}ms on the last profile." >&2
+      echo "         Pushing anyway. Run .codex/profile-a03.sh for the full picture." >&2
+    fi
+  fi
+fi
+
+if [ -x "$SCRIPT" ]; then
+  nohup "$SCRIPT" --quiet >/Users/matrix/Developer/.codex/a03-last-regression.txt 2>&1 &
+fi
+
+exit 0
