@@ -103,8 +103,26 @@ free_kb() { df -Pk "$1" 2>/dev/null | tail -1 | awk '{print $4}'; }
 # ---------------------------------------------------------------- hold/release
 lock_path() { printf '%s/.build-lock' "$1"; }
 
+# A bare product name ("--release ios-iphone-20260901-1045") is the natural way
+# to name one of these directories, but a verbatim argument resolves against the
+# CALLER's cwd rather than the product root — so it addressed a path that does
+# not exist, which --release then treated as success. Accept either form: use
+# the argument as given when it is a directory, otherwise look for it under each
+# configured root.
+resolve_target() {
+  local target="$1" root
+  if [ -d "$target" ]; then printf '%s' "$target"; return 0; fi
+  for root in "${ROOTS[@]}"; do
+    if [ -d "$root/$target" ]; then printf '%s' "$root/$target"; return 0; fi
+  done
+  return 1
+}
+
 if [ "$MODE" = hold ]; then
-  [ -d "$HOLD_TARGET" ] || die "--hold: not a directory: $HOLD_TARGET"
+  # Capture into a temp first: assigning directly would blank HOLD_TARGET on
+  # failure and the die message would name nothing.
+  resolved=$(resolve_target "$HOLD_TARGET") || die "--hold: not a directory: $HOLD_TARGET"
+  HOLD_TARGET="$resolved"
   until_ts=$(( now + HOLD_HOURS * 3600 ))
   # Deliberately no pid= here: the caller is usually a `zsh -c` that exits at
   # once, and a recycled pid would pin the directory past the hold. hold_until
@@ -117,7 +135,19 @@ if [ "$MODE" = hold ]; then
   exit 0
 fi
 if [ "$MODE" = release ]; then
-  rm -f "$(lock_path "$HOLD_TARGET")" && say "released $HOLD_TARGET"
+  resolved=$(resolve_target "$HOLD_TARGET") || die "--release: not a directory: $HOLD_TARGET"
+  lock="$(lock_path "$resolved")"
+  # `rm -f` exits 0 for a path that does not exist, so the old unconditional
+  # `&& say released` reported a release that never happened — observed on
+  # 2026-09-01, where a bare product name resolved outside the root, printed
+  # "released", left the hold in place, and the next prune pass skipped the
+  # directory as still held. Only claim a release when a lock was really there.
+  if [ -e "$lock" ]; then
+    rm -f "$lock" || die "--release: could not remove $lock"
+    say "released $resolved"
+  else
+    say "no hold on $resolved — nothing to release"
+  fi
   exit 0
 fi
 
