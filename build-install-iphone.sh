@@ -109,11 +109,16 @@ Mach-O binary (the sha256 covers this file — a .app is a directory and has no 
 EOF
 echo "=== provenance written: $PROV ==="
 
-# Sanity: the whole point of this build is the web bundle it carries.
-if [ -f "$APP/ClayMapWeb/index-DCQTVB52.js" ]; then
-  echo "=== bundle check: index-DCQTVB52.js present in the .app ==="
+# Sanity: the whole point of this build is the web bundle it carries. The hashed
+# filename changes on every sync, so derive the expected name from the synced
+# source's index.html (what the WebView actually loads) instead of hardcoding it.
+EXPECTED_WEB=$(grep -o 'index-[A-Za-z0-9_-]*\.js' /Users/matrix/Developer/Poplur2025-iOS/ClayMapWeb/index.html 2>/dev/null | head -1)
+if [ -z "$EXPECTED_WEB" ]; then
+  echo "=== WARNING: no hashed bundle name found in ClayMapWeb/index.html — cannot verify the .app's web bundle ==="
+elif [ -f "$APP/ClayMapWeb/$EXPECTED_WEB" ]; then
+  echo "=== bundle check: $EXPECTED_WEB present in the .app (matches synced index.html) ==="
 else
-  echo "=== WARNING: expected clay-map bundle not found in the .app ==="
+  echo "=== WARNING: expected clay-map bundle $EXPECTED_WEB not found in the .app ==="
   ls "$APP/ClayMapWeb"/index-*.js 2>/dev/null | head -3
 fi
 
