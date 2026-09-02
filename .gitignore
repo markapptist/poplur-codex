@@ -43,3 +43,10 @@ gcl-downstream-sync-state.json
 *.bak
 *.bak-*
 node_modules/
+
+# Probe run-state, regenerable by re-running the probe that writes it.
+# thermal-subscreen-state.json says so in its own note ("Delete this file to
+# force a full re-measurement"), and a03-last-regression.txt is one run's
+# stdout. Tracked at import by oversight; they only ever churn.
+a03-last-regression.txt
+thermal-subscreen-state.json
