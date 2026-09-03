@@ -26,7 +26,13 @@ xcodebuild \
   -derivedDataPath "$DD" \
   -allowProvisioningUpdates \
   build 2>&1 | tee "$DD/build.log" | tail -40
-rc=$?
+# PIPESTATUS[0] is xcodebuild's own status, not tail's. `set -o pipefail` at the
+# top of this script already makes a bare $? correct here, but only while that
+# line survives: drop pipefail and $? silently becomes tail's 0, so a FAILED
+# BUILD would report success. Naming the element makes the intent independent of
+# a shell option set 120 lines away. Must be read on the very next line — any
+# intervening command resets PIPESTATUS.
+rc=${PIPESTATUS[0]}
 if [ $rc -ne 0 ]; then
   echo "BUILD FAILED (exit $rc)"
   # xcodebuild diagnostics start the line with `error:`, and the console only ever
@@ -124,5 +130,8 @@ fi
 
 echo "=== installing on iPhone ==="
 xcrun devicectl device install app --device "$IPHONE" "$APP" 2>&1 | tail -15
-echo "install rc=$?"
+# devicectl's own status. Capture BEFORE echoing: $? inside the echo would be
+# the pipeline's, and after any other command PIPESTATUS is already gone.
+install_rc=${PIPESTATUS[0]}
+echo "install rc=$install_rc"
 echo "DONE"
