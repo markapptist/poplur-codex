@@ -23,7 +23,9 @@ import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 
 const CHROME = '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'
-const ORIGIN = process.argv[2] ?? 'http://127.0.0.1:5173'
+// The origin is the first NON-flag argument, so `--map-only` alone still
+// bakes against the default dev server.
+const ORIGIN = process.argv.slice(2).find(arg => !arg.startsWith('--')) ?? 'http://127.0.0.1:5173'
 const ROOT = '/Users/matrix/Developer/poplur-clay-map'
 const OUT_DIR = join(ROOT, 'public/sprites')
 const MANIFEST = join(ROOT, 'src/spritePrerender.json')
@@ -45,7 +47,11 @@ const ALL_ROUTES = [
 ]
 const ROUTES = process.argv.includes('--profile-only')
   ? [`${ORIGIN}/?view=profile`]
-  : ALL_ROUTES
+  // The map's own document (the iframe the shell nests). The zoom rail's
+  // radius trophies are requested here on mount during a bake.
+  : process.argv.includes('--map-only')
+    ? [`${ORIGIN}/?map=1&front=1`]
+    : ALL_ROUTES
 
 const profileDir = mkdtempSync(join(tmpdir(), 'poplur-bake-'))
 const chrome = spawn(CHROME, [
