@@ -129,9 +129,35 @@ else
 fi
 
 echo "=== installing on iPhone ==="
-xcrun devicectl device install app --device "$IPHONE" "$APP" 2>&1 | tail -15
-# devicectl's own status. Capture BEFORE echoing: $? inside the echo would be
-# the pipeline's, and after any other command PIPESTATUS is already gone.
-install_rc=${PIPESTATUS[0]}
+# The install is the step this script exists to deliver, yet until 2026-09-05 its
+# result never reached the exit status: the script ended on `echo "DONE"`, so a
+# failed devicectl install (seen that day: CoreDevice.ControlChannelConnectionError /
+# NWError 54 over Wi-Fi, `install rc=1`) still exited 0 and a caller's
+# `SCRIPT EXIT: 0` read as success. That class of failure is a transient transport
+# error — the retry succeeded at once — so the same .app is retried exactly once,
+# with no rebuild, before the script fails. The build product and
+# BUILD-PROVENANCE.txt stay in place either way, so a failed install can be
+# re-run by hand from $APP.
+install_attempt() {
+  xcrun devicectl device install app --device "$IPHONE" "$APP" 2>&1 | tail -15
+  # devicectl's own status, not tail's. Must be read on the very next line —
+  # any intervening command resets PIPESTATUS.
+  return "${PIPESTATUS[0]}"
+}
+install_attempt
+install_rc=$?
+if [ "$install_rc" -ne 0 ]; then
+  echo "install attempt 1 failed (devicectl rc=$install_rc) — retrying the same .app once, no rebuild"
+  sleep 3
+  install_attempt
+  install_rc=$?
+fi
 echo "install rc=$install_rc"
+if [ "$install_rc" -ne 0 ]; then
+  echo "INSTALL FAILED (exit $install_rc) after 2 attempts — build product kept at $APP"
+  echo "  provenance: $PROV"
+  echo "  retry by hand: xcrun devicectl device install app --device $IPHONE \"$APP\""
+  exit "$install_rc"
+fi
 echo "DONE"
+exit 0
