@@ -87,11 +87,62 @@ for _ in $(seq 1 40); do
 done
 sleep 6
 
+# Screen guard. `feed` and `map` are LABELS this script writes into the history;
+# nothing above verifies the app actually reached those screens. On a device
+# that is not signed in the launcher lands on PreloginWebActivity and stays
+# there — the six scroll swipes below do nothing, the two cube swipes for `map`
+# do nothing, and both rows get recorded under names that describe a screen
+# that was never on screen.
+#
+# That is not hypothetical. Measured 2026-09-03 on this A03: every `feed` and
+# `map` entry in the history to that date was the PRE-LOGIN WebView. It read
+# 81-100% janky on `feed` forever, which is just that screen's animated clay
+# artwork compositing (an atrace put ~42ms of each ~51ms frame inside
+# WebViewFunctor::drawGl, with the UI thread blocked in postAndWait), and it
+# invited exactly the wrong conclusion — that the real feed had regressed.
+#
+# A wrong number is worse than no number, so skip loudly like the load guard.
+FOCUS=$(sh dumpsys window | grep -m1 mCurrentFocus)
+case "$FOCUS" in
+  *PostLoginWebActivity*) ;;
+  *)
+    SCREEN=$(printf '%s' "$FOCUS" | grep -oE '[A-Za-z0-9_.]+Activity' | tail -1)
+    echo "profile-a03: app is on ${SCREEN:-an unknown screen}, not PostLoginWebActivity — SKIPPING." >&2
+    echo "  'feed' and 'map' are labels this script writes; measuring the wrong screen under" >&2
+    echo "  those names is worse than measuring nothing. Sign this device in and re-run." >&2
+    exit 0
+    ;;
+esac
+
+# The guard above runs ONCE, before any sampling. That is not enough: this app
+# serves interstitial ads, and an AdActivity taking the window mid-sample is
+# recorded under the app's own name — the same mislabelling the screen guard
+# exists to prevent, arriving a few seconds later. Measured 2026-09-03: three
+# of five consecutive runs found com.google.android.gms.ads.AdActivity on top.
+# So re-assert after every sample and throw the whole run away if the window
+# moved. Cheap, and the alternative is a plausible number from the wrong screen.
+still_home() { # $1 = what was just measured
+  local f
+  f=$(sh dumpsys window | grep -m1 mCurrentFocus)
+  case "$f" in
+    *PostLoginWebActivity*) return 0 ;;
+    *)
+      local s
+      s=$(printf '%s' "$f" | grep -oE '[A-Za-z0-9_.]+Activity' | tail -1)
+      echo "profile-a03: ${s:-another screen} took the window during the $1 sample — DISCARDING this run." >&2
+      echo "  An interstitial ad or a system dialog mid-sample makes the number describe that, not $1." >&2
+      exit 0
+      ;;
+  esac
+}
+
 FEED=$(measure feed)
+still_home feed
 # Two cube swipes: feed -> profile -> map.
 for _ in 1 2; do sh input swipe $CUBE_L $CUBE_Y $CUBE_R $CUBE_Y 250 >/dev/null; sleep 9; done
 sleep 12
 MAP=$(measure map)
+still_home map
 
 STAMP=$(date -u +%Y-%m-%dT%H:%M:%SZ)
 { echo "$FEED"; echo "$MAP"; } | while read -r l p50 p90 p99 j f g50; do

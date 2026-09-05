@@ -40,6 +40,27 @@ import { fileURLToPath } from 'node:url'
 
 const HERE = dirname(fileURLToPath(import.meta.url))
 const BUDGETS_PATH = join(HERE, 'thermal-budgets.json')
+/**
+ * Mapbox frames allowed while the map sits parked and untouched for 60s.
+ *
+ * Read here, not from the `budgets` object further down, because the idle
+ * PRECONDITION needs it long before that object is parsed. See the
+ * `_idleRendersNote` in thermal-budgets.json for why this is no longer a
+ * hardcoded 2: a live board legitimately changes shape while nobody is
+ * touching it, and each real change has to draw or the map is lying.
+ */
+const MAP_IDLE_RENDER_BUDGET = (() => {
+  try {
+    const value = Number(JSON.parse(readFileSync(BUDGETS_PATH, 'utf8'))?.budgets?.map?.maxIdleRenders)
+    return Number.isFinite(value) && value >= 0 ? value : 2
+  } catch {
+    return 2
+  }
+})()
+/** The same allowance pro-rated over the 10s quiescence window. Demanding
+ *  EXACTLY zero renders there assumed a static board, so on a live one the
+ *  heap leg could never start and reported "unmeasurable" instead of a number. */
+const MAP_QUIESCENCE_RENDER_ALLOWANCE = Math.ceil((MAP_IDLE_RENDER_BUDGET * 10_000) / 60_000)
 const CHROME = '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'
 const BASE = process.env.POPLUR_THERMAL_BASE || 'http://127.0.0.1:5199'
 // Set by callers that own the server BASE points at (sync-mobile's snapshot
@@ -458,9 +479,13 @@ async function measure(surface) {
           parked: document.documentElement.dataset.poplurMapPark === '1',
           count: Number(window.__poplurMapRenderCount || 0),
         })`) || '{}')
-        if (snapshot.parked === true && snapshot.count === lastRenderCount) {
-          if (!stableSince) stableSince = Date.now()
+        if (snapshot.parked === true
+          && stableSince
+          && Number(snapshot.count || 0) - lastRenderCount <= MAP_QUIESCENCE_RENDER_ALLOWANCE) {
           if (Date.now() - stableSince >= 10_000) break
+        } else if (snapshot.parked === true) {
+          lastRenderCount = Number(snapshot.count || 0)
+          stableSince = Date.now()
         } else {
           lastRenderCount = Number(snapshot.count || 0)
           stableSince = 0
@@ -667,9 +692,13 @@ async function measureHeapGrowth() {
         returnByValue: true,
       })
       const snapshot = JSON.parse(state?.result?.result?.value || '{}')
-      if (snapshot.parked === true && snapshot.count === lastRenderCount) {
-        if (!stableSince) stableSince = Date.now()
+      if (snapshot.parked === true
+        && stableSince
+        && Number(snapshot.count || 0) - lastRenderCount <= MAP_QUIESCENCE_RENDER_ALLOWANCE) {
         if (Date.now() - stableSince >= 10_000) break
+      } else if (snapshot.parked === true) {
+        lastRenderCount = Number(snapshot.count || 0)
+        stableSince = Date.now()
       } else {
         lastRenderCount = Number(snapshot.count || 0)
         stableSince = 0
@@ -860,8 +889,8 @@ if (heapGrowth && !heapGrowth.staticIdlePass) {
 if (heapGrowth && (!heapGrowth.parkedBefore || !heapGrowth.parkedAfter)) {
   failures.push(`map-idle: renderer was not parked for the complete 60s dwell (before=${heapGrowth.parkedBefore}, after=${heapGrowth.parkedAfter})`)
 }
-if (heapGrowth && heapGrowth.idleRenderCount > 2) {
-  failures.push(`map-idle: Mapbox drew ${heapGrowth.idleRenderCount} frames while parked for 60s (budget 2)`)
+if (heapGrowth && heapGrowth.idleRenderCount > MAP_IDLE_RENDER_BUDGET) {
+  failures.push(`map-idle: Mapbox drew ${heapGrowth.idleRenderCount} frames while parked for 60s (budget ${MAP_IDLE_RENDER_BUDGET})`)
 }
 // A surface measured for the first time has no budget yet. Record one from
 // this run rather than silently never enforcing it — the same first-run

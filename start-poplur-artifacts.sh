@@ -83,6 +83,15 @@ start_service \
   "http://127.0.0.1:8945/.claude/artifacts/poplur-subscreen-twins.html" \
   python3 -m http.server 8945 --bind 127.0.0.1 --directory "$ROOT"
 
+# Radius Lab: the Test Center (8084) drops one synthetic pin on the production map and rewrites
+# its radius through this local admin-path service. Its own process on purpose: the desk's
+# test-control proxy is supervised with keychain tokens and must never restart for lab work.
+start_service \
+  "radius-lab" \
+  "8098" \
+  "http://127.0.0.1:8098/health" \
+  node "$ROOT/PoplurLandingPage-HTML/PoplurApp/scripts/radius-lab-server.mjs"
+
 if ! port_is_open 8946; then
   launchctl remove com.poplur.garbage-collection >/dev/null 2>&1 || true
   launchctl submit \

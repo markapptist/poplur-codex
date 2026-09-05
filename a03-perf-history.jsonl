@@ -154,3 +154,24 @@
 {"at":"2026-08-23T02:56:24Z","device":"R9TX30MHRSR","screen":"map","p50":24,"p90":32,"p99":40,"janky":10,"frames":190,"gpu_p50":8}
 {"at":"2026-08-23T03:10:19Z","device":"R9TX30MHRSR","screen":"feed","p50":36,"p90":97,"p99":200,"janky":78,"frames":117,"gpu_p50":9}
 {"at":"2026-08-23T03:10:19Z","device":"R9TX30MHRSR","screen":"map","p50":34,"p90":40,"p99":200,"janky":78,"frames":165,"gpu_p50":9}
+{"at":"2026-09-03T23:12:09Z","device":"R9TX30MHRSR","screen":"feed","p50":61,"p90":125,"p99":550,"janky":100,"frames":88,"gpu_p50":7}
+{"at":"2026-09-03T23:12:09Z","device":"R9TX30MHRSR","screen":"map","p50":28,"p90":36,"p99":42,"janky":41,"frames":186,"gpu_p50":8}
+{"at":"2026-09-03T23:14:23Z","device":"R9TX30MHRSR","screen":"feed","p50":65,"p90":150,"p99":350,"janky":100,"frames":83,"gpu_p50":8}
+{"at":"2026-09-03T23:14:23Z","device":"R9TX30MHRSR","screen":"map","p50":38,"p90":48,"p99":73,"janky":85,"frames":154,"gpu_p50":9}
+{"at":"2026-09-04T00:53:59Z","device":"R9TX30MHRSR","screen":"feed","p50":53,"p90":129,"p99":650,"janky":99,"frames":102,"gpu_p50":8}
+{"at":"2026-09-04T00:53:59Z","device":"R9TX30MHRSR","screen":"map","p50":21,"p90":29,"p99":34,"janky":5,"frames":176,"gpu_p50":8}
+{"at":"2026-09-04T01:04:53Z","device":"R9TX30MHRSR","screen":"feed","p50":53,"p90":89,"p99":450,"janky":100,"frames":97,"gpu_p50":7}
+{"at":"2026-09-04T01:04:53Z","device":"R9TX30MHRSR","screen":"map","p50":30,"p90":36,"p99":38,"janky":59,"frames":176,"gpu_p50":9}
+{"at":"2026-09-04T01:05:53Z","device":"R9TX30MHRSR","screen":"feed","p50":44,"p90":89,"p99":900,"janky":81,"frames":71,"gpu_p50":7}
+{"at":"2026-09-04T01:05:53Z","device":"R9TX30MHRSR","screen":"map","p50":30,"p90":32,"p99":36,"janky":91,"frames":177,"gpu_p50":8}
+{"at":"2026-09-04T01:06:51Z","device":"R9TX30MHRSR","screen":"feed","p50":48,"p90":73,"p99":200,"janky":88,"frames":109,"gpu_p50":7}
+{"at":"2026-09-04T01:06:51Z","device":"R9TX30MHRSR","screen":"map","p50":29,"p90":32,"p99":48,"janky":98,"frames":174,"gpu_p50":9}
+{"at":"2026-09-04T01:07:50Z","device":"R9TX30MHRSR","screen":"feed","p50":48,"p90":93,"p99":300,"janky":92,"frames":105,"gpu_p50":7}
+{"at":"2026-09-04T01:07:50Z","device":"R9TX30MHRSR","screen":"map","p50":23,"p90":29,"p99":57,"janky":23,"frames":178,"gpu_p50":8}
+{"at":"2026-09-04T01:30:00Z","note":"EVERY 'feed' AND 'map' ENTRY ABOVE THIS LINE IS UNTRUSTWORTHY. profile-a03.sh labelled its two samples 'feed' and 'map' without verifying the app had reached PostLoginWebActivity. This A03 is not signed in, so the launcher lands on PreloginWebActivity and stays there: the six scroll swipes and the two cube swipes both did nothing, and both rows recorded the pre-login WebView. Confirmed 2026-09-03 by mCurrentFocus plus a screenshot; an atrace put ~42ms of each ~51ms frame inside WebViewFunctor::drawGl with the UI thread blocked in postAndWait, i.e. the pre-login screen's animated clay compositing on the Mali GPU. That is why 'feed' read 81-100% janky forever while 'map' looked healthy. Do not compare against these numbers. A screen guard now skips rather than mislabel; sign the device in to get real feed/map figures."}
+{"at":"2026-09-04T02:02:30Z","device":"R9TX30MHRSR","screen":"feed","p50":30,"p90":105,"p99":350,"janky":67,"frames":90,"gpu_p50":5}
+{"at":"2026-09-04T02:02:30Z","device":"R9TX30MHRSR","screen":"map","p50":32,"p90":46,"p99":65,"janky":58,"frames":122,"gpu_p50":8}
+{"at":"2026-09-04T02:46:27Z","device":"R9TX30MHRSR","screen":"feed","p50":38,"p90":150,"p99":400,"janky":70,"frames":106,"gpu_p50":6}
+{"at":"2026-09-04T02:46:27Z","device":"R9TX30MHRSR","screen":"map","p50":28,"p90":53,"p99":129,"janky":48,"frames":133,"gpu_p50":7}
+{"at":"2026-09-04T02:48:46Z","device":"R9TX30MHRSR","screen":"feed","p50":27,"p90":73,"p99":150,"janky":40,"frames":160,"gpu_p50":7}
+{"at":"2026-09-04T02:48:46Z","device":"R9TX30MHRSR","screen":"map","p50":24,"p90":32,"p99":129,"janky":27,"frames":130,"gpu_p50":7}

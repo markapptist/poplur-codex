@@ -30,6 +30,7 @@ OUT="$ROOT/raw/$LEG-$STAMP"
 mkdir -p "$OUT"
 
 LAUNCH_UTC="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+LAUNCH_EPOCH="$(date +%s)"
 echo "leg=$LEG  start=$LAUNCH_UTC  duration=${DURATION}s  interval=${INTERVAL}s"
 echo "pulls -> $OUT"
 echo
@@ -53,11 +54,15 @@ while [ "$(date +%s)" -lt "$END" ]; do
     continue
   fi
   SUM="$(shasum -a 256 "$FILE" | cut -c1-12)"
-  ELAPSED=$(( $(date +%s) - $(date -j -f %Y-%m-%dT%H:%M:%SZ "$LAUNCH_UTC" +%s 2>/dev/null || echo 0) ))
+  # Epoch arithmetic: `date -j -f` reads the Z-suffixed stamp as LOCAL time and
+  # printed -14400s for the first ten runs of this loop.
+  ELAPSED=$(( $(date +%s) - LAUNCH_EPOCH ))
   THERMAL="$(grep '\[PoplurThermal\]' "$FILE" | tail -1 | sed 's/.*\[PoplurThermal\] \([a-z]*\).*/\1/')"
   OWNER="$(grep -o 'lastThermal=[^ }]*' "$FILE" | tail -1)"
   # A fenced app is a dead leg: the display locked, or the user switched away.
-  if grep -q 'displayActive:false' "$FILE" && [ "$N" -gt 1 ]; then
+  # The key is JSON-quoted in the log, and older sessions above the launch
+  # marker always carry a fence — only lines after THIS launch count.
+  if [ "$N" -gt 1 ] && awk -v s="$LAUNCH_UTC" '$0 ~ "=== LAUNCH ===" && $1 >= s {f=1} f' "$FILE" | grep -q '"displayActive":false'; then
     FENCE="  <-- BACKGROUNDED, leg is dead (Auto-Lock?)"
   else
     FENCE=""
