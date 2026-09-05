@@ -1,0 +1,46 @@
+{
+  "info" : {
+    "arguments" : [
+      "devicectl",
+      "device",
+      "info",
+      "apps",
+      "--device",
+      "339089BF-8115-5788-B719-5967E503A27B",
+      "--bundle-id",
+      "com.apptist.Poplur2025",
+      "--json-output",
+      ".codex/claude-takeover-20260904/iphone-app-0905.json"
+    ],
+    "commandType" : "devicectl.device.info.apps",
+    "environment" : {
+
+    },
+    "jsonVersion" : 3,
+    "outcome" : "success",
+    "version" : "518.31"
+  },
+  "result" : {
+    "apps" : [
+      {
+        "appClip" : false,
+        "builtByDeveloper" : true,
+        "bundleIdentifier" : "com.apptist.Poplur2025",
+        "bundleVersion" : "6",
+        "defaultApp" : false,
+        "hidden" : false,
+        "internalApp" : false,
+        "name" : "Poplur",
+        "removable" : true,
+        "url" : "file:///private/var/containers/Bundle/Application/A72D7946-E7DF-44C4-AE64-95DF9D8E72CB/Poplur2025.app/",
+        "version" : "0.1"
+      }
+    ],
+    "defaultAppsIncluded" : false,
+    "deviceIdentifier" : "339089BF-8115-5788-B719-5967E503A27B",
+    "hiddenAppsIncluded" : false,
+    "internalAppsIncluded" : false,
+    "matchingBundleIdentifier" : "com.apptist.Poplur2025",
+    "removableAppsIncluded" : true
+  }
+}

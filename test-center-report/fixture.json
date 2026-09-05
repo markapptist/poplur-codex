@@ -1,0 +1,147 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-09-04",
+  "generatedAt": "2026-09-05T02:40:00.000Z",
+  "generatedAtLocal": "4 September 2026 22:40 EDT",
+  "project": "poplur2025",
+  "tiles": [
+    { "key": "human_testers", "label": "Human testers", "value": 0, "note": "5 accounts exist: 2 owner-controlled, 3 synthetic businesses provisioned tonight.", "zero": true },
+    { "key": "human_posts", "label": "Human posts", "value": 1, "note": "Of 63. Posted 31 Aug by the owner's account, 2 views, radius 1,348 m and decaying.", "zero": true },
+    { "key": "feedback_received", "label": "Feedback received", "value": 0, "note": "No in-app channel exists; the backend that would store it has never been called.", "zero": true },
+    { "key": "analytics_events", "label": "Analytics events", "value": 0, "note": "Ever, on any platform. The project is linked to Google Analytics; no app ships the SDK.", "zero": true },
+    { "key": "pops_moved_24h", "label": "Pops moved, 24 h", "value": 63, "note": "Every post: tonight's radiusHistory backfill wrote 242 entries, and the hourly decay moved the one human post 1,351 → 1,348 m. No move was caused by a person.", "zero": false },
+    { "key": "synthetic_events_24h", "label": "Synthetic events, 24 h", "value": 3412, "note": "Browser events from the five-actor live run, 14:56 to 19:18 UTC, of 23,335 all time. Synthetic, labelled by runner persona.", "zero": false }
+  ],
+  "answer": "No third-party human has used the app. Production holds 63 posts and one of them is a person's: a photo from the owner's own account on 31 August, 2 views, radius decaying. Firebase Analytics is linked at the project level and has never received an event because no client ships the SDK, and no feedback channel has ever received a message. The simulation did run in the last 24 h: 3,412 synthetic browser events from five runner actors, 13 posts made through the real composer, then every live cohort actor stopped. 63 pops moved in the window, all through tonight's radiusHistory backfill (242 entries) and one hourly decay step; none of the movement came from a person.",
+  "services": [
+    { "name": "Beta Control Room page", "port": "8084", "state": "down", "detail": "HTTP 000. Nothing automated starts it." },
+    { "name": "Owner proxy", "port": "8096", "state": "down", "detail": "HTTP 000. Refuses to start without the two local tokens." },
+    { "name": "Synthetic app runner", "port": "8097", "state": "error", "detail": "HTTP 403 without the token; /state answers with the token: \"Every live cohort actor stopped.\" One actor timed out reaching the 8081 shell, one never settled on the hold menu, three lost their browser page." },
+    { "name": "Radius Lab server", "port": "8098", "state": "up", "detail": "HTTP 403: answers, token-gated." },
+    { "name": "RN web shell (what the runner drives)", "port": "8081", "state": "up", "detail": "HTTP 200." },
+    { "name": "Scheduler (launchd)", "port": "—", "state": "not loaded", "detail": "Last log line 14:53 UTC: \"start failed: HTTP 0\". Deliberately disabled while content was cleaned up." }
+  ],
+  "runner": {
+    "mode": "five-actor-live",
+    "status": "error",
+    "error": "Every live cohort actor stopped.",
+    "startedAtMs": 1788533774190,
+    "actorErrors": [
+      { "actorId": "sim-food-001", "error": "page timeout after 75 s reaching http://127.0.0.1:8081/ (ERR_CONNECTION_REFUSED)" },
+      { "actorId": "sim-shop-002", "error": "step open-hold-menu failed: did not settle on hold-menu (saw feed)" },
+      { "actorId": "sim-sport-003", "error": "browser page closed (Target closed)" },
+      { "actorId": "sim-city-004", "error": "browser page closed (Target closed)" },
+      { "actorId": "sim-news-005", "error": "browser page closed (Target closed)" }
+    ]
+  },
+  "simulation": {
+    "ranInWindow": true,
+    "windowHours": 24,
+    "eventsInWindow": 3412,
+    "sessionsInWindow": 5,
+    "postsInWindow": 13,
+    "newestEventAt": "2026-09-04T19:18:52Z",
+    "actorsSeen": ["sim-food-001", "sim-shop-002", "sim-sport-003", "sim-city-004", "sim-news-005"]
+  },
+  "postsByClass": { "official": 29, "cohort": 23, "lab": 10, "human": 1, "total": 63 },
+  "accounts": [
+    { "label": "PoplurTest", "what": "The App Review demo account; owns the 29 seed posts.", "posts": 29, "class": "owner" },
+    { "label": "mark", "what": "The owner's own account; the one organic post.", "posts": 1, "class": "owner" },
+    { "label": "nightmarket · hauls.to · fitcheck.nyc", "what": "Three business testers, listed businesses, provisioned tonight (syntheticBeta = true).", "posts": 7, "class": "synthetic" },
+    { "label": "sim-food-001 … sim-news-005", "what": "Five person testers driven by the browser runner. They post but own no profile document.", "posts": 16, "class": "synthetic" },
+    { "label": "Radius Lab", "what": "Pins dropped from the Test Center's lab, owned by the lab account.", "posts": 10, "class": "synthetic" }
+  ],
+  "engagementByClass": [
+    { "cls": "Official seed content", "posts": 29, "views": 184, "likes": 216491, "comments": 0, "origin": "Like counts were seeded to match the figures printed on the card artwork; not engagement." },
+    { "cls": "Synthetic cohort", "posts": 23, "views": 4799, "likes": 57997, "comments": 319, "origin": "The cohort and the simulation engaging with each other; a like-farm defect inflated these before 1 Sep." },
+    { "cls": "Radius Lab", "posts": 10, "views": 97, "likes": 21, "comments": 0, "origin": "Lab engagement from the desk." },
+    { "cls": "A person", "posts": 1, "views": 2, "likes": 0, "comments": 0, "origin": "Two views, viewers not identified anywhere." }
+  ],
+  "radiusMoves": {
+    "windowHours": 24,
+    "entriesInWindow": 243,
+    "postsWithHistory": 63,
+    "totalEntries": 243,
+    "top": [
+      { "postId": "post-sim-food-001-1756997520", "owner": "sim-food-001", "cls": "synthetic cohort", "fromMeters": 5000, "toMeters": 48300, "deltaMeters": 43300, "causes": { "backfill": 9 } },
+      { "postId": "post-sim-news-005-1756998010", "owner": "sim-news-005", "cls": "synthetic cohort", "fromMeters": 2500, "toMeters": 31900, "deltaMeters": 29400, "causes": { "backfill": 7 } },
+      { "postId": "post-radius-lab-0007", "owner": "radius-lab", "cls": "radius lab", "fromMeters": 1000, "toMeters": 12400, "deltaMeters": 11400, "causes": { "backfill": 4 } },
+      { "postId": "post-hauls.to-1757024840", "owner": "hauls.to", "cls": "synthetic business", "fromMeters": 973, "toMeters": 6150, "deltaMeters": 5177, "causes": { "backfill": 3 } },
+      { "postId": "post-nightmarket-1757024611", "owner": "nightmarket", "cls": "synthetic business", "fromMeters": 1200, "toMeters": 4980, "deltaMeters": 3780, "causes": { "backfill": 2 } },
+      { "postId": "post-64AA9FBA-8BE7-4DD4-98EA-9DAE5CC9D3B6", "owner": "mark", "cls": "human", "fromMeters": 1351, "toMeters": 1348, "deltaMeters": -3, "causes": { "decay": 1 } }
+    ],
+    "byCause": { "engagement": 0, "decay": 1, "boost": 0, "synthetic": 0, "lab": 0, "create": 0, "backfill": 242 }
+  },
+  "analytics": {
+    "projectLinked": true,
+    "propertyId": "499359978",
+    "streams": 3,
+    "clientsShipped": [],
+    "eventsEverSent": 0,
+    "note": "Property 499359978 has data streams for the iOS app, the Android app and the web app; that console step was already done. Nothing has ever arrived on them: iOS links Auth, Core, Firestore, Functions, Messaging, Storage, App Check and Database but not Analytics and has no logEvent anywhere; Android's Firebase BoM 33.9.0 carries no firebase-analytics dependency; the web page imports nothing from firebase/analytics and has no measurement id. Client-side collection exists in the working tree tonight, but nothing built with it has shipped. There is no crash reporter on any platform, so crash-free rate is unknown."
+  },
+  "feedback": [
+    { "channel": "In-app \"Send feedback\"", "exists": "No", "received": 0, "notes": "No app has a feedback row, form or mail link. The in-app browser blocks mailto:." },
+    { "channel": "Beta feedback backend (testFeedback)", "exists": "Yes, unwired", "received": 0, "notes": "The cloud function stores finding / liked / improve and the desk renders them; nothing calls it." },
+    { "channel": "Block and Report on a profile", "exists": "Committed tonight", "received": 0, "notes": "Fixed reason, no free text; rules not deployed by that commit; Android has no handler." },
+    { "channel": "Beta invite email (\"reply to this email\")", "exists": "Yes", "received": "unknown", "notes": "Replies live only in the owner's inbox; nothing is stored." },
+    { "channel": "Landing-page beta signup", "exists": "Broken", "received": 0, "notes": "The client writes to a collection no rule allows; it has never been created, so it is unknown whether anyone tried." },
+    { "channel": "TestFlight feedback and crash logs", "exists": "Unreachable", "received": "—", "notes": "No App Store Connect API key on this Mac." }
+  ],
+  "signals": [
+    { "title": "The first message to anyone never sent", "status": "fixed", "body": "The synthetic testers' direct-message step failed 110 times and never once succeeded. The cause was in the app, not the runner: the client read the message document before writing the batch, the participant lookup returned nothing for a thread that did not exist yet, and the rules denied it. This is the strongest product defect the Test Center has surfaced, and it surfaced as a step failure, not as feedback. Production now has its first thread.", "evidence": "synthetic-runner.log \"step send-dm failed\" ×110, \" messaged \" ×0; iOS commit 8f28662b" },
+    { "title": "Testers never reach the hold menu", "status": "undetermined", "body": "The hold gesture failed 131 times in the synthetic journeys, 123 of them \"did not settle on hold-menu (saw feed)\"; it is the current error of one runner actor. Whether this is a runner selector problem or a real discoverability problem for a person holding the cube is not established by any evidence found. Worth a human test.", "evidence": "synthetic-runner.log \"step open-hold-menu failed\" ×131, \"saw feed\" ×123" },
+    { "title": "A newcomer with nothing nearby sees an empty app", "status": "mitigated", "body": "Apple rejected the app as \"not complete\" because radius-gated delivery meant a reviewer outside every post's radius saw nothing. The 29 official posts reach the whole planet to fix that. The reviewer's own words are not stored in any repository; only a developer's paraphrase survives. The same emptiness awaits any first user in a quiet area.", "evidence": "qa/official-launch-content/seed-official-posts.mjs header; 29 posts with officialContent: true" },
+    { "title": "Silent front-end failures would be invisible to the desk", "status": "open", "body": "The runner captures console errors and page errors in memory only (a 20-line tail) and the session documents carry no such fields. Across the whole log it recorded zero of either, which is either good news or a blind spot; today it cannot tell which.", "evidence": "testSyntheticBrowserSessions schema; runner log pageerror ×0, console.error ×0" },
+    { "title": "Infrastructure, not product", "status": "info", "body": "Twenty connection refusals to the RN shell on 8081, one 75-second page timeout, and 32,230 sandbox \"blocked\" verdicts are the runner's environment and its safety net doing their jobs. The scheduler cannot restart a runner that is down by design, so once the cohort stops it stays stopped until someone starts it.", "evidence": "synthetic-runner.log ERR_CONNECTION_REFUSED ×20; live-production-blocked ×32,230; external-write-blocked ×1,381; live-firestore-blocked ×13" }
+  ],
+  "gaps": [
+    "No analytics data at all, on any platform; the GA4 property was not opened from this session, and code-wise nothing has ever sent it an event.",
+    "No human feedback text anywhere readable from this Mac.",
+    "Human activity is one post by the owner's account; no third-party human account exists.",
+    "The App Review rejection survives only as a paraphrase; the guideline number and Resolution Center thread are not stored.",
+    "The origin of the like and view counts on official and cohort posts was not traced past \"seeded or simulation-driven\"; they must not be read as human engagement.",
+    "The Test Center page was down, so its rendered dashboard was not inspected; the report is built from its source and the same collections it reads.",
+    "Whether the 131 hold-menu failures reflect a human discoverability problem or a runner selector problem is undetermined."
+  ],
+  "numbers": [
+    { "label": "users", "value": "5; human / synthetic = 2 owner-controlled / 3 synthetic", "query": "POST documents:runAggregationQuery {\"structuredAggregationQuery\":{\"structuredQuery\":{\"from\":[{\"collectionId\":\"users\"}]},\"aggregations\":[{\"count\":{}}]}} → 5; GET documents/users?pageSize=300&mask.fieldPaths=username&mask.fieldPaths=syntheticBeta → 5 docs, no nextPageToken" },
+    { "label": "users with testActivityConsent == true; testActivity documents", "value": "0; 0", "query": "runAggregationQuery from users where testActivityConsent EQUAL true → 0; count from testActivity → 0" },
+    { "label": "posts", "value": "63; official / cohort / lab / human = 29 / 23 / 10 / 1", "query": "runAggregationQuery count from posts → 63; from posts where officialContent EQUAL true → 29; GET documents/posts?pageSize=300&mask.fieldPaths=userID&mask.fieldPaths=syntheticBeta&mask.fieldPaths=officialContent&mask.fieldPaths=source → 63 docs, no nextPageToken; classified officialContent == true, id prefix post-radius-lab, syntheticBeta / source / sim- uid, remainder" },
+    { "label": "the one human post", "value": "post-64AA9FBA-8BE7-4DD4-98EA-9DAE5CC9D3B6, 2026-08-31T15:25:22Z, photo, radius 1,348 m at check time (1,351 m an hour earlier; decay runs hourly), 2 views", "query": "GET documents/posts/post-64AA9FBA-8BE7-4DD4-98EA-9DAE5CC9D3B6" },
+    { "label": "posts per account", "value": "PoplurTest 29; mark 1; nightmarket · hauls.to · fitcheck.nyc 7; sim-* 16; Radius Lab 10", "query": "the same paged GET documents/posts listing grouped by userID, joined to documents/users?mask.fieldPaths=username" },
+    { "label": "dmThreads", "value": "1 (owner account ↔ synthetic participant)", "query": "runAggregationQuery count from dmThreads → 1; GET documents/dmThreads?mask.fieldPaths=participants" },
+    { "label": "testSyntheticBrowserEvents (all time)", "value": "23,335 (newest 2026-09-04T19:18:52Z, session-end)", "query": "runAggregationQuery count from testSyntheticBrowserEvents → 23335; runQuery orderBy eventAtMs DESC limit 3" },
+    { "label": "testSyntheticBrowserEvents in the last 24 h; sessions; runner posts; actors seen", "value": "3,412; 5; 13; 5 actors", "query": "runAggregationQuery count from testSyntheticBrowserEvents where eventAtMs GREATER_THAN_OR_EQUAL 1788474000000 → 3412; count from testSyntheticBrowserSessions where startedAtMs GREATER_THAN_OR_EQUAL 1788474000000 → 5; runQuery from posts where createdAt >= 2026-09-03T22:40:00Z and syntheticBeta EQUAL true, paged with pageToken → 13; distinct actorId over the paged session listing → 5" },
+    { "label": "testSimulationEvents / testSyntheticBrowserSessions / testSyntheticRunnerActors / testBetaPosts", "value": "84 / 5 / 8 / 60", "query": "runAggregationQuery count from each collection" },
+    { "label": "engagement sums by class (views / likes / comments)", "value": "official 184 / 216,491 / 0; cohort 4,799 / 57,997 / 319; lab 97 / 21 / 0; human 2 / 0 / 0", "query": "GET documents/posts?pageSize=300&mask.fieldPaths=viewCount&mask.fieldPaths=likeCount&mask.fieldPaths=commentCount (+ class fields), summed per class; view counts move as the simulation runs" },
+    { "label": "radiusHistory entries in the last 24 h; posts with a history; entries all time", "value": "243; 63; 243", "query": "runQuery collectionGroup radiusHistory where at GREATER_THAN_OR_EQUAL 2026-09-03T22:40:00Z, paged with pageToken → 243; distinct parent post ids → 63; runAggregationQuery count over the collection group → 243" },
+    { "label": "radiusHistory entries by cause", "value": "backfill 242; decay 1; engagement / boost / synthetic / lab / create 0", "query": "the same paged collectionGroup listing grouped by cause" },
+    { "label": "biggest movers (from → to)", "value": "post-sim-food-001-1756997520 5,000 → 48,300 m; post-sim-news-005-1756998010 2,500 → 31,900 m; post-radius-lab-0007 1,000 → 12,400 m; post-hauls.to-1757024840 973 → 6,150 m; post-nightmarket-1757024611 1,200 → 4,980 m; post-64AA9FBA… 1,351 → 1,348 m", "query": "per post: first and last radiusMeters among that post's radiusHistory entries in the window, delta = last − first, sorted by |delta| desc, top 10" },
+    { "label": "radiusHistory backfill", "value": "63 posts scanned, 242 entries written", "query": "node functions/scripts/backfillRadiusHistory.js --execute (dry run first: identical plan)" },
+    { "label": "Analytics link", "value": "property 499359978, three streams", "query": "GET https://firebase.googleapis.com/v1beta1/projects/poplur2025/analyticsDetails" },
+    { "label": "Analytics in clients; events ever sent", "value": "0 of 4 platforms shipped; 0", "query": "grep productName in project.pbxproj; grep firebase-analytics app/build.gradle.kts; grep -rIn 'logEvent(|FirebaseAnalytics|firebase/analytics' across iOS, Android, RN, clay-map → no shipped match" },
+    { "label": "testFeedback / feedback / reports / betaSignups", "value": "0 / 0 / 0 / 0 (collections absent)", "query": "runAggregationQuery count from each → 0; documents:listCollectionIds lists none of them" },
+    { "label": "Test Center ports", "value": "8084 / 8096 = 000 / 000; 8097 / 8098 = 403 / 403; 8081 = 200", "query": "for p in 8081 8084 8096 8097 8098; do curl -s -o /dev/null -m 3 -w '%{http_code}' http://127.0.0.1:$p/; done" },
+    { "label": "Runner status", "value": "five-actor-live, error \"Every live cohort actor stopped.\"; run started 2026-09-04T14:56:14Z (startedAtMs 1788533774190); 5 actor errors", "query": "GET http://127.0.0.1:8097/state with the x-poplur-local-runner-token header read from ~/.poplur/test-control-token (never printed)" },
+    { "label": "Scheduler", "value": "not loaded; last line 14:53 UTC \"start failed: HTTP 0\"", "query": "launchctl list | grep poplur; tail -1 ~/.poplur/synthetic-scheduler.log" },
+    { "label": "Synthetic DM failures / successes; hold-menu failures; page errors / console errors; 8081 refusals; sandbox blocks", "value": "110 / 0; 131 (123 saw feed); 0 / 0; 20; 32,230 / 1,381 / 13 (all time: the log carries no timestamps)", "query": "grep -c over ~/.poplur/synthetic-runner.log for 'step send-dm failed', ' messaged ', 'step open-hold-menu failed', 'saw feed', pageerror, console.error, ERR_CONNECTION_REFUSED, live-production-blocked, external-write-blocked, live-firestore-blocked" },
+    { "label": "previous report (2026-09-03) values", "value": "posts 56; users 2; testSyntheticBrowserEvents 19,923; dmThreads 0; radiusHistory entries 0; runner idle; 8098 down", "query": "read from .codex/test-center-report/2026-09-03.json (the previous day's saved data file)" }
+  ],
+  "previous": {
+    "date": "2026-09-03",
+    "diffs": [
+      { "label": "posts", "before": "56", "after": "63 (seven business-tester posts tonight)" },
+      { "label": "users", "before": "2", "after": "5 (three synthetic businesses provisioned)" },
+      { "label": "testSyntheticBrowserEvents, all time", "before": "19,923", "after": "23,335" },
+      { "label": "dmThreads", "before": "0", "after": "1 (first message fixed tonight)" },
+      { "label": "radiusHistory entries", "before": "0", "after": "243 (242 backfilled)" },
+      { "label": "Synthetic runner", "before": "idle", "after": "error: Every live cohort actor stopped." },
+      { "label": "Radius Lab server, 8098", "before": "down", "after": "up" }
+    ]
+  },
+  "proposals": [
+    { "title": "A \"Send feedback\" row in web Settings", "why": "No human can tell the desk anything: no app has a feedback row, form or mail link, and the in-app browser blocks mailto:. The backend that would store it already exists and has never been called.", "evidence": "feedback: In-app \"Send feedback\" received 0; testFeedback received 0; grep submitBetaFeedback → definition only (PoplurApp/src/services/testControl.ts:619)", "change": "Add a Settings row in poplur-clay-map with the three fields the testFeedback backend already stores (finding, liked, improve), calling the existing beta-feedback action. The desk's \"What testers are saying\" section already renders those documents.", "risk": "Low: a new write path to an existing callable whose rule already exists. Needs a rules-deploy check and a 64-character cap on free text." },
+    { "title": "Prompt the \"Share closed-beta activity\" switch once after first login", "why": "0 of 5 accounts have consented, so the human telemetry collection is empty and \"Who is testing right now\" has never had a row. The switch is opt-in and nobody has found it.", "evidence": "users where testActivityConsent EQUAL true → 0; testActivity count → 0", "change": "Show the switch once on the first post-login launch of a beta build, defaulting to off, and record the answer on users/{uid} so the prompt never repeats.", "risk": "Medium: a consent prompt is a product surface whose wording needs review; a wrong default would collect without consent." }
+  ]
+}

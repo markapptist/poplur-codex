@@ -1,0 +1,34 @@
+{
+  "name": "poplur-functions",
+  "private": true,
+  "engines": {
+    "node": "20"
+  },
+  "main": "lib/index.js",
+  "scripts": {
+    "build": "tsc && node scripts/copyAppleRootCertificates.js",
+    "lint": "tsc --noEmit",
+    "test:test-activity": "npm run build && node scripts/testTestActivityPrivacy.js",
+    "test:synthetic-runner": "npm run build && node scripts/testSyntheticBrowserRunner.js",
+    "test:synthetic-reset": "node scripts/testSyntheticBetaReset.js",
+    "test:vertex-image-fallback": "npm run build && node scripts/testVertexImageFallback.js",
+    "provision:synthetic-beta": "node scripts/provisionSyntheticBetaAccounts.js",
+    "reset:synthetic-beta": "node scripts/resetSyntheticBetaCohort.js",
+    "seed:creator-credits": "node scripts/seedCreatorCreditBalances.js",
+    "serve": "npm run build && firebase emulators:start --only auth,functions,firestore",
+    "deploy": "npm run build && firebase deploy --only functions,firestore:rules"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.117.1",
+    "@apple/app-store-server-library": "^3.1.0",
+    "@genkit-ai/google-genai": "^1.28.0",
+    "firebase-admin": "^13.4.0",
+    "firebase-functions": "^6.4.0",
+    "genkit": "^1.15.0",
+    "googleapis": "^137.1.0",
+    "passkit-generator": "^3.5.7"
+  },
+  "devDependencies": {
+    "typescript": "^5.8.3"
+  }
+}

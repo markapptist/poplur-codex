@@ -1,0 +1,22 @@
+{
+  "checkedAt": "2026-09-05T02:51:01.271Z",
+  "status": 403,
+  "data": {
+    "error": {
+      "code": 403,
+      "message": "Request had insufficient authentication scopes.",
+      "status": "PERMISSION_DENIED",
+      "details": [
+        {
+          "@type": "type.googleapis.com/google.rpc.ErrorInfo",
+          "reason": "ACCESS_TOKEN_SCOPE_INSUFFICIENT",
+          "domain": "googleapis.com",
+          "metadata": {
+            "method": "google.analytics.data.v1beta.BetaAnalyticsData.RunReport",
+            "service": "analyticsdata.googleapis.com"
+          }
+        }
+      ]
+    }
+  }
+}

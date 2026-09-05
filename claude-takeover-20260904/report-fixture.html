@@ -1,0 +1,329 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Poplur Test Center Daily</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+  :root {
+    --ground: #FBF7F9;
+    --panel: #FFFFFF;
+    --ink: #25131F;
+    --ink-2: #4E3A46;
+    --muted: #8A7A83;
+    --rule: #EADDE3;
+    --accent: #E23A85;
+    --accent-soft: #FBE3EE;
+    --synthetic: #1D8FB0;
+    --synthetic-soft: #DDF1F7;
+    --good: #2F9E6F;
+    --warn: #C98416;
+    --crit: #C42E3E;
+    --crit-soft: #FBE4E6;
+    --shadow: 0 1px 2px rgba(37, 19, 31, 0.06), 0 8px 24px rgba(37, 19, 31, 0.05);
+    --display: "Nunito", "SF Pro Rounded", system-ui, sans-serif;
+    --body: "IBM Plex Sans", system-ui, -apple-system, sans-serif;
+    --mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ground: #17111A;
+      --panel: #1F1721;
+      --ink: #F6EEF3;
+      --ink-2: #D9C9D2;
+      --muted: #A394A0;
+      --rule: #3A2C36;
+      --accent: #FF6CAD;
+      --accent-soft: #3A1F2E;
+      --synthetic: #5FC4E3;
+      --synthetic-soft: #16303A;
+      --good: #4FC08D;
+      --warn: #E1A445;
+      --crit: #F06A78;
+      --crit-soft: #3D1F25;
+      --shadow: 0 1px 2px rgba(0, 0, 0, 0.4), 0 8px 24px rgba(0, 0, 0, 0.3);
+    }
+  }
+  :root[data-theme="dark"] {
+    --ground: #17111A;
+    --panel: #1F1721;
+    --ink: #F6EEF3;
+    --ink-2: #D9C9D2;
+    --muted: #A394A0;
+    --rule: #3A2C36;
+    --accent: #FF6CAD;
+    --accent-soft: #3A1F2E;
+    --synthetic: #5FC4E3;
+    --synthetic-soft: #16303A;
+    --good: #4FC08D;
+    --warn: #E1A445;
+    --crit: #F06A78;
+    --crit-soft: #3D1F25;
+    --shadow: 0 1px 2px rgba(0, 0, 0, 0.4), 0 8px 24px rgba(0, 0, 0, 0.3);
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--ground);
+    color: var(--ink);
+    font-family: var(--body);
+    font-size: 16px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+  .page { max-width: 880px; margin: 0 auto; padding: 40px 24px 80px; }
+  h1, h2, h3 { font-family: var(--display); font-weight: 900; letter-spacing: -0.01em; text-wrap: balance; margin: 0; }
+  h1 { font-size: clamp(30px, 5vw, 44px); line-height: 1.05; }
+  h2 { font-size: 22px; line-height: 1.2; margin-top: 56px; margin-bottom: 14px; }
+  h3 { font-size: 16px; font-weight: 800; margin-top: 22px; margin-bottom: 6px; }
+  p { max-width: 68ch; margin: 0 0 12px; }
+  .eyebrow { display: flex; align-items: center; flex-wrap: wrap; gap: 6px 12px; font-family: var(--display); font-weight: 800; font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin-bottom: 10px; }
+  .tag { font-family: var(--display); font-weight: 800; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; padding: 2px 8px; border-radius: 999px; background: var(--synthetic-soft); color: var(--synthetic); }
+  .lede { font-size: 18px; color: var(--ink-2); max-width: 62ch; margin-top: 14px; }
+  .meta { display: flex; flex-wrap: wrap; gap: 6px 18px; margin-top: 18px; color: var(--muted); font-size: 13px; }
+  .meta b { color: var(--ink-2); font-weight: 600; }
+  code, .mono { font-family: var(--mono); font-size: 0.86em; }
+  code { background: var(--accent-soft); color: var(--ink); padding: 1px 5px; border-radius: 4px; }
+  a { color: var(--accent); }
+  .small { font-size: 13px; }
+  .empty { color: var(--muted); font-style: italic; }
+
+  /* The strip: six things the desk can count today. Their zeros are the point. */
+  .strip { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin-top: 30px; }
+  .tile { background: var(--panel); border: 1px solid var(--rule); border-radius: 14px; padding: 16px 16px 14px; box-shadow: var(--shadow); min-width: 0; }
+  .tile .k { font-family: var(--display); font-weight: 800; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+  .tile .v { font-family: var(--display); font-weight: 900; font-size: 40px; line-height: 1; margin-top: 8px; font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
+  .tile .s { font-size: 12.5px; color: var(--ink-2); margin-top: 8px; line-height: 1.35; }
+  .tile.zero .v { color: var(--crit); }
+  @media (max-width: 640px) { .strip { grid-template-columns: repeat(2, minmax(0, 1fr)); } .tile .v { font-size: 32px; } }
+
+  .chip { display: inline-block; font-family: var(--display); font-weight: 800; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; padding: 2px 8px; border-radius: 999px; vertical-align: middle; white-space: nowrap; }
+  .chip.human { background: var(--accent-soft); color: var(--accent); }
+  .chip.synthetic { background: var(--synthetic-soft); color: var(--synthetic); }
+  .chip.down { background: var(--crit-soft); color: var(--crit); }
+  .chip.good { background: color-mix(in srgb, var(--good) 16%, transparent); color: var(--good); }
+  .chip.warn { background: color-mix(in srgb, var(--warn) 16%, transparent); color: var(--warn); }
+  .chip.muted { background: color-mix(in srgb, var(--muted) 16%, transparent); color: var(--muted); }
+
+  .callout { border-left: 3px solid var(--accent); padding: 10px 16px; background: var(--panel); border-radius: 0 12px 12px 0; margin: 18px 0; box-shadow: var(--shadow); }
+  .callout.crit { border-left-color: var(--crit); }
+  .callout p:last-child { margin-bottom: 0; }
+
+  table { width: 100%; border-collapse: collapse; font-size: 14px; margin: 12px 0 6px; }
+  th, td { text-align: left; padding: 9px 10px; border-bottom: 1px solid var(--rule); vertical-align: top; }
+  th { font-family: var(--display); font-weight: 800; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+  td.n, th.n { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  td.dim { color: var(--muted); }
+  td.neg { color: var(--crit); }
+  .tablewrap { overflow-x: auto; }
+  tr.total td { font-weight: 600; border-bottom: 2px solid var(--ink); }
+  table.causes td { font-family: var(--display); font-weight: 900; font-size: 20px; }
+  td.barcell { width: 150px; min-width: 130px; vertical-align: middle; }
+  .bar { display: block; height: 10px; border-radius: 5px; min-width: 2px; }
+
+  .kv { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 10px; margin: 12px 0 14px; }
+  .kv > div { background: var(--panel); border: 1px solid var(--rule); border-radius: 12px; padding: 10px 12px; min-width: 0; }
+  .kv .k { font-family: var(--display); font-weight: 800; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+  .kv .v { font-family: var(--display); font-weight: 900; font-size: 24px; line-height: 1.1; margin-top: 4px; font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
+  .kv .v.small { font-size: 15px; font-family: var(--body); font-weight: 600; margin-top: 8px; }
+  .kv .v.mono { font-size: 15px; font-weight: 500; margin-top: 8px; }
+  .kv .v.crit { color: var(--crit); }
+
+  /* Posts by class: one bar chart drawn to one scale. */
+  .chart { background: var(--panel); border: 1px solid var(--rule); border-radius: 14px; padding: 18px 18px 10px; box-shadow: var(--shadow); margin: 16px 0; }
+  .chart svg { width: 100%; height: auto; display: block; }
+  .chart .cap { font-size: 12.5px; color: var(--muted); margin-top: 6px; }
+
+  ul, ol { padding-left: 20px; margin: 6px 0 14px; max-width: 70ch; }
+  li { margin-bottom: 7px; }
+  li b, p b { font-weight: 600; }
+
+  .signal { background: var(--panel); border: 1px solid var(--rule); border-radius: 14px; padding: 14px 18px; margin: 12px 0; box-shadow: var(--shadow); }
+  .signal h3 { margin-top: 0; }
+  .signal .ev { font-size: 13px; color: var(--muted); margin-top: 6px; }
+  .signal .ev code { background: transparent; padding: 0; color: var(--ink-2); }
+
+  ol.props { padding-left: 0; max-width: none; counter-reset: prop; list-style: none; }
+  .prop { background: var(--panel); border: 1px solid var(--rule); border-radius: 14px; padding: 14px 18px 8px; margin: 12px 0; box-shadow: var(--shadow); counter-increment: prop; }
+  .prop h3 { margin-top: 0; }
+  .prop h3::before { content: counter(prop) ". "; color: var(--accent); }
+  .prop dl { display: grid; grid-template-columns: max-content minmax(0, 1fr); gap: 4px 14px; margin: 8px 0; font-size: 14px; }
+  .prop dt { font-family: var(--display); font-weight: 800; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); padding-top: 3px; }
+  .prop dd { margin: 0; }
+  .prop dd code { background: transparent; padding: 0; color: var(--ink-2); }
+  .await { border: 1px dashed var(--rule); border-radius: 14px; padding: 18px 20px; margin: 12px 0; background: var(--panel); color: var(--muted); }
+  .await .k { font-family: var(--display); font-weight: 800; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--warn); }
+  .await p { margin: 6px 0 0; }
+  .gate { font-size: 13px; color: var(--muted); }
+
+  details { border: 1px solid var(--rule); border-radius: 12px; background: var(--panel); margin: 10px 0; }
+  summary { cursor: pointer; padding: 12px 16px; font-family: var(--display); font-weight: 800; }
+  summary::-webkit-details-marker { color: var(--accent); }
+  details .in { padding: 0 16px 14px; }
+  .q { font-family: var(--mono); font-size: 12px; color: var(--ink-2); white-space: pre-wrap; word-break: break-word; margin: 0; }
+  .qrow { display: grid; grid-template-columns: minmax(0, 1fr); gap: 4px; padding: 10px 0; border-bottom: 1px solid var(--rule); }
+  .qrow:last-child { border-bottom: 0; }
+  .qrow .l { font-size: 13.5px; }
+  .qrow .l b { font-family: var(--display); font-weight: 800; }
+  .foot { margin-top: 56px; padding-top: 18px; border-top: 1px solid var(--rule); color: var(--muted); font-size: 13px; }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="eyebrow"><span>Beta Control Room · 4 September 2026 22:40 EDT</span><span class="tag">Daily · from the test simulation</span></div>
+  <h1>Poplur Test Center Daily</h1>
+  <p class="lede">No third-party human has used the app. Production holds 63 posts and one of them is a person&#39;s: a photo from the owner&#39;s own account on 31 August, 2 views, radius decaying. Firebase Analytics is linked at the project level and has never received an event because no client ships the SDK, and no feedback channel has ever received a message. The simulation did run in the last 24 h: 3,412 synthetic browser events from five runner actors, 13 posts made through the real composer, then every live cohort actor stopped. 63 pops moved in the window, all through tonight&#39;s radiusHistory backfill (242 entries) and one hourly decay step; none of the movement came from a person.</p>
+  <div class="meta">
+    <span>Project <b>poplur2025</b></span>
+    <span>Source <b>production Firestore, read-only</b></span>
+    <span>Report date <b>4 September 2026</b></span>
+    <span>Generated <b><time datetime="2026-09-05T02:40:00.000Z">4 September 2026 22:40 EDT</time></b></span>
+  </div>
+
+  <div class="strip" aria-label="What the desk can count today"><div class="tile zero"><div class="k">Human testers</div><div class="v">0</div><div class="s">5 accounts exist: 2 owner-controlled, 3 synthetic businesses provisioned tonight.</div></div><div class="tile zero"><div class="k">Human posts</div><div class="v">1</div><div class="s">Of 63. Posted 31 Aug by the owner&#39;s account, 2 views, radius 1,348 m and decaying.</div></div><div class="tile zero"><div class="k">Feedback received</div><div class="v">0</div><div class="s">No in-app channel exists; the backend that would store it has never been called.</div></div><div class="tile zero"><div class="k">Analytics events</div><div class="v">0</div><div class="s">Ever, on any platform. The project is linked to Google Analytics; no app ships the SDK.</div></div><div class="tile"><div class="k">Pops moved, 24 h</div><div class="v">63</div><div class="s">Every post: tonight&#39;s radiusHistory backfill wrote 242 entries, and the hourly decay moved the one human post 1,351 → 1,348 m. No move was caused by a person.</div></div><div class="tile"><div class="k">Synthetic events, 24 h</div><div class="v">3,412</div><div class="s">Browser events from the five-actor live run, 14:56 to 19:18 UTC, of 23,335 all time. Synthetic, labelled by runner persona.</div></div></div>
+  <div class="callout"><p><b>Nothing in this report quotes a tester.</b> Synthetic, owner-controlled and human activity are labelled as such everywhere, and every number on this page is paired with the query that produced it in the Method section at the end.</p></div>
+
+  <h2>1. What changed since 3 September 2026</h2>
+  <div class="tablewrap"><table>
+    <thead><tr><th>What</th><th class="n">3 September 2026</th><th class="n">Today</th></tr></thead>
+    <tbody><tr><td>posts</td><td class="n">56</td><td class="n"><b>63 (seven business-tester posts tonight)</b></td></tr><tr><td>users</td><td class="n">2</td><td class="n"><b>5 (three synthetic businesses provisioned)</b></td></tr><tr><td>testSyntheticBrowserEvents, all time</td><td class="n">19,923</td><td class="n"><b>23,335</b></td></tr><tr><td>dmThreads</td><td class="n">0</td><td class="n"><b>1 (first message fixed tonight)</b></td></tr><tr><td>radiusHistory entries</td><td class="n">0</td><td class="n"><b>243 (242 backfilled)</b></td></tr><tr><td>Synthetic runner</td><td class="n">idle</td><td class="n"><b>error: Every live cohort actor stopped.</b></td></tr><tr><td>Radius Lab server, 8098</td><td class="n">down</td><td class="n"><b>up</b></td></tr></tbody>
+  </table></div>
+
+  <h2>2. Test Center state</h2>
+  <div class="tablewrap"><table>
+    <thead><tr><th>Service</th><th>Port</th><th>State</th><th>Detail</th></tr></thead>
+    <tbody><tr><td>Beta Control Room page</td><td class="mono">8084</td><td><span class="chip down">down</span></td><td>HTTP 000. Nothing automated starts it.</td></tr><tr><td>Owner proxy</td><td class="mono">8096</td><td><span class="chip down">down</span></td><td>HTTP 000. Refuses to start without the two local tokens.</td></tr><tr><td>Synthetic app runner</td><td class="mono">8097</td><td><span class="chip warn">error</span></td><td>HTTP 403 without the token; /state answers with the token: &quot;Every live cohort actor stopped.&quot; One actor timed out reaching the 8081 shell, one never settled on the hold menu, three lost their browser page.</td></tr><tr><td>Radius Lab server</td><td class="mono">8098</td><td><span class="chip good">up</span></td><td>HTTP 403: answers, token-gated.</td></tr><tr><td>RN web shell (what the runner drives)</td><td class="mono">8081</td><td><span class="chip good">up</span></td><td>HTTP 200.</td></tr><tr><td>Scheduler (launchd)</td><td class="mono">—</td><td><span class="chip down">not loaded</span></td><td>Last log line 14:53 UTC: &quot;start failed: HTTP 0&quot;. Deliberately disabled while content was cleaned up.</td></tr></tbody>
+  </table></div>
+  <h3>Synthetic runner</h3>
+  <div class="kv">
+    <div><div class="k">Mode</div><div class="v mono">five-actor-live</div></div>
+    <div><div class="k">Status</div><div class="v mono">error</div></div>
+    <div><div class="k">Run started</div><div class="v small">Sep 4, 2026, 10:56 EDT</div></div>
+  </div>
+  <div class="callout crit"><p><b>Runner error:</b> Every live cohort actor stopped.</p></div>
+  <div class="tablewrap"><table><thead><tr><th>Actor</th><th>Current error</th></tr></thead><tbody><tr><td class="mono">sim-food-001</td><td>page timeout after 75 s reaching http://127.0.0.1:8081/ (ERR_CONNECTION_REFUSED)</td></tr><tr><td class="mono">sim-shop-002</td><td>step open-hold-menu failed: did not settle on hold-menu (saw feed)</td></tr><tr><td class="mono">sim-sport-003</td><td>browser page closed (Target closed)</td></tr><tr><td class="mono">sim-city-004</td><td>browser page closed (Target closed)</td></tr><tr><td class="mono">sim-news-005</td><td>browser page closed (Target closed)</td></tr></tbody></table></div>
+
+  <h2>3. Did the simulation run?</h2>
+  <p><span class="chip good">ran in the last 24 h</span></p>
+  <div class="kv">
+    <div><div class="k">Synthetic events, 24 h</div><div class="v">3,412</div></div>
+    <div><div class="k">Sessions</div><div class="v">5</div></div>
+    <div><div class="k">Posts made by the runner</div><div class="v">13</div></div>
+    <div><div class="k">Newest event</div><div class="v small">Sep 4, 2026, 15:18 EDT</div></div>
+  </div>
+  <p>Actors seen <span class="chip synthetic">synthetic</span>: <span class="chip synthetic">sim-food-001</span> <span class="chip synthetic">sim-shop-002</span> <span class="chip synthetic">sim-sport-003</span> <span class="chip synthetic">sim-city-004</span> <span class="chip synthetic">sim-news-005</span></p>
+
+  <h2>4. How the app is being used: human versus synthetic</h2>
+  <p>Production holds 63 posts. Four classes, one of them a person.</p>
+  <div class="chart" role="img" aria-label="Posts by class: 29 official seed content, 23 synthetic cohort, 10 radius lab pins, 1 a person; 63 in total">
+    <svg viewBox="0 0 640 176" xmlns="http://www.w3.org/2000/svg">
+      <g font-family="IBM Plex Sans, system-ui, sans-serif" font-size="13" fill="var(--ink-2)"><text x="0" y="26">Official seed content</text><text x="0" y="62">Synthetic cohort</text><text x="0" y="98">Radius Lab pins</text><text x="0" y="134">A person</text></g>
+      <g><rect x="190" y="12" width="420" height="20" rx="6" fill="var(--muted)" fill-opacity="0.55"/><rect x="190" y="48" width="333" height="20" rx="6" fill="var(--synthetic)" fill-opacity="1"/><rect x="190" y="84" width="145" height="20" rx="6" fill="var(--synthetic)" fill-opacity="0.6"/><rect x="190" y="120" width="14" height="20" rx="6" fill="var(--accent)" fill-opacity="1"/></g>
+      <g font-family="Nunito, system-ui, sans-serif" font-weight="800" font-size="13" fill="var(--ink)"><text x="602" y="27" text-anchor="end" fill="#fff">29</text><text x="515" y="63" text-anchor="end" fill="#fff">23</text><text x="327" y="99" text-anchor="end" fill="#fff">10</text><text x="212" y="135">1</text></g>
+      <g stroke="var(--rule)" stroke-width="1"><line x1="190" y1="4" x2="190" y2="150"/></g>
+      <g font-family="IBM Plex Sans, system-ui, sans-serif" font-size="11" fill="var(--muted)">
+        <text x="190" y="168">0</text>
+        <text x="400" y="168" text-anchor="middle">15</text>
+        <text x="610" y="168" text-anchor="end">29 posts</text>
+      </g>
+    </svg>
+    <div class="cap">Posts by class, production <code>posts</code> collection, 4 September 2026 22:40 EDT. 63 posts in total; one bar scale.</div>
+  </div>
+  <h3>Accounts <span class="chip human">human</span> <span class="chip synthetic">synthetic</span></h3>
+  <div class="tablewrap"><table>
+    <thead><tr><th>Account</th><th>What it is</th><th class="n">Posts</th><th>Class</th></tr></thead>
+    <tbody><tr><td class="mono">PoplurTest</td><td>The App Review demo account; owns the 29 seed posts.</td><td class="n">29</td><td><span class="chip human">owner</span></td></tr><tr><td class="mono">mark</td><td>The owner&#39;s own account; the one organic post.</td><td class="n">1</td><td><span class="chip human">owner</span></td></tr><tr><td class="mono">nightmarket · hauls.to · fitcheck.nyc</td><td>Three business testers, listed businesses, provisioned tonight (syntheticBeta = true).</td><td class="n">7</td><td><span class="chip synthetic">synthetic</span></td></tr><tr><td class="mono">sim-food-001 … sim-news-005</td><td>Five person testers driven by the browser runner. They post but own no profile document.</td><td class="n">16</td><td><span class="chip synthetic">synthetic</span></td></tr><tr><td class="mono">Radius Lab</td><td>Pins dropped from the Test Center&#39;s lab, owned by the lab account.</td><td class="n">10</td><td><span class="chip synthetic">synthetic</span></td></tr></tbody>
+  </table></div>
+  <h3>Engagement counters, and where they come from</h3>
+  <div class="tablewrap"><table>
+    <thead><tr><th>Post class</th><th class="n">Posts</th><th class="n">Views</th><th class="n">Likes</th><th class="n">Comments</th><th>Where the numbers come from</th></tr></thead>
+    <tbody><tr><td>Official seed content</td><td class="n">29</td><td class="n">184</td><td class="n">216,491</td><td class="n">0</td><td>Like counts were seeded to match the figures printed on the card artwork; not engagement.</td></tr><tr><td>Synthetic cohort</td><td class="n">23</td><td class="n">4,799</td><td class="n">57,997</td><td class="n">319</td><td>The cohort and the simulation engaging with each other; a like-farm defect inflated these before 1 Sep.</td></tr><tr><td>Radius Lab</td><td class="n">10</td><td class="n">97</td><td class="n">21</td><td class="n">0</td><td>Lab engagement from the desk.</td></tr><tr><td>A person</td><td class="n">1</td><td class="n">2</td><td class="n">0</td><td class="n">0</td><td>Two views, viewers not identified anywhere.</td></tr></tbody>
+  </table></div>
+
+  <h2>5. How pops moved</h2>
+  <p><b>243 radiusHistory entries</b> in the last 24 h, across <b>63 posts</b> that carry a history; 243 entries all time.</p>
+  <h3>Entries in the window, by cause</h3><div class="tablewrap"><table class="causes">
+    <thead><tr><th class="n">engagement</th><th class="n">decay</th><th class="n">boost</th><th class="n">synthetic</th><th class="n">lab</th><th class="n">create</th><th class="n">backfill</th></tr></thead>
+    <tbody><tr><td class="n dim">0</td><td class="n">1</td><td class="n dim">0</td><td class="n dim">0</td><td class="n dim">0</td><td class="n dim">0</td><td class="n">242</td></tr></tbody>
+  </table></div>
+  <h3>Biggest movers</h3><div class="tablewrap"><table>
+    <thead><tr><th>Pop</th><th>Owner</th><th>Class</th><th class="n">From</th><th class="n">To</th><th class="n">Δ</th><th>|Δ| to scale</th><th>Causes</th></tr></thead>
+    <tbody><tr><td class="mono">post-sim-food-001-1756997520</td><td class="mono">sim-food-001</td><td>synthetic cohort</td><td class="n">5,000 m</td><td class="n">48.3 km</td><td class="n">+43.3 km</td><td class="barcell"><span class="bar" style="width:100%;background:var(--synthetic)" aria-label="43.3 km"></span></td><td class="mono small">backfill&nbsp;×9</td></tr><tr><td class="mono">post-sim-news-005-1756998010</td><td class="mono">sim-news-005</td><td>synthetic cohort</td><td class="n">2,500 m</td><td class="n">31.9 km</td><td class="n">+29.4 km</td><td class="barcell"><span class="bar" style="width:68%;background:var(--synthetic)" aria-label="29.4 km"></span></td><td class="mono small">backfill&nbsp;×7</td></tr><tr><td class="mono">post-radius-lab-0007</td><td class="mono">radius-lab</td><td>radius lab</td><td class="n">1,000 m</td><td class="n">12.4 km</td><td class="n">+11.4 km</td><td class="barcell"><span class="bar" style="width:26%;background:var(--synthetic)" aria-label="11.4 km"></span></td><td class="mono small">backfill&nbsp;×4</td></tr><tr><td class="mono">post-hauls.to-1757024840</td><td class="mono">hauls.to</td><td>synthetic business</td><td class="n">973 m</td><td class="n">6,150 m</td><td class="n">+5,177 m</td><td class="barcell"><span class="bar" style="width:12%;background:var(--synthetic)" aria-label="5,177 m"></span></td><td class="mono small">backfill&nbsp;×3</td></tr><tr><td class="mono">post-nightmarket-1757024611</td><td class="mono">nightmarket</td><td>synthetic business</td><td class="n">1,200 m</td><td class="n">4,980 m</td><td class="n">+3,780 m</td><td class="barcell"><span class="bar" style="width:9%;background:var(--synthetic)" aria-label="3,780 m"></span></td><td class="mono small">backfill&nbsp;×2</td></tr><tr><td class="mono">post-64AA9FBA-8BE7-4DD4-98EA-9DAE5CC9D3B6</td><td class="mono">mark</td><td>human</td><td class="n">1,351 m</td><td class="n">1,348 m</td><td class="n neg">−3 m</td><td class="barcell"><span class="bar" style="width:1%;background:var(--accent)" aria-label="3 m"></span></td><td class="mono small">decay&nbsp;×1</td></tr></tbody>
+  </table></div>
+
+  <h2>6. Firebase Analytics</h2>
+  <p><span class="chip good">project linked</span> property <code>499359978</code>, 3 data streams. Clients shipping it: <span class="chip unknown">delivery unverified</span>.</p>
+  <div class="kv">
+    <div><div class="k">Events ever sent</div><div class="v crit">0</div></div>
+    <div><div class="k">Data streams</div><div class="v">3</div></div>
+    <div><div class="k">Clients shipped</div><div class="v crit">0</div></div>
+  </div>
+  <p>Property 499359978 has data streams for the iOS app, the Android app and the web app; that console step was already done. Nothing has ever arrived on them: iOS links Auth, Core, Firestore, Functions, Messaging, Storage, App Check and Database but not Analytics and has no logEvent anywhere; Android&#39;s Firebase BoM 33.9.0 carries no firebase-analytics dependency; the web page imports nothing from firebase/analytics and has no measurement id. Client-side collection exists in the working tree tonight, but nothing built with it has shipped. There is no crash reporter on any platform, so crash-free rate is unknown.</p>
+
+  <h2>7. Feedback: what channels exist, and what has arrived</h2>
+  <div class="tablewrap"><table>
+    <thead><tr><th>Channel</th><th>Exists?</th><th class="n">Received</th><th>Notes</th></tr></thead>
+    <tbody><tr><td>In-app &quot;Send feedback&quot;</td><td>No</td><td class="n">0</td><td>No app has a feedback row, form or mail link. The in-app browser blocks mailto:.</td></tr><tr><td>Beta feedback backend (testFeedback)</td><td>Yes, unwired</td><td class="n">0</td><td>The cloud function stores finding / liked / improve and the desk renders them; nothing calls it.</td></tr><tr><td>Block and Report on a profile</td><td>Committed tonight</td><td class="n">0</td><td>Fixed reason, no free text; rules not deployed by that commit; Android has no handler.</td></tr><tr><td>Beta invite email (&quot;reply to this email&quot;)</td><td>Yes</td><td class="n">unknown</td><td>Replies live only in the owner&#39;s inbox; nothing is stored.</td></tr><tr><td>Landing-page beta signup</td><td>Broken</td><td class="n">0</td><td>The client writes to a collection no rule allows; it has never been created, so it is unknown whether anyone tried.</td></tr><tr><td>TestFlight feedback and crash logs</td><td>Unreachable</td><td class="n">—</td><td>No App Store Connect API key on this Mac.</td></tr></tbody>
+  </table></div>
+
+  <h2>8. Improvement signals the evidence supports</h2>
+  <p>The closest things to "how the app could be improved" that exist. Each comes from a machine or a developer, and says so.</p>
+  <div class="signal">
+    <h3>The first message to anyone never sent <span class="chip good">fixed</span></h3>
+    <p>The synthetic testers&#39; direct-message step failed 110 times and never once succeeded. The cause was in the app, not the runner: the client read the message document before writing the batch, the participant lookup returned nothing for a thread that did not exist yet, and the rules denied it. This is the strongest product defect the Test Center has surfaced, and it surfaced as a step failure, not as feedback. Production now has its first thread.</p>
+    <div class="ev">Evidence: <code>synthetic-runner.log &quot;step send-dm failed&quot; ×110, &quot; messaged &quot; ×0; iOS commit 8f28662b</code></div>
+  </div><div class="signal">
+    <h3>Testers never reach the hold menu <span class="chip warn">undetermined</span></h3>
+    <p>The hold gesture failed 131 times in the synthetic journeys, 123 of them &quot;did not settle on hold-menu (saw feed)&quot;; it is the current error of one runner actor. Whether this is a runner selector problem or a real discoverability problem for a person holding the cube is not established by any evidence found. Worth a human test.</p>
+    <div class="ev">Evidence: <code>synthetic-runner.log &quot;step open-hold-menu failed&quot; ×131, &quot;saw feed&quot; ×123</code></div>
+  </div><div class="signal">
+    <h3>A newcomer with nothing nearby sees an empty app <span class="chip good">mitigated</span></h3>
+    <p>Apple rejected the app as &quot;not complete&quot; because radius-gated delivery meant a reviewer outside every post&#39;s radius saw nothing. The 29 official posts reach the whole planet to fix that. The reviewer&#39;s own words are not stored in any repository; only a developer&#39;s paraphrase survives. The same emptiness awaits any first user in a quiet area.</p>
+    <div class="ev">Evidence: <code>qa/official-launch-content/seed-official-posts.mjs header; 29 posts with officialContent: true</code></div>
+  </div><div class="signal">
+    <h3>Silent front-end failures would be invisible to the desk <span class="chip down">open</span></h3>
+    <p>The runner captures console errors and page errors in memory only (a 20-line tail) and the session documents carry no such fields. Across the whole log it recorded zero of either, which is either good news or a blind spot; today it cannot tell which.</p>
+    <div class="ev">Evidence: <code>testSyntheticBrowserSessions schema; runner log pageerror ×0, console.error ×0</code></div>
+  </div><div class="signal">
+    <h3>Infrastructure, not product <span class="chip muted">info</span></h3>
+    <p>Twenty connection refusals to the RN shell on 8081, one 75-second page timeout, and 32,230 sandbox &quot;blocked&quot; verdicts are the runner&#39;s environment and its safety net doing their jobs. The scheduler cannot restart a runner that is down by design, so once the cohort stops it stays stopped until someone starts it.</p>
+    <div class="ev">Evidence: <code>synthetic-runner.log ERR_CONNECTION_REFUSED ×20; live-production-blocked ×32,230; external-write-blocked ×1,381; live-firestore-blocked ×13</code></div>
+  </div>
+
+  <h2>9. Proposed improvements — for review</h2>
+  <ol class="props"><li class="prop">
+    <h3>A &quot;Send feedback&quot; row in web Settings</h3>
+    <dl>
+      <dt>Why</dt><dd>No human can tell the desk anything: no app has a feedback row, form or mail link, and the in-app browser blocks mailto:. The backend that would store it already exists and has never been called.</dd>
+      <dt>Evidence</dt><dd><code>feedback: In-app &quot;Send feedback&quot; received 0; testFeedback received 0; grep submitBetaFeedback → definition only (PoplurApp/src/services/testControl.ts:619)</code></dd>
+      <dt>Change</dt><dd>Add a Settings row in poplur-clay-map with the three fields the testFeedback backend already stores (finding, liked, improve), calling the existing beta-feedback action. The desk&#39;s &quot;What testers are saying&quot; section already renders those documents.</dd>
+      <dt>Risk</dt><dd>Low: a new write path to an existing callable whose rule already exists. Needs a rules-deploy check and a 64-character cap on free text.</dd>
+    </dl>
+  </li><li class="prop">
+    <h3>Prompt the &quot;Share closed-beta activity&quot; switch once after first login</h3>
+    <dl>
+      <dt>Why</dt><dd>0 of 5 accounts have consented, so the human telemetry collection is empty and &quot;Who is testing right now&quot; has never had a row. The switch is opt-in and nobody has found it.</dd>
+      <dt>Evidence</dt><dd><code>users where testActivityConsent EQUAL true → 0; testActivity count → 0</code></dd>
+      <dt>Change</dt><dd>Show the switch once on the first post-login launch of a beta build, defaulting to off, and record the answer on users/{uid} so the prompt never repeats.</dd>
+      <dt>Risk</dt><dd>Medium: a consent prompt is a product surface whose wording needs review; a wrong default would collect without consent.</dd>
+    </dl>
+  </li></ol><p class="gate">Nothing here changes anything until it is approved: these are proposals for review, derived from the evidence above, and none of them came from a user.</p>
+
+  <h2>10. Data gaps, stated plainly</h2>
+  <ul><li>No analytics data at all, on any platform; the GA4 property was not opened from this session, and code-wise nothing has ever sent it an event.</li><li>No human feedback text anywhere readable from this Mac.</li><li>Human activity is one post by the owner&#39;s account; no third-party human account exists.</li><li>The App Review rejection survives only as a paraphrase; the guideline number and Resolution Center thread are not stored.</li><li>The origin of the like and view counts on official and cohort posts was not traced past &quot;seeded or simulation-driven&quot;; they must not be read as human engagement.</li><li>The Test Center page was down, so its rendered dashboard was not inspected; the report is built from its source and the same collections it reads.</li><li>Whether the 131 hold-menu failures reflect a human discoverability problem or a runner selector problem is undetermined.</li></ul>
+
+  <h2>11. Method</h2>
+  <p>Read-only queries against production Firestore over the REST API with the workstation's application-default credentials, the local runner's state endpoint, port probes, and greps over the runner log. Aggregations use <code>runAggregationQuery</code>; listings are paged. Every number shown above is listed here with the exact query that produced it.</p>
+  <details>
+    <summary>Every number, with its query (22)</summary>
+    <div class="in"><div class="qrow"><div class="l"><b>users</b> = 5; human / synthetic = 2 owner-controlled / 3 synthetic</div><p class="q">POST documents:runAggregationQuery {&quot;structuredAggregationQuery&quot;:{&quot;structuredQuery&quot;:{&quot;from&quot;:[{&quot;collectionId&quot;:&quot;users&quot;}]},&quot;aggregations&quot;:[{&quot;count&quot;:{}}]}} → 5; GET documents/users?pageSize=300&amp;mask.fieldPaths=username&amp;mask.fieldPaths=syntheticBeta → 5 docs, no nextPageToken</p></div><div class="qrow"><div class="l"><b>users with testActivityConsent == true; testActivity documents</b> = 0; 0</div><p class="q">runAggregationQuery from users where testActivityConsent EQUAL true → 0; count from testActivity → 0</p></div><div class="qrow"><div class="l"><b>posts</b> = 63; official / cohort / lab / human = 29 / 23 / 10 / 1</div><p class="q">runAggregationQuery count from posts → 63; from posts where officialContent EQUAL true → 29; GET documents/posts?pageSize=300&amp;mask.fieldPaths=userID&amp;mask.fieldPaths=syntheticBeta&amp;mask.fieldPaths=officialContent&amp;mask.fieldPaths=source → 63 docs, no nextPageToken; classified officialContent == true, id prefix post-radius-lab, syntheticBeta / source / sim- uid, remainder</p></div><div class="qrow"><div class="l"><b>the one human post</b> = post-64AA9FBA-8BE7-4DD4-98EA-9DAE5CC9D3B6, 2026-08-31T15:25:22Z, photo, radius 1,348 m at check time (1,351 m an hour earlier; decay runs hourly), 2 views</div><p class="q">GET documents/posts/post-64AA9FBA-8BE7-4DD4-98EA-9DAE5CC9D3B6</p></div><div class="qrow"><div class="l"><b>posts per account</b> = PoplurTest 29; mark 1; nightmarket · hauls.to · fitcheck.nyc 7; sim-* 16; Radius Lab 10</div><p class="q">the same paged GET documents/posts listing grouped by userID, joined to documents/users?mask.fieldPaths=username</p></div><div class="qrow"><div class="l"><b>dmThreads</b> = 1 (owner account ↔ synthetic participant)</div><p class="q">runAggregationQuery count from dmThreads → 1; GET documents/dmThreads?mask.fieldPaths=participants</p></div><div class="qrow"><div class="l"><b>testSyntheticBrowserEvents (all time)</b> = 23,335 (newest 2026-09-04T19:18:52Z, session-end)</div><p class="q">runAggregationQuery count from testSyntheticBrowserEvents → 23335; runQuery orderBy eventAtMs DESC limit 3</p></div><div class="qrow"><div class="l"><b>testSyntheticBrowserEvents in the last 24 h; sessions; runner posts; actors seen</b> = 3,412; 5; 13; 5 actors</div><p class="q">runAggregationQuery count from testSyntheticBrowserEvents where eventAtMs GREATER_THAN_OR_EQUAL 1788474000000 → 3412; count from testSyntheticBrowserSessions where startedAtMs GREATER_THAN_OR_EQUAL 1788474000000 → 5; runQuery from posts where createdAt &gt;= 2026-09-03T22:40:00Z and syntheticBeta EQUAL true, paged with pageToken → 13; distinct actorId over the paged session listing → 5</p></div><div class="qrow"><div class="l"><b>testSimulationEvents / testSyntheticBrowserSessions / testSyntheticRunnerActors / testBetaPosts</b> = 84 / 5 / 8 / 60</div><p class="q">runAggregationQuery count from each collection</p></div><div class="qrow"><div class="l"><b>engagement sums by class (views / likes / comments)</b> = official 184 / 216,491 / 0; cohort 4,799 / 57,997 / 319; lab 97 / 21 / 0; human 2 / 0 / 0</div><p class="q">GET documents/posts?pageSize=300&amp;mask.fieldPaths=viewCount&amp;mask.fieldPaths=likeCount&amp;mask.fieldPaths=commentCount (+ class fields), summed per class; view counts move as the simulation runs</p></div><div class="qrow"><div class="l"><b>radiusHistory entries in the last 24 h; posts with a history; entries all time</b> = 243; 63; 243</div><p class="q">runQuery collectionGroup radiusHistory where at GREATER_THAN_OR_EQUAL 2026-09-03T22:40:00Z, paged with pageToken → 243; distinct parent post ids → 63; runAggregationQuery count over the collection group → 243</p></div><div class="qrow"><div class="l"><b>radiusHistory entries by cause</b> = backfill 242; decay 1; engagement / boost / synthetic / lab / create 0</div><p class="q">the same paged collectionGroup listing grouped by cause</p></div><div class="qrow"><div class="l"><b>biggest movers (from → to)</b> = post-sim-food-001-1756997520 5,000 → 48,300 m; post-sim-news-005-1756998010 2,500 → 31,900 m; post-radius-lab-0007 1,000 → 12,400 m; post-hauls.to-1757024840 973 → 6,150 m; post-nightmarket-1757024611 1,200 → 4,980 m; post-64AA9FBA… 1,351 → 1,348 m</div><p class="q">per post: first and last radiusMeters among that post&#39;s radiusHistory entries in the window, delta = last − first, sorted by |delta| desc, top 10</p></div><div class="qrow"><div class="l"><b>radiusHistory backfill</b> = 63 posts scanned, 242 entries written</div><p class="q">node functions/scripts/backfillRadiusHistory.js --execute (dry run first: identical plan)</p></div><div class="qrow"><div class="l"><b>Analytics link</b> = property 499359978, three streams</div><p class="q">GET https://firebase.googleapis.com/v1beta1/projects/poplur2025/analyticsDetails</p></div><div class="qrow"><div class="l"><b>Analytics in clients; events ever sent</b> = 0 of 4 platforms shipped; 0</div><p class="q">grep productName in project.pbxproj; grep firebase-analytics app/build.gradle.kts; grep -rIn &#39;logEvent(|FirebaseAnalytics|firebase/analytics&#39; across iOS, Android, RN, clay-map → no shipped match</p></div><div class="qrow"><div class="l"><b>testFeedback / feedback / reports / betaSignups</b> = 0 / 0 / 0 / 0 (collections absent)</div><p class="q">runAggregationQuery count from each → 0; documents:listCollectionIds lists none of them</p></div><div class="qrow"><div class="l"><b>Test Center ports</b> = 8084 / 8096 = 000 / 000; 8097 / 8098 = 403 / 403; 8081 = 200</div><p class="q">for p in 8081 8084 8096 8097 8098; do curl -s -o /dev/null -m 3 -w &#39;%{http_code}&#39; http://127.0.0.1:$p/; done</p></div><div class="qrow"><div class="l"><b>Runner status</b> = five-actor-live, error &quot;Every live cohort actor stopped.&quot;; run started 2026-09-04T14:56:14Z (startedAtMs 1788533774190); 5 actor errors</div><p class="q">GET http://127.0.0.1:8097/state with the x-poplur-local-runner-token header read from ~/.poplur/test-control-token (never printed)</p></div><div class="qrow"><div class="l"><b>Scheduler</b> = not loaded; last line 14:53 UTC &quot;start failed: HTTP 0&quot;</div><p class="q">launchctl list | grep poplur; tail -1 ~/.poplur/synthetic-scheduler.log</p></div><div class="qrow"><div class="l"><b>Synthetic DM failures / successes; hold-menu failures; page errors / console errors; 8081 refusals; sandbox blocks</b> = 110 / 0; 131 (123 saw feed); 0 / 0; 20; 32,230 / 1,381 / 13 (all time: the log carries no timestamps)</div><p class="q">grep -c over ~/.poplur/synthetic-runner.log for &#39;step send-dm failed&#39;, &#39; messaged &#39;, &#39;step open-hold-menu failed&#39;, &#39;saw feed&#39;, pageerror, console.error, ERR_CONNECTION_REFUSED, live-production-blocked, external-write-blocked, live-firestore-blocked</p></div><div class="qrow"><div class="l"><b>previous report (2026-09-03) values</b> = posts 56; users 2; testSyntheticBrowserEvents 19,923; dmThreads 0; radiusHistory entries 0; runner idle; 8098 down</div><p class="q">read from .codex/test-center-report/2026-09-03.json (the previous day&#39;s saved data file)</p></div></div>
+  </details>
+
+  <div class="foot">Prepared from the Beta Control Room's own sources, 4 September 2026 22:40 EDT. Synthetic and owner-controlled data are labelled as such throughout; no figure here should be read as a real person's behaviour.</div>
+</div>
+</body>
+</html>

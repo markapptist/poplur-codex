@@ -1,0 +1,57 @@
+{
+  "info" : {
+    "arguments" : [
+      "devicectl",
+      "device",
+      "process",
+      "launch",
+      "--terminate-existing",
+      "--device",
+      "339089BF-8115-5788-B719-5967E503A27B",
+      "com.apptist.Poplur2025",
+      "--json-output",
+      ".codex/claude-takeover-20260904/iphone-relaunch-0905.json"
+    ],
+    "commandType" : "devicectl.device.process.launch",
+    "environment" : {
+
+    },
+    "jsonVersion" : 3,
+    "outcome" : "success",
+    "version" : "518.31"
+  },
+  "result" : {
+    "deviceIdentifier" : "339089BF-8115-5788-B719-5967E503A27B",
+    "launchOptions" : {
+      "activatedWhenStarted" : true,
+      "arguments" : [
+
+      ],
+      "environmentVariables" : {
+        "TERM" : "vt100"
+      },
+      "platformSpecificOptions" : {
+
+      },
+      "startStopped" : false,
+      "terminateExistingInstances" : true,
+      "user" : {
+        "active" : true
+      }
+    },
+    "process" : {
+      "auditToken" : [
+        4294967295,
+        501,
+        501,
+        501,
+        501,
+        37238,
+        0,
+        368376
+      ],
+      "executable" : "file:///private/var/containers/Bundle/Application/A72D7946-E7DF-44C4-AE64-95DF9D8E72CB/Poplur2025.app/Poplur2025",
+      "processIdentifier" : 37238
+    }
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "error" : {
+    "code" : 1011,
+    "domain" : "com.apple.dt.CoreDeviceError",
+    "userInfo" : {
+      "DeviceIdentifier" : {
+        "string" : "ecid_5687001338314780"
+      },
+      "NSLocalizedDescription" : {
+        "string" : "CoreDeviceService was unable to locate a device matching the requested device identifier. (DeviceIdentifier: ecid_5687001338314780)"
+      }
+    }
+  },
+  "info" : {
+    "arguments" : [
+      "devicectl",
+      "device",
+      "install",
+      "app",
+      "--device",
+      "339089BF-8115-5788-B719-5967E503A27B",
+      "/Users/matrix/Developer/.codex/build-products/ios-iphone-20260904-222946/Build/Products/Debug-iphoneos/Poplur2025.app",
+      "--json-output",
+      "/Users/matrix/Developer/.codex/claude-takeover-20260904/iphone-final-install.json"
+    ],
+    "commandType" : "devicectl.device.install.app",
+    "environment" : {
+      "TERM" : "dumb"
+    },
+    "jsonVersion" : 3,
+    "outcome" : "failed",
+    "version" : "518.31"
+  }
+}
