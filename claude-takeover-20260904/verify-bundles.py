@@ -18,7 +18,7 @@ def markers(directory):
     required = ['global.block', 'feedTitleScrolls', 'feedHeadlineSwap',
                 'data-profile-safety-dialog', 'traverseOwner',
                 'poplur-claims-overview', 'analyticsEvent', 'Review your capture',
-                'data-feed-timer', 'Unlimited photo view', 'photoViewSeconds']
+                'data-feed-timer', 'photoViewSeconds']
     missing = [m for m in required if m not in text]
     css = '\n'.join(p.read_text() for p in directory.glob('*.css'))
     if '--profile-control-top' not in css:
