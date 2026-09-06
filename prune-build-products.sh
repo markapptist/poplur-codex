@@ -101,6 +101,7 @@ human_kb() {  # KB -> human
 free_kb() { df -Pk "$1" 2>/dev/null | tail -1 | awk '{print $4}'; }
 
 # ---------------------------------------------------------------- hold/release
+source /Users/matrix/Developer/.codex/lib/pid-identity.sh
 lock_path() { printf '%s/.build-lock' "$1"; }
 
 # A bare product name ("--release ios-iphone-20260901-1045") is the natural way
@@ -180,14 +181,19 @@ effective_mtime() {
 # Why this directory must be spared, or empty if it may go.
 # Ordered cheapest-first; the deep walk only runs if nothing cheaper vetoed.
 veto_reason() {
-  local d="$1" lock pid hold_until hit
+  local d="$1" lock pid pidstart hold_until hit
   [ -e "$d/.keep" ] && { printf 'pinned by .keep'; return; }
 
   lock="$(lock_path "$d")"
   if [ -f "$lock" ]; then
     pid=$(sed -n 's/^pid=//p' "$lock" | head -1)
+    pidstart=$(sed -n 's/^pidstart=//p' "$lock" | head -1)
     hold_until=$(sed -n 's/^hold_until=//p' "$lock" | head -1)
-    if [ -n "${pid:-}" ] && kill -0 "$pid" 2>/dev/null; then
+    # Not "is that number alive" but "is that number still the process that
+    # claimed this". A 4 GB product from 4 Sep was pinned indefinitely because
+    # its lock named pid 1092 and translationd had inherited the number — a
+    # bare `kill -0` calls that alive. See lib/pid-identity.sh.
+    if pid_is_owner "${pid:-}" "${pidstart:-}"; then
       printf 'build-lock pid %s alive' "$pid"; return
     fi
     if [ -n "${hold_until:-}" ] && [ "$hold_until" -gt "$now" ] 2>/dev/null; then

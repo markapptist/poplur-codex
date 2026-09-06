@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+source /Users/matrix/Developer/.codex/lib/pid-identity.sh
 # build-preflight.sh — run this as the FIRST thing in any build.
 #
 # Two jobs, in this order:
@@ -139,7 +140,10 @@ fi
 # it mid-build. $PPID is the build script itself, which lives for the whole run.
 if [ -n "$BUILD_DIR" ]; then
   mkdir -p "$BUILD_DIR" || { echo "build-preflight: cannot create $BUILD_DIR" >&2; exit 1; }
+  # pid alone is not an identity: a recycled pid pins the directory forever
+  # (see lib/pid-identity.sh). Record the owner's start time with it.
   { echo "pid=$PPID"
+    echo "pidstart=$(pid_start_token "$PPID")"
     echo "started=$(date +%s)"
     echo "hold_until=$(( $(date +%s) + 21600 ))"
     echo "note=$(basename "$0") claim for $(basename "$BUILD_DIR")"

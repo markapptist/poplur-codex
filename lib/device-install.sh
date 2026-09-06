@@ -1,4 +1,5 @@
 #!/bin/bash
+source /Users/matrix/Developer/.codex/lib/pid-identity.sh
 # Shared device-install machinery — sourced by build-install-iphone.sh and
 # build-install-ipad.sh.
 #
@@ -67,6 +68,7 @@ take_device_lock() {
     # test-then-create window for a second script to slip through.
     if mkdir "$LOCK_DIR" 2>/dev/null; then
       { echo "pid=$$"
+        echo "pidstart=$(pid_start_token $$)"
         echo "started=$(date +%s)"
         echo "startedLocal=$(date '+%Y-%m-%d %H:%M:%S')"
         echo "device=$DEVICE_UDID"
@@ -84,7 +86,10 @@ take_device_lock() {
     case "$started" in ''|*[!0-9]*) started=$now ;; esac
     age=$(( now - started ))
 
-    if [ -n "$pid" ] && [ -z "${pid//[0-9]/}" ] && kill -0 "$pid" 2>/dev/null; then
+    # Owner identity, not just a live pid: a recycled pid would make a dead
+    # session's lock look alive and every later install would wait out the full
+    # timeout for a process that is not there (lib/pid-identity.sh).
+    if pid_is_owner "$pid" "$(lock_field pidstart)"; then
       if [ "$waited" -ge "$LOCK_WAIT_SECS" ]; then
         echo "DEVICE BUSY: pid $pid has held $LOCK_DIR for ${age}s and is still running."
         echo "  waited ${waited}s (POPLUR_DEVICE_LOCK_WAIT=$LOCK_WAIT_SECS) — refusing to install over another session."
@@ -92,7 +97,7 @@ take_device_lock() {
         echo "  build product kept at $APP — re-run the install by hand once the device is free."
         return 1
       fi
-      [ $(( waited % 30 )) -eq 0 ] && echo "waiting for the iPhone: pid $pid holds the device lock (${age}s, waited ${waited}s)"
+      [ $(( waited % 30 )) -eq 0 ] && echo "waiting for ${DEVICE_LABEL:-the device}: pid $pid holds the device lock (${age}s, waited ${waited}s)"
       sleep 5
       waited=$(( waited + 5 ))
       continue
@@ -106,7 +111,13 @@ take_device_lock() {
       continue
     fi
 
-    echo "breaking stale device lock: owner pid ${pid:-unknown} is gone (lock age ${age}s)"
+    if [ -n "$pid" ] && kill -0 "$pid" 2>/dev/null; then
+      # The number is in use, but by something else — say so precisely rather
+      # than "gone", which would send anyone reading this hunting a live pid.
+      echo "breaking stale device lock: pid $pid was RECYCLED (now $(ps -p "$pid" -o comm= 2>/dev/null | sed 's|.*/||'), not the owner) — lock age ${age}s"
+    else
+      echo "breaking stale device lock: owner pid ${pid:-unknown} is gone (lock age ${age}s)"
+    fi
     rm -rf "$LOCK_DIR"
     # Loop round and try to claim it; if another waiter won the race we just wait.
   done
