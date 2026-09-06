@@ -11,6 +11,10 @@
 # its retention. 12G at the time this repo was created.
 build-products/
 
+# Runtime device locks: build-install-iphone.sh serialises install+launch per
+# UDID here. Pure runtime state — deleting one only costs a re-run.
+locks/
+
 # Git worktrees belonging to OTHER repositories. Tracking these would nest
 # repos inside this one.
 worktrees/
