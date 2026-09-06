@@ -5,9 +5,309 @@
 # device-pinned build against a LOCKED phone retries forever and reports no
 # compile error, which reads exactly like a hang. Build generic, then let
 # devicectl do the install once the phone is unlocked.
+#
+# USAGE
+#   build-install-iphone.sh                 build, install, verify the container
+#   build-install-iphone.sh --launch        …and launch what was verified
+#   build-install-iphone.sh --launch-only [PRODUCT]
+#                                           no build: re-verify and launch a
+#                                           product already installed from here
+#                                           (default: the newest one carrying an
+#                                           install.json). This mode exists so a
+#                                           launch decided on AFTER the install
+#                                           still runs inside the device lock and
+#                                           still proves the container, instead of
+#                                           being done by hand with a bare
+#                                           `devicectl process launch` — which is
+#                                           precisely the unverified launch of
+#                                           2026-09-05.
 set -o pipefail
 
 IPHONE=339089BF-8115-5788-B719-5967E503A27B
+BUNDLE_ID=com.apptist.Poplur2025
+PRODUCT_ROOT=/Users/matrix/Developer/.codex/build-products
+
+# ── modes ───────────────────────────────────────────────────────────────────
+# Parsed before anything expensive: --launch-only must not reach the preflight,
+# which would claim (and prune toward) a build directory nothing is going to
+# build into.
+LAUNCH=0
+LAUNCH_ONLY=0
+PRODUCT_ARG=
+for arg in "$@"; do
+  case "$arg" in
+    --launch) LAUNCH=1 ;;
+    --launch-only) LAUNCH_ONLY=1; LAUNCH=1 ;;
+    -*) echo "unknown option: $arg"; echo "usage: build-install-iphone.sh [--launch | --launch-only [PRODUCT]]"; exit 2 ;;
+    *) PRODUCT_ARG="$arg" ;;
+  esac
+done
+[ "${POPLUR_LAUNCH_AFTER_INSTALL:-0}" = 1 ] && LAUNCH=1
+
+# A bare product name is the natural way to say which build you mean, but a
+# verbatim argument resolves against the CALLER's cwd — so accept either form,
+# as prune-build-products.sh does. With no argument: the newest product that
+# actually reached an install, since only those can be verified.
+resolve_product() {
+  local dir
+  if [ -n "$PRODUCT_ARG" ]; then
+    [ -d "$PRODUCT_ARG" ] && { printf '%s' "$PRODUCT_ARG"; return 0; }
+    [ -d "$PRODUCT_ROOT/$PRODUCT_ARG" ] && { printf '%s' "$PRODUCT_ROOT/$PRODUCT_ARG"; return 0; }
+    return 1
+  fi
+  for dir in $(ls -td "$PRODUCT_ROOT"/ios-iphone-* 2>/dev/null); do
+    [ -f "$dir/install.json" ] && { printf '%s' "$dir"; return 0; }
+  done
+  return 1
+}
+
+
+# --- device lock (install + launch only) ------------------------------------
+# On the evening of 2026-09-05 two sessions built and installed to this phone
+# within three minutes of each other (products ios-iphone-20260905-205512 and
+# -205515). The second install silently replaced the first: one session put
+# container 4ACF434D-8BBB-4CA3-A14D-DB3ABD34AA1D on the device, the other's
+# install landed at 21:09 as 55BD326F-2269-4FD9-B3D9-A417371CB60B, and the first
+# session then launched a binary it had never verified. Both were the same commit
+# that night so nothing broke; two sessions on different branches would leave the
+# phone running whichever finished last, with no signal at the launch step.
+#
+# The pre-build pgrep guard does not catch this — the other build was still inside
+# build-preflight.sh's prune and had no xcodebuild process to find yet. So the lock
+# is taken around the INSTALL, not the build: builds may overlap freely (they write
+# to their own $DD), only the device is exclusive.
+#
+# A stale lock must never deadlock the workbench, so the holder records its pid and
+# start time and a lock whose owner is gone is broken. A lock whose owner is still
+# ALIVE is waited on, never broken — waiting out a live install is correct, and
+# after POPLUR_DEVICE_LOCK_WAIT seconds this exits loudly rather than hanging.
+BUNDLE_ID=com.apptist.Poplur2025
+LOCK_ROOT=/Users/matrix/Developer/.codex/locks
+LOCK_DIR="$LOCK_ROOT/device-$IPHONE.lock"
+LOCK_HELD=0
+LOCK_WAIT_SECS=${POPLUR_DEVICE_LOCK_WAIT:-900}
+# Grace before an owner file we cannot read is called stale: mkdir and the write of
+# owner/ are two steps, so a lock caught between them is young, not abandoned.
+LOCK_WRITE_GRACE=10
+
+lock_field() { sed -n "s/^$1=//p" "$LOCK_DIR/owner" 2>/dev/null | head -1; }
+
+release_device_lock() {
+  [ "$LOCK_HELD" = 1 ] || return 0
+  # Only ever remove a lock this process still owns. If it was broken as stale and
+  # retaken by someone else, theirs is not ours to delete.
+  if [ "$(lock_field pid)" = "$$" ]; then rm -rf "$LOCK_DIR"; fi
+  LOCK_HELD=0
+}
+
+take_device_lock() {
+  mkdir -p "$LOCK_ROOT" || { echo "cannot create $LOCK_ROOT"; return 1; }
+  local waited=0 pid now started age
+  while :; do
+    # mkdir is the atomic claim: it either creates the directory or fails, with no
+    # test-then-create window for a second script to slip through.
+    if mkdir "$LOCK_DIR" 2>/dev/null; then
+      { echo "pid=$$"
+        echo "started=$(date +%s)"
+        echo "startedLocal=$(date '+%Y-%m-%d %H:%M:%S')"
+        echo "device=$IPHONE"
+        echo "script=build-install-iphone.sh"
+        echo "product=$DD"
+      } > "$LOCK_DIR/owner"
+      LOCK_HELD=1
+      return 0
+    fi
+
+    pid=$(lock_field pid)
+    now=$(date +%s)
+    started=$(lock_field started)
+    case "$started" in ''|*[!0-9]*) started=$(stat -f %m "$LOCK_DIR" 2>/dev/null || echo "$now") ;; esac
+    case "$started" in ''|*[!0-9]*) started=$now ;; esac
+    age=$(( now - started ))
+
+    if [ -n "$pid" ] && [ -z "${pid//[0-9]/}" ] && kill -0 "$pid" 2>/dev/null; then
+      if [ "$waited" -ge "$LOCK_WAIT_SECS" ]; then
+        echo "DEVICE BUSY: pid $pid has held $LOCK_DIR for ${age}s and is still running."
+        echo "  waited ${waited}s (POPLUR_DEVICE_LOCK_WAIT=$LOCK_WAIT_SECS) — refusing to install over another session."
+        echo "  holder: $(tr '\n' ' ' < "$LOCK_DIR/owner" 2>/dev/null)"
+        echo "  build product kept at $APP — re-run the install by hand once the device is free."
+        return 1
+      fi
+      [ $(( waited % 30 )) -eq 0 ] && echo "waiting for the iPhone: pid $pid holds the device lock (${age}s, waited ${waited}s)"
+      sleep 5
+      waited=$(( waited + 5 ))
+      continue
+    fi
+
+    if [ "$age" -lt "$LOCK_WRITE_GRACE" ]; then
+      # No live owner, but the lock is seconds old — most likely someone between
+      # mkdir and their owner write. Give them the grace window before breaking it.
+      sleep 2
+      waited=$(( waited + 2 ))
+      continue
+    fi
+
+    echo "breaking stale device lock: owner pid ${pid:-unknown} is gone (lock age ${age}s)"
+    rm -rf "$LOCK_DIR"
+    # Loop round and try to claim it; if another waiter won the race we just wait.
+  done
+}
+
+trap release_device_lock EXIT INT TERM
+
+claim_device() {
+  echo "=== taking device lock for $IPHONE ==="
+  take_device_lock || return 1
+  echo "=== device lock held (pid $$) ==="
+}
+
+# --- installed-container verification ---------------------------------------
+# What the 2026-09-05 collision actually needed: the container this install wrote
+# has to still be the container the device reports afterwards. If another session
+# installed between our write and this read, the URLs differ and we say so instead
+# of launching a stranger's build.
+container_url() {  # <json file> <install|info>
+  python3 - "$1" "$2" "$BUNDLE_ID" <<'PY' 2>/dev/null
+import json, sys
+path, kind, bundle = sys.argv[1], sys.argv[2], sys.argv[3]
+try:
+    doc = json.load(open(path))
+except Exception:
+    sys.exit(1)
+result = doc.get("result") or {}
+if kind == "install":
+    entries = result.get("installedApplications") or []
+    key_id, key_url = "bundleID", "installationURL"
+else:
+    entries = result.get("apps") or []
+    key_id, key_url = "bundleIdentifier", "url"
+for entry in entries:
+    if entry.get(key_id) == bundle:
+        url = entry.get(key_url) or ""
+        # file:///private/var/…/Poplur2025.app/ — normalise scheme and trailing
+        # slash so a cosmetic difference never reads as a different container.
+        if url.startswith("file://"):
+            url = url[len("file://"):]
+        print(url.rstrip("/"))
+        break
+PY
+}
+
+# Sets VERIFIED / INSTALLED_URL / ON_DEVICE_URL; returns non-zero when the
+# container on the phone is not the one $INSTALL_JSON says was written.
+verify_installed_container() {  # <where to write the device read>
+  local app_info_json="$1" info_rc
+  INSTALLED_URL=$(container_url "$INSTALL_JSON" install)
+  echo "=== verifying the installed container ==="
+  xcrun devicectl device info apps --device "$IPHONE" --bundle-id "$BUNDLE_ID" \
+    --json-output "$app_info_json" >/dev/null 2>&1
+  info_rc=$?
+  ON_DEVICE_URL=$(container_url "$app_info_json" info)
+
+  VERIFIED=0
+  if [ -z "$INSTALLED_URL" ]; then
+    echo "VERIFY FAILED: no installationURL for $BUNDLE_ID in $INSTALL_JSON"
+  elif [ "$info_rc" -ne 0 ] || [ -z "$ON_DEVICE_URL" ]; then
+    echo "VERIFY FAILED: could not read the installed app back from the device (devicectl rc=$info_rc)"
+    echo "  install wrote: $INSTALLED_URL"
+    echo "  device info:   $app_info_json"
+  elif [ "$INSTALLED_URL" != "$ON_DEVICE_URL" ]; then
+    echo "VERIFY FAILED: the container on the phone is NOT the one this build installed."
+    echo "  this build installed: $INSTALLED_URL"
+    echo "  device now reports:   $ON_DEVICE_URL"
+    echo "  Another session installed over it. Nothing was launched."
+    echo "  This build stays at ${APP:-$DD} (provenance: ${PROV:-$DD/BUILD-PROVENANCE.txt}) — re-run the install to claim the device."
+  else
+    VERIFIED=1
+    echo "=== verified: $ON_DEVICE_URL ==="
+  fi
+  [ "$VERIFIED" = 1 ] || { echo "INSTALL VERIFICATION FAILED — build product kept at ${APP:-$DD}"; return 1; }
+  return 0
+}
+
+# --- launch (only ever on a verified container) ------------------------------
+# Launching "whatever is on the phone" is exactly the 2026-09-05 failure, so this
+# refuses on anything but a container this run has just proved. Every caller —
+# --launch after an install, or --launch-only later — comes through here.
+launch_app() {
+  if [ "$VERIFIED" != 1 ]; then
+    echo "REFUSING TO LAUNCH: the installed container was not verified as this build's."
+    return 1
+  fi
+  echo "=== launching $BUNDLE_ID ==="
+  xcrun devicectl device process launch --terminate-existing --device "$IPHONE" "$BUNDLE_ID" \
+    --json-output "$DD/launch.json" 2>&1 | tail -10
+  local launch_rc=${PIPESTATUS[0]}
+  if [ "$launch_rc" -ne 0 ]; then
+    echo "LAUNCH FAILED (exit $launch_rc) — the app IS installed and verified at $ON_DEVICE_URL"
+    return "$launch_rc"
+  fi
+  return 0
+}
+# The install is the step this script exists to deliver, yet until 2026-09-05 its
+# result never reached the exit status: the script ended on `echo "DONE"`, so a
+# failed devicectl install (seen that day: CoreDevice.ControlChannelConnectionError /
+# NWError 54 over Wi-Fi, `install rc=1`) still exited 0 and a caller's
+# `SCRIPT EXIT: 0` read as success. That class of failure is a transient transport
+# error — the retry succeeded at once — so the same .app is retried exactly once,
+# with no rebuild, before the script fails. The build product and
+# BUILD-PROVENANCE.txt stay in place either way, so a failed install can be
+# re-run by hand from $APP.
+#
+# --json-output is what makes the install answerable: the installationURL naming the
+# container devicectl just wrote is a structured field, and scraping it out of the
+# human-readable text would break the first time Apple reflows that output.
+install_attempt() {
+  rm -f "$INSTALL_JSON"
+  xcrun devicectl device install app --device "$IPHONE" "$APP" \
+    --json-output "$INSTALL_JSON" 2>&1 | tail -15
+  # devicectl's own status, not tail's. Must be read on the very next line —
+  # any intervening command resets PIPESTATUS.
+  return "${PIPESTATUS[0]}"
+}
+install_to_device() {
+  echo "=== installing on iPhone ==="
+  install_attempt
+  local install_rc=$?
+  if [ "$install_rc" -ne 0 ]; then
+    echo "install attempt 1 failed (devicectl rc=$install_rc) — retrying the same .app once, no rebuild"
+    sleep 3
+    install_attempt
+    install_rc=$?
+  fi
+  echo "install rc=$install_rc"
+  if [ "$install_rc" -ne 0 ]; then
+    echo "INSTALL FAILED (exit $install_rc) after 2 attempts — build product kept at $APP"
+    echo "  provenance: $PROV"
+    echo "  retry by hand: xcrun devicectl device install app --device $IPHONE \"$APP\""
+    return "$install_rc"
+  fi
+  return 0
+}
+
+
+# ── --launch-only: no build, no install; verify what is there and launch it ──
+# The gap this closes: a launch decided on after the install used to mean a bare
+# `devicectl process launch` typed by hand, outside the lock and with nothing
+# checked — the 2026-09-05 failure exactly. Here it takes the same lock and runs
+# the same verification against the install.json that build wrote.
+if [ "$LAUNCH_ONLY" = 1 ]; then
+  DD=$(resolve_product) || {
+    echo "--launch-only: no product to launch${PRODUCT_ARG:+ matching \"$PRODUCT_ARG\"}"
+    echo "  looked under $PRODUCT_ROOT for ios-iphone-* carrying an install.json"
+    exit 1
+  }
+  INSTALL_JSON="$DD/install.json"
+  [ -f "$INSTALL_JSON" ] || { echo "--launch-only: $DD never installed (no install.json)"; exit 1; }
+  echo "=== launch-only: $DD ==="
+  claim_device || exit 1
+  verify_installed_container "$DD/relaunch-app.json" || exit 1
+  launch_app
+  rc=$?
+  [ "$rc" -eq 0 ] && echo "DONE"
+  exit "$rc"
+fi
+
 DD=/Users/matrix/Developer/.codex/build-products/ios-iphone-$(date +%Y%m%d-%H%M%S)
 # Retention + disk floor BEFORE anything expensive starts. Also claims $DD, so a
 # prune running in another session cannot take this build's directory mid-run.
@@ -129,224 +429,14 @@ else
 fi
 
 
-# --- device lock (install + launch only) ------------------------------------
-# On the evening of 2026-09-05 two sessions built and installed to this phone
-# within three minutes of each other (products ios-iphone-20260905-205512 and
-# -205515). The second install silently replaced the first: one session put
-# container 4ACF434D-8BBB-4CA3-A14D-DB3ABD34AA1D on the device, the other's
-# install landed at 21:09 as 55BD326F-2269-4FD9-B3D9-A417371CB60B, and the first
-# session then launched a binary it had never verified. Both were the same commit
-# that night so nothing broke; two sessions on different branches would leave the
-# phone running whichever finished last, with no signal at the launch step.
-#
-# The pre-build pgrep guard does not catch this — the other build was still inside
-# build-preflight.sh's prune and had no xcodebuild process to find yet. So the lock
-# is taken around the INSTALL, not the build: builds may overlap freely (they write
-# to their own $DD), only the device is exclusive.
-#
-# A stale lock must never deadlock the workbench, so the holder records its pid and
-# start time and a lock whose owner is gone is broken. A lock whose owner is still
-# ALIVE is waited on, never broken — waiting out a live install is correct, and
-# after POPLUR_DEVICE_LOCK_WAIT seconds this exits loudly rather than hanging.
-BUNDLE_ID=com.apptist.Poplur2025
-LOCK_ROOT=/Users/matrix/Developer/.codex/locks
-LOCK_DIR="$LOCK_ROOT/device-$IPHONE.lock"
-LOCK_HELD=0
-LOCK_WAIT_SECS=${POPLUR_DEVICE_LOCK_WAIT:-900}
-# Grace before an owner file we cannot read is called stale: mkdir and the write of
-# owner/ are two steps, so a lock caught between them is young, not abandoned.
-LOCK_WRITE_GRACE=10
+claim_device || exit 1
 
-lock_field() { sed -n "s/^$1=//p" "$LOCK_DIR/owner" 2>/dev/null | head -1; }
-
-release_device_lock() {
-  [ "$LOCK_HELD" = 1 ] || return 0
-  # Only ever remove a lock this process still owns. If it was broken as stale and
-  # retaken by someone else, theirs is not ours to delete.
-  if [ "$(lock_field pid)" = "$$" ]; then rm -rf "$LOCK_DIR"; fi
-  LOCK_HELD=0
-}
-
-take_device_lock() {
-  mkdir -p "$LOCK_ROOT" || { echo "cannot create $LOCK_ROOT"; return 1; }
-  local waited=0 pid now started age
-  while :; do
-    # mkdir is the atomic claim: it either creates the directory or fails, with no
-    # test-then-create window for a second script to slip through.
-    if mkdir "$LOCK_DIR" 2>/dev/null; then
-      { echo "pid=$$"
-        echo "started=$(date +%s)"
-        echo "startedLocal=$(date '+%Y-%m-%d %H:%M:%S')"
-        echo "device=$IPHONE"
-        echo "script=build-install-iphone.sh"
-        echo "product=$DD"
-      } > "$LOCK_DIR/owner"
-      LOCK_HELD=1
-      return 0
-    fi
-
-    pid=$(lock_field pid)
-    now=$(date +%s)
-    started=$(lock_field started)
-    case "$started" in ''|*[!0-9]*) started=$(stat -f %m "$LOCK_DIR" 2>/dev/null || echo "$now") ;; esac
-    case "$started" in ''|*[!0-9]*) started=$now ;; esac
-    age=$(( now - started ))
-
-    if [ -n "$pid" ] && [ -z "${pid//[0-9]/}" ] && kill -0 "$pid" 2>/dev/null; then
-      if [ "$waited" -ge "$LOCK_WAIT_SECS" ]; then
-        echo "DEVICE BUSY: pid $pid has held $LOCK_DIR for ${age}s and is still running."
-        echo "  waited ${waited}s (POPLUR_DEVICE_LOCK_WAIT=$LOCK_WAIT_SECS) — refusing to install over another session."
-        echo "  holder: $(tr '\n' ' ' < "$LOCK_DIR/owner" 2>/dev/null)"
-        echo "  build product kept at $APP — re-run the install by hand once the device is free."
-        return 1
-      fi
-      [ $(( waited % 30 )) -eq 0 ] && echo "waiting for the iPhone: pid $pid holds the device lock (${age}s, waited ${waited}s)"
-      sleep 5
-      waited=$(( waited + 5 ))
-      continue
-    fi
-
-    if [ "$age" -lt "$LOCK_WRITE_GRACE" ]; then
-      # No live owner, but the lock is seconds old — most likely someone between
-      # mkdir and their owner write. Give them the grace window before breaking it.
-      sleep 2
-      waited=$(( waited + 2 ))
-      continue
-    fi
-
-    echo "breaking stale device lock: owner pid ${pid:-unknown} is gone (lock age ${age}s)"
-    rm -rf "$LOCK_DIR"
-    # Loop round and try to claim it; if another waiter won the race we just wait.
-  done
-}
-
-trap release_device_lock EXIT INT TERM
-
-echo "=== taking device lock for $IPHONE ==="
-take_device_lock || exit 1
-echo "=== device lock held (pid $$) ==="
-
-echo "=== installing on iPhone ==="
-# The install is the step this script exists to deliver, yet until 2026-09-05 its
-# result never reached the exit status: the script ended on `echo "DONE"`, so a
-# failed devicectl install (seen that day: CoreDevice.ControlChannelConnectionError /
-# NWError 54 over Wi-Fi, `install rc=1`) still exited 0 and a caller's
-# `SCRIPT EXIT: 0` read as success. That class of failure is a transient transport
-# error — the retry succeeded at once — so the same .app is retried exactly once,
-# with no rebuild, before the script fails. The build product and
-# BUILD-PROVENANCE.txt stay in place either way, so a failed install can be
-# re-run by hand from $APP.
-#
-# --json-output is what makes the install answerable: the installationURL naming the
-# container devicectl just wrote is a structured field, and scraping it out of the
-# human-readable text would break the first time Apple reflows that output.
 INSTALL_JSON="$DD/install.json"
-APP_INFO_JSON="$DD/installed-app.json"
-install_attempt() {
-  rm -f "$INSTALL_JSON"
-  xcrun devicectl device install app --device "$IPHONE" "$APP" \
-    --json-output "$INSTALL_JSON" 2>&1 | tail -15
-  # devicectl's own status, not tail's. Must be read on the very next line —
-  # any intervening command resets PIPESTATUS.
-  return "${PIPESTATUS[0]}"
-}
-install_attempt
-install_rc=$?
-if [ "$install_rc" -ne 0 ]; then
-  echo "install attempt 1 failed (devicectl rc=$install_rc) — retrying the same .app once, no rebuild"
-  sleep 3
-  install_attempt
-  install_rc=$?
-fi
-echo "install rc=$install_rc"
-if [ "$install_rc" -ne 0 ]; then
-  echo "INSTALL FAILED (exit $install_rc) after 2 attempts — build product kept at $APP"
-  echo "  provenance: $PROV"
-  echo "  retry by hand: xcrun devicectl device install app --device $IPHONE \"$APP\""
-  exit "$install_rc"
-fi
+install_to_device || exit $?
+verify_installed_container "$DD/installed-app.json" || exit 1
 
-# --- installed-container verification ---------------------------------------
-# What the 2026-09-05 collision actually needed: the container this install wrote
-# has to still be the container the device reports afterwards. If another session
-# installed between our write and this read, the URLs differ and we say so instead
-# of launching a stranger's build.
-container_url() {  # <json file> <install|info>
-  python3 - "$1" "$2" "$BUNDLE_ID" <<'PY' 2>/dev/null
-import json, sys
-path, kind, bundle = sys.argv[1], sys.argv[2], sys.argv[3]
-try:
-    doc = json.load(open(path))
-except Exception:
-    sys.exit(1)
-result = doc.get("result") or {}
-if kind == "install":
-    entries = result.get("installedApplications") or []
-    key_id, key_url = "bundleID", "installationURL"
-else:
-    entries = result.get("apps") or []
-    key_id, key_url = "bundleIdentifier", "url"
-for entry in entries:
-    if entry.get(key_id) == bundle:
-        url = entry.get(key_url) or ""
-        # file:///private/var/…/Poplur2025.app/ — normalise scheme and trailing
-        # slash so a cosmetic difference never reads as a different container.
-        if url.startswith("file://"):
-            url = url[len("file://"):]
-        print(url.rstrip("/"))
-        break
-PY
-}
-
-INSTALLED_URL=$(container_url "$INSTALL_JSON" install)
-echo "=== verifying the installed container ==="
-xcrun devicectl device info apps --device "$IPHONE" --bundle-id "$BUNDLE_ID" \
-  --json-output "$APP_INFO_JSON" >/dev/null 2>&1
-info_rc=$?
-ON_DEVICE_URL=$(container_url "$APP_INFO_JSON" info)
-
-VERIFIED=0
-if [ -z "$INSTALLED_URL" ]; then
-  echo "VERIFY FAILED: no installationURL for $BUNDLE_ID in $INSTALL_JSON"
-elif [ "$info_rc" -ne 0 ] || [ -z "$ON_DEVICE_URL" ]; then
-  echo "VERIFY FAILED: could not read the installed app back from the device (devicectl rc=$info_rc)"
-  echo "  install wrote: $INSTALLED_URL"
-  echo "  device info:   $APP_INFO_JSON"
-elif [ "$INSTALLED_URL" != "$ON_DEVICE_URL" ]; then
-  echo "VERIFY FAILED: the container on the phone is NOT the one this script installed."
-  echo "  this install wrote: $INSTALLED_URL"
-  echo "  device now reports: $ON_DEVICE_URL"
-  echo "  Another session installed over this build. Nothing was launched."
-  echo "  This build stays at $APP (provenance: $PROV) — re-run the install to claim the device."
-else
-  VERIFIED=1
-  echo "=== verified: $ON_DEVICE_URL ==="
-fi
-if [ "$VERIFIED" -ne 1 ]; then
-  echo "INSTALL VERIFICATION FAILED — build product kept at $APP"
-  exit 1
-fi
-
-# --- launch (opt-in, and only on a verified container) -----------------------
-# Off by default so the script's existing contract — build, install, exit — is
-# unchanged. When asked for, it launches only what was just verified: launching
-# "whatever is on the phone" is exactly the 2026-09-05 failure.
-LAUNCH=0
-for arg in "$@"; do case "$arg" in --launch) LAUNCH=1 ;; esac; done
-[ "${POPLUR_LAUNCH_AFTER_INSTALL:-0}" = 1 ] && LAUNCH=1
 if [ "$LAUNCH" = 1 ]; then
-  if [ "$VERIFIED" -ne 1 ]; then
-    echo "REFUSING TO LAUNCH: the installed container was not verified as this build's."
-    exit 1
-  fi
-  echo "=== launching $BUNDLE_ID ==="
-  xcrun devicectl device process launch --terminate-existing --device "$IPHONE" "$BUNDLE_ID" \
-    --json-output "$DD/launch.json" 2>&1 | tail -10
-  launch_rc=${PIPESTATUS[0]}
-  if [ "$launch_rc" -ne 0 ]; then
-    echo "LAUNCH FAILED (exit $launch_rc) — the app IS installed and verified at $ON_DEVICE_URL"
-    exit "$launch_rc"
-  fi
+  launch_app || exit $?
 fi
 
 echo "DONE"
