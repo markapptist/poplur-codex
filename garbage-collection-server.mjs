@@ -100,6 +100,17 @@ const validationEnv = {
 
 function validateProject(project) {
   const checks = projectChecks[project] || []
+  if (checks.length === 0) {
+    // A standalone document or a folder outside the app projects has no build
+    // to protect. Failing closed here made such items undeletable from the page
+    // (11 Sep 2026: engagement-push-plan.md returned an empty validation), so
+    // the owner's confirmation in the UI is the only gate for them.
+    return {
+      project, ok: true, checkedAt: new Date().toISOString(),
+      results: [{ label: 'No build validation applies', ok: true, status: 0,
+        output: `"${project}" is not one of the validated projects (${Object.keys(projectChecks).join(', ')}). Nothing to build, so the item is removed on the owner's confirmation alone.` }]
+    }
+  }
   const results = checks.map(check => {
     const run = spawnSync(check.command, check.args, {
       cwd: path.join(ROOT, project, check.cwd || ''),
