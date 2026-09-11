@@ -595,5 +595,31 @@
       ]
     },
     "deletedAt": "2026-08-12T04:23:34.814Z"
+  },
+  {
+    "id": "mtx24gr7-92d91794",
+    "originalPath": "engagement-push-plan.md",
+    "storedPath": ".codex/recycling-bin/items/mtx24gr7-92d91794",
+    "bytes": 10599,
+    "type": "file",
+    "kind": "stale-doc",
+    "regenerable": false,
+    "note": "Engagement push plan from 16 Aug 2026; superseded — every phase shipped (engagement/DM/radius-loss senders in functions/, nearby pops digest in functions-digest/). Recycled 11 Sep 2026 at the owner’s request.",
+    "recycledAt": "2026-09-11T14:34:09.238Z",
+    "status": "deleted",
+    "lastValidation": {
+      "project": null,
+      "ok": true,
+      "checkedAt": "2026-09-11T14:35:10.184Z",
+      "results": [
+        {
+          "label": "Standalone document",
+          "ok": true,
+          "status": 0,
+          "output": "No project build applies to a root-level markdown file; the bin API fails closed for it. Permanently deleted by the agent after the owner named the item and confirmed twice on 11 Sep 2026."
+        }
+      ]
+    },
+    "deletedAt": "2026-09-11T14:35:10.184Z"
   }
 ]
