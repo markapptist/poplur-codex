@@ -57,6 +57,9 @@ a day-14 number for the form; the month is for the interview, not the applicatio
       interstitials fire on the passive feed within a minute and click through; "Keep my pop" is hidden under the
       navigator on 720×1600. Post/engagement/push/delete NOT verified (would replace Mark's real home pop). Both
       permission fixes are Kotlin-side and must ship in a new Play build before any Android invite.
+      **20 Sep 21:39Z: fixed in Android 88cde06 and shipped as 1.0.3 (versionCode 4) to the Play internal track;** the A03
+      re-check of both prompts is pending (phone was unplugged at install time). iOS TestFlight build 0.1 (202609201549)
+      uploaded 20:17Z — attach to the Beta Testers group + App Store 1.0 submission (manual release) still to do in ASC.
 - [ ] [Claude/Codex] Push notifications for a real (non-sim) account: post, like, radius-grew. Verify on device.
 - [ ] [Claude/Codex] Crash reporting: confirm TestFlight crash logs + Crashlytics land somewhere you will read.
 - [ ] [Claude/Codex] Feed pool: human pops must never be evicted by synthetic volume (fix in poplur-clay-map
