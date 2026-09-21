@@ -46,7 +46,7 @@ Poplur is a social map: you post from where you are, your post gets a radius, ev
 - Standings posted in #focus-group every Monday.
 - Points come from testing work, not from how much you use the app — use it the way you naturally would.
 
-**Voice chat** — [Thursdays 7–7:30 pm] in 🔊 Voice on **Oct 1, Oct 8, Oct 15 and Oct 29**. Talk through what you found; 5 pts for showing up, no penalty for skipping.
+**Voice chat** — Tuesdays 7–7:30 pm in 🔊 focus-group on **Oct 6, Oct 13, Oct 20 and Oct 27**. Talk through what you found; 5 pts for showing up, no penalty for skipping.
 
 **Ask anything in #focus-group** — bugs, confusion, "why did my radius shrink", all of it is useful. The first two weeks (Oct 1–14) are the busy part with a daily prompt; after that it's one prompt a week and the board stays open. The points board closes Oct 31; you keep the app. If anything about the beta changes, I'll post it here with at least a week's notice.
 
@@ -59,7 +59,7 @@ Poplur is a social map: you post from where you are, your post gets a radius, ev
 | Delivery | Credits + poplur.ca page updated in the first week of Nov; references written on request after 31 Oct | No money changes hands, so no payout rule, no tie-splitting, no contest-law question |
 | Budget | $0 (demo night pizza aside) | The 17 Sep $250 cap and the under-8 fallback are retired with the cash |
 | Reports | **On the site (20 Sep): `poplur.ca/report`**, four rounds — First pop (Sun 4 Oct), Reach (Sun 11 Oct), Two weeks in (Wed 14 Oct), Final (Sat 31 Oct); each a series of tests to run on the phone (worked / didn't work / couldn't try + note), three ratings, a few questions. The tester's own link (token bound to their NDA email) rides in the links email; the pinned link works too and is marked unverified. Record = receipt to the tester + copy to Poplur with the JSON attached (`src/report/betaTestPlan.ts`, `src/app/report.tsx`, `src/app/api/report+api.ts`) | Structured, per-tester, no third-party form; the JSON copies tally the board |
-| Voice | Fixed 30-min slot, 5 pts per attendance | Depth + quotable clips for the founder video; points make it worth showing up without making it mandatory |
+| Voice | Tuesdays 7–7:30 pm, Oct 6 / 13 / 20 / 27 (OWNER 21 Sep), 5 pts per attendance | Depth + quotable clips for the founder video; points make it worth showing up without making it mandatory |
 | NDA tool | OWNER 20 Sep: Mark pays for a Jotform tier if the day-2 join count needs it (reverses 17 Sep "must stay free"); buy after the count, not before. Fallback stays free: a regular Jotform form with a Signature field (100 submissions/month) or a Google Form. Unlimited is not needed at 20–30. Jotform **Sign** free caps at 10/month and the cohort is front-loaded | |
 | Access gate | Discord "Tester" role unlocks #focus-group (TestFlight link + Play internal-testing opt-in link) after the NDA arrives | Makes "NDA before access" real |
 | Headcount | **Aim 20 signed NDAs → ~15 active; floor 10 active in one campus cluster; soft ceiling ~30** | Funnel: ~40 students in the two channels × ~35% opt-in ≈ 14 + referrals ≈ 20. Under 10 the radius loop never fires human-to-human and the YC line is "we had six users"; over 30 the daily bug/report load eats video + application time. Density beats total: 12 on one campus > 20 across five |
@@ -68,7 +68,7 @@ Poplur is a social map: you post from where you are, your post gets a radius, ev
 ## Mark's checklist before posting
 - [ ] Discord: permanent invite link (channel → Invite → Edit link → Expire: Never, Max uses: 100) → replace [invite]
 - [ ] Discord: "Tester" role; #focus-group visible to Tester only; #welcome / #nda visible to everyone
-- [ ] Voice slot day/time → replace [Thursdays 7–7:30 pm]
+- [x] Voice slot: Tuesdays 7–7:30 pm (OWNER 21 Sep — Thursdays are out); Oct 6, 13, 20, 27
 - [ ] Confirm the recognition set (resume line wording, reference offer, credits placement, demo night) and the point values (every number lives in this file and the two messages)
 - [ ] Discord: create #bugs (Tester-only); ✅ reaction = confirmed. Claude tallies the board from the report form + #bugs + voice attendance and drafts the Monday standings post
 - [ ] NDA form rebuilt on a free tier + "referred by" and "Google account email (Android)" fields → replace [NDA link]
@@ -79,3 +79,7 @@ Poplur is a social map: you post from where you are, your post gets a radius, ev
 - [ ] IP agent meeting (disclosure / what an NDA-gated beta means for patents). The conflict-of-interest question is moot with no cash; ask only if convenient
 - [ ] Book the college camera equipment for Mon 12–Fri 16 Oct (founder video + demo, mid-beta)
 - [ ] Every date in both messages re-read against day 0 = Thu 1 Oct (done 20 Sep; re-check if the invite slips past Mon 28 Sep)
+
+## Posted to the Discord server — 21 Sep 2026 09:24–09:25 (Claude, approved by Mark in chat)
+
+The 15 Sep welcome post in #focus-group was edited in place to the v5 wording (both platforms, Oct 1–31, sign the tester agreement at poplur.ca, links by email, optional / no grades), and a second message "How the beta works (Oct 1 – Oct 31)" was posted and pinned (recognition, points, reports on poplur.ca/report, voice chat Tuesdays 7–7:30 pm Oct 6/13/20/27, daily routine, don'ts). #bugs is empty. The server has no #welcome or #nda channel any more (the old post pointed at a deleted one); the NDA lives on the site. Both texts: .
