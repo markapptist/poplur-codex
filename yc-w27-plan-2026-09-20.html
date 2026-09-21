@@ -1,0 +1,317 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>Poplur beta to YC W27: the plan</title>
+<style>
+  @page { size: Letter; margin: 18mm 17mm 18mm 17mm; }
+  html { font-family: -apple-system, "Helvetica Neue", Helvetica, Arial, sans-serif; font-size: 10.6pt; line-height: 1.42; color: #111; }
+  body { margin: 0; }
+  h1 { font-size: 21pt; margin: 0 0 2pt; letter-spacing: -0.01em; }
+  .sub { color: #555; margin: 0 0 14pt; font-size: 10pt; }
+  h2 { font-size: 13.5pt; margin: 18pt 0 6pt; padding-top: 6pt; border-top: 1px solid #ddd; page-break-after: avoid; }
+  h3 { font-size: 11pt; margin: 12pt 0 4pt; page-break-after: avoid; }
+  p { margin: 0 0 7pt; }
+  ul, ol { margin: 0 0 8pt 16pt; padding: 0; }
+  li { margin: 0 0 3pt; }
+  table { border-collapse: collapse; width: 100%; margin: 4pt 0 10pt; page-break-inside: auto; }
+  th, td { text-align: left; vertical-align: top; padding: 4pt 6pt; border-bottom: 1px solid #e3e3e3; font-size: 9.8pt; }
+  th { font-weight: 600; color: #333; border-bottom: 1px solid #999; }
+  tr { page-break-inside: avoid; }
+  .key { background: #f4f6f8; border-left: 3px solid #111; padding: 8pt 10pt; margin: 6pt 0 12pt; }
+  .key p:last-child { margin-bottom: 0; }
+  .tag { display: inline-block; font-size: 8.5pt; font-weight: 600; color: #fff; background: #333; border-radius: 3px; padding: 0 5px; margin-right: 4px; vertical-align: 1px; }
+  .tag.m { background: #b3261e; } .tag.a { background: #1f5fbf; } .tag.d { background: #2e7d32; }
+  .muted { color: #666; }
+  code { font-family: Menlo, monospace; font-size: 9.3pt; background: #f2f2f2; padding: 0 3px; border-radius: 2px; }
+  .cols { display: flex; gap: 14pt; } .cols > div { flex: 1; }
+  .small { font-size: 9.3pt; }
+  .nobreak { page-break-inside: avoid; }
+  .sheet { page-break-before: always; }
+  .story { background: #fff8e6; border-left: 3px solid #b8860b; padding: 8pt 10pt; margin: 6pt 0 12pt; }
+  .story p:last-child { margin-bottom: 0; }
+</style></head><body>
+
+<h1>Poplur beta → YC Winter 2027: the plan</h1>
+<p class="sub">Decided 20 September 2026, updated 21 September. Day 0 is Thursday 1 October. Submit Tuesday 27 October. Hard deadline Monday 2 November, 8:00 p.m. Pacific (11:00 p.m. Toronto).</p>
+
+<div class="key">
+<p><b>The shape of it.</b> The invite goes out <b>Thu 24 Sep</b>. Students join the Discord, sign the NDA, get the Tester role and install before <b>day 0, Thu 1 Oct</b>. The first two weeks, <b>1–14 Oct</b>, are the intensive: daily prompt, a fix build every two or three days, three short reports. <b>Thu 15 Oct</b> is the day-14 pull that feeds the application. The <b>shoot week is 12–16 Oct</b>, mid-beta, with the college's camera equipment. From 15 Oct the beta drops to a low-touch tail with the points board still open to <b>Fri 31 Oct</b>. The form is rewritten 15–21 Oct and submitted <b>Tue 27 Oct</b>. The beta keeps running through the 11 December decision. <b>Both platforms from day 0:</b> iPhone via TestFlight, Android 8.0+ via Google Play internal testing.</p>
+<p><b>Two weeks and a month are not alternatives.</b> The application only ever uses the first two weeks, because two weeks is the minimum that yields a day-14 retention number. The month is for the interview, where the first question is "what happened since you applied", and for the numbers on decision day.</p>
+</div>
+
+<h2>Calendar</h2>
+<p>Each row says what the step is, why it is on the calendar, how it gets done, and what "done" looks like. Owner tags: <span class="tag m">Mark</span> only you can do it, <span class="tag a">Agents</span> Claude or Codex does it and you approve anything that posts.</p>
+<table>
+<tr><th style="width:17%">When</th><th>What, why, how, and done when</th><th style="width:10%">Who</th></tr>
+
+<tr><td><b>Mon 21 – Wed 23 Sep</b><br><span class="muted">prep</span></td><td>
+<b>College meetings.</b> Book the IP agent and ask the four questions in the decisions section. Separately ask whoever owns conflict-of-interest policy whether faculty may involve current students in a private venture, pay them prizes, and have them sign an NDA. Why: the answer can change the prize text and the NDA before anyone sees them. Done when you have the answers in writing, even an email.<br>
+<b>Legal clinic glance at the NDA.</b> Humber and Sheridan both run student legal clinics. One question: anything in here that would embarrass me? Done when someone qualified has read it.<br>
+<b>Discord.</b> Create a permanent invite link with no expiry and about 100 uses. Create the Tester role. Make #focus-group visible to Tester only, #welcome and #nda visible to everyone, and add #bugs for Tester only where a ✅ reaction means confirmed. Pick the voice slot day and time. Done when a fresh account can join, see #welcome and #nda, and nothing else.<br>
+<b>NDA form.</b> Decide between the free route, a regular Jotform form with a Signature field at 100 submissions a month, or a paid Jotform Sign tier after the day-2 join count. Either way add two fields: "referred by" and "Google account email for Android". Done when a test submission lands in your inbox with those fields.<br>
+<b>Weekly report form.</b> A Google Form, about five minutes to fill: what broke, what you wish it did, what made you open it again, one screenshot. Done when the link works on a phone.<br>
+<b>Prizes.</b> Confirm $100, $75, $50 and $25 and the point values, or change them in the invite draft before it posts.<br>
+<b>TestFlight.</b> Attach build 202609201549 to the Beta Testers group in App Store Connect. It uploaded 20 Sep at 20:17Z and needs your sign-in. Done when the public link offers that build.<br>
+<b>Play Console.</b> Testing → Internal testing: create the tester email list, copy the opt-in link, and pin it beside the TestFlight link. Android 1.0.3 is already on the track. Done when a listed email can opt in and see Poplur in the Play Store.<br>
+<b>Camera equipment.</b> Book it for Mon 12 to Fri 16 Oct now, while the booking is easy.
+</td><td><span class="tag m">Mark</span></td></tr>
+
+<tr><td></td><td>
+<b>Android permission fixes and a new Play build.</b> The 20 Sep walkthrough on the A03 found that Android never shows the system location prompt, so the composer ends at "Waiting for your location" and nobody can post, and never asks notification permission, so pushes are dropped on Android 13. Both fixes are in the post-login activity's bridge handlers. Shipped 20 Sep 21:39Z as version 1.0.3, version code 4, to the internal track; re-run the walkthrough on the A03 to confirm both prompts. Done when a fresh install on the A03 shows both prompts and a pop posts from "My location".<br>
+<b>iOS walkthrough.</b> On the attached TestFlight build with a fresh account: sign up, location prompt, first pop, a second account sees it, like, radius grows, push arrives, delete post. Fix anything that fails and re-attach. Done when every step has a screenshot.<br>
+<b>Claim-ladder functions.</b> Rules and backfill are live, but the trigger deploy failed once on the secret gate and the re-run's result was never recorded. Confirm the functions actually shipped. Done when the deployed trigger writes the earned and committed fields on a new post.<br>
+<b>Campus lane.</b> Confirm synthetic pops are landing near Humber North and Lakeshore and Sheridan Trafalgar, HMC and Davis on the Test Center map, so a student's first map is not empty.<br>
+<b>Sign-up email.</b> The landing page's sign-up currently mails the TestFlight link to anyone, which bypasses the NDA. Change it to point at the Discord.<br>
+<b>Messages.</b> Draft the daily prompts, the day-7 check-in, the mid-point question and the Monday standings format so you only approve on the day.
+</td><td><span class="tag a">Agents</span></td></tr>
+
+<tr><td><b>Thu 24 Sep</b><br><span class="muted">invite day</span></td><td>
+<b>Post the invite</b> in both course channels, Sheridan and Humber, same text, from the invite draft. That is the whole launch: nobody is asked in person, so retention is not biased by the instructor in the room. Why Thursday: it leaves a full week for the funnel before day 0. Done when both posts are up and the Discord shows its first joins.<br>
+<b>Count joins over 48 hours.</b> That number sizes the NDA plan. Under 10 signed by Sunday: post the invite again in every class session you teach that week. Latest sensible date to post if something slips: Mon 28 Sep.
+</td><td><span class="tag m">Mark</span></td></tr>
+
+<tr><td><b>Fri 25 – Wed 30 Sep</b><br><span class="muted">onboarding</span></td><td>
+<b>Work the funnel daily.</b> For each NDA that arrives: give the Discord Tester role, and for Android testers add the Google email from the NDA to the Play internal list. Installs and first pops are welcome before day 0; points are not counted yet. Done when every signed tester has the role and can see the install links.<br>
+<b>Be the first pop on each campus.</b> Post one from Humber and one from Sheridan on the day you are there, so the first volunteer's map is not empty.<br>
+<b>Buy the NDA tier only if needed.</b> If joins pass what the free route covers, buy one month and cancel after.<br>
+<b>Day 0 message ready.</b> Approve the board-open message and the first daily prompt before Thursday.
+</td><td><span class="tag m">Mark</span></td></tr>
+
+<tr><td><b>Thu 1 Oct</b><br><span class="muted">day 0</span></td><td>
+<b>Open the board.</b> Post the board-open message in #focus-group. Points start counting. First voice chat at the slot you picked.<br>
+<b>Set the scorecard window.</b> Set <code>testControl/betaScorecard.startAtMillis</code> to 1 Oct 00:00 Toronto so the public scorecard on the landing page counts from day 0. An agent can do this if you prefer. Done when the landing page's "since" date reads 1 Oct.<br>
+<b>Why day 0 matters:</b> every retention number is measured from it, and the day-14 pull on 15 Oct is what the application uses.
+</td><td><span class="tag m">Mark</span> <span class="tag a">Agents</span></td></tr>
+
+<tr><td><b>1 – 14 Oct</b><br><span class="muted">the intensive</span></td><td>
+<b>Daily prompt</b> in #focus-group every morning, for example "today: post from somewhere you have never posted from". Agents draft, you approve and post.<br>
+<b>Daily triage.</b> Agents read TestFlight feedback, #focus-group and #bugs every day, confirm bugs with a ✅, and ship a fix build every two or three days. The same version 0.1 needs no re-review and testers auto-update. You get a short metrics post each day; the number to watch in week one is the share who posted within 24 hours.<br>
+<b>Reports</b> due Sun 4 Oct, Sun 11 Oct and Wed 14 Oct, the last one closing the intensive. Agents tally the board from the form, #bugs and voice attendance and draft the Monday standings for 5 and 12 Oct.<br>
+<b>Voice chats</b> Thu 1 and Thu 8 Oct, 30 minutes. They produce the quotable lines for the video and the application.<br>
+<b>Day-7 check-in</b> around 8 Oct, plus a DM from you to anyone who signed the NDA but never installed.<br>
+<b>Mid-point question</b> around 10 Oct: what's broken, what do you wish it did, what made you open it again. Collect three quotable answers and ask permission to use first names.<br>
+<b>Watch two things:</b> whether the ×10 decay makes radii vanish overnight, and whether anyone's feed goes empty. Both are findings if they happen.
+</td><td><span class="tag a">Agents</span> <span class="tag m">Mark</span></td></tr>
+
+<tr><td><b>Mon 12 – Fri 16 Oct</b><br><span class="muted">shoot week</span></td><td>
+<b>Founder video, one minute, required.</b> You to camera, no slides, no music, from bullet points not a script, three or four takes. The beats and the rules are in section 4 of the application draft. The line "[N] of my students are on it" needs the real two-week number, which is why the shoot sits here and not in September.<br>
+<b>Demo video, up to three minutes, optional but strongly recommended.</b> Screen-record a real iPhone with real student pops on the map: open on campus, post a pop, a second phone inside the radius sees it, a like grows the radius, the best reach story, a business pop if you got a café, one sentence on what's next. The shot list is in section 4.<br>
+<b>Why not after the beta:</b> after 31 Oct there are two days to the hard deadline and none to the 27 Oct target. Done when both files are under the form's size limit and uploaded by 21 Oct.
+</td><td><span class="tag m">Mark</span></td></tr>
+
+<tr><td><b>Thu 15 Oct</b><br><span class="muted">day-14 pull</span></td><td>
+<b>The numbers that go into the application,</b> humans only, each as count over denominator with dates, never a bare percentage: installs and sign-ups; posted a pop within 24 hours of first open; day-7 and day-14 return for accounts whose day 14 has passed; pops per active user; engaged pops that grew and re-posts within 72 hours; discovery by radius versus profile visits; referral installs and off-prompt posts. Plus one reach story with a screenshot, one product change the data caused, and three verbatims. Source: the Test Center Beta tab and the scorecard. Done when the table in the runbook's scorecard section is filled in.
+</td><td><span class="tag a">Agents</span></td></tr>
+
+<tr><td><b>15 – 31 Oct</b><br><span class="muted">the tail</span></td><td>
+<b>Drop to low touch.</b> One prompt a week, Monday standings on 19 and 26 Oct, voice chats Thu 15 and Thu 29 Oct. The board stays open so retention after the intensive is real, which is exactly what an interviewer asks about.<br>
+<b>Wave 2.</b> Online students near the campus for density, and a labelled far cohort of about five who agree their map will look empty. Optional and powerful: one campus café or shop posting a real business pop, asked in person.<br>
+<b>Final report</b> due Sat 31 Oct. Prizes paid by Interac e-Transfer by Fri 7 Nov.
+</td><td><span class="tag m">Mark</span> <span class="tag a">Agents</span></td></tr>
+
+<tr><td><b>15 – 21 Oct</b><br><span class="muted">write the answers</span></td><td>
+<b>Rewrite the form</b> with the day-14 numbers: <i>How far along</i> and <i>When will you have a version</i> get the numbers; <i>Are people using your product?</i> flips to Yes; one student quote goes into <i>Why this idea</i>. Agents draft and show you the diff before "Save changes". The form is the source of truth, so the .codex draft is re-synced from it after every edit.<br>
+<b>Upload both videos</b> to the form.<br>
+<b>Independent full read</b> of the saved form against the numbers; anything unverifiable comes out.
+</td><td><span class="tag a">Agents</span> <span class="tag m">Mark</span></td></tr>
+
+<tr><td><b>20 – 26 Oct</b><br><span class="muted">final pass</span></td><td>
+<b>Read the whole application aloud once.</b> Anything you would not defend in a ten-minute interview comes out.<br>
+<b>Final numbers refresh</b> Mon 26 Oct, the evening before submit.<br>
+<b>Checklist:</b> founder profile complete, both videos uploaded, the product link works from a phone with no account, no placeholders left, "Submit application" enabled. Then sleep on it.
+</td><td><span class="tag m">Mark</span></td></tr>
+
+<tr><td><b>Tue 27 Oct</b><br><span class="muted">submit</span></td><td>
+<b>You click Submit.</b> Nobody else ever does; agents only click "Save changes". Six days of buffer to the hard stop on Monday 2 Nov at 8:00 p.m. Pacific, 11:00 p.m. Toronto.
+</td><td><span class="tag m">Mark</span></td></tr>
+
+<tr><td><b>Nov – 11 Dec</b><br><span class="muted">after</span></td><td>
+<b>Do not stop the beta.</b> Interviews are ten minutes on video, November to early December, and the first question is what happened since you applied. Decisions by 11 Dec. Batch January to March in San Francisco.
+</td><td></td></tr>
+</table>
+
+<h2>What YC needs</h2>
+<p>Partners spend about ten minutes per application and look for four things: you launched to real people, you have a retention read, you shipped fixes fast while they used it, and you explain it clearly on video. A two-week opt-in student beta produces all four.</p>
+<div class="cols">
+<div>
+<h3>Form fields that carry the beta</h3>
+<ul>
+<li><i>Are people using your product?</i> Today: <b>No</b>. Flipping it to Yes is the single change a partner reads most, and it must be backed by numbers in <i>How far along</i>.</li>
+<li><i>How far along are you?</i> Rewritten with the day-14 pull.</li>
+<li><i>When will you have a version people can use?</i> Already says "this semester", so 1 Oct fits without edits now.</li>
+<li><i>Do you have revenue?</i> No. A campus café posting a real business pop is the revenue story on screen, if you can get one.</li>
+<li>Founder video, required. YC profile, required. Demo, optional.</li>
+</ul>
+</div>
+<div>
+<h3>Numbers to pull, humans only</h3>
+<ul>
+<li>Installs and sign-ups.</li>
+<li>Posted a pop within 24 h of first open, as count / n.</li>
+<li>D7 and D14: opened plus any action, as count / eligible.</li>
+<li>Pops per active user; engaged pops that grew; re-post within 72 h.</li>
+<li>Discovery by radius: feed/map interception vs profile visit.</li>
+<li>Referral installs and off-prompt posts.</li>
+<li>One reach story, one learning that changed the product, three verbatims.</li>
+</ul>
+</div>
+</div>
+<p class="small"><b>Never write in the application:</b> the IP rationale for having no users; any synthetic-cohort number where it could read as human traction, the 8-actor cohort is only the pre-launch simulation harness and gets its own sentence; any mention of teaching online or part-time during the batch; revenue estimates borrowed from another company's user count. Never write "validated"; write the numbers, n, dates and the one insight.</p>
+
+<h2 class="sheet">What to present to YC at the end of the beta</h2>
+<p>A one-page sheet for 15–27 October. YC scores founders and evidence, not ideas. A partner spends about ten minutes on the form and, if it goes well, ten minutes on a video interview in November. By 31 October you need to answer four questions with numbers you can defend.</p>
+
+<h3>The four questions</h3>
+<ul>
+<li><b>Did real people use it, and did they come back?</b> For consumer social this is the whole ballgame. Retention beats installs, beats posts, beats everything. Day 7 and day 14 return, with honest denominators.</li>
+<li><b>Does the core loop work between humans?</b> Post, seen inside the radius, a classmate engages, the radius grows, the poster posts again. If that loop fired without you in it, the product exists. If it only fired with synthetic actors, it does not.</li>
+<li><b>How fast do you ship and learn?</b> YC reads iteration speed as the strongest founder signal. A fix build every two or three days, and at least one product change the data forced.</li>
+<li><b>Can you explain it in a minute and defend it in ten?</b> The founder video and the interview. Clarity and honesty about small numbers beat polish.</li>
+</ul>
+
+<h3>What the beta can prove, and how to report it</h3>
+<p>Fifteen to twenty students over two weeks cannot prove product-market fit, growth or revenue. Do not claim them. Counts with denominators and dates, never a bare percentage: "9 of 14 posted within a day" is credible, "64% activation" from 14 people is not.</p>
+<table>
+<tr><th style="width:30%">Signal</th><th style="width:38%">What it shows a partner</th><th>Report as</th></tr>
+<tr><td>Posted within 24 h of first open</td><td>People understood it without being told</td><td>count / installs</td></tr>
+<tr><td>Day 7 and day 14 return</td><td>They came back</td><td>count / accounts whose day has passed</td></tr>
+<tr><td>Engaged pops that grew; re-post within 72 h</td><td>The loop fires between humans</td><td>count / engaged pops</td></tr>
+<tr><td>Discovery by radius vs profile visit</td><td>The mechanic drives discovery, not the follow graph</td><td>share of human engagements</td></tr>
+<tr><td>Referral installs, off-prompt posts</td><td>Organic pull</td><td>counts</td></tr>
+<tr><td>Active after 14 Oct</td><td>Not just the prizes</td><td>active in the tail / day-14 actives</td></tr>
+</table>
+<p class="small"><b>Two risks specific to you.</b> A professor testing on his own students invites a captive-audience read: the opt-in, no-grade framing and the retention after the prize board stops on 14 Oct are the defence, which is why the board stays open to 31 Oct. And the synthetic cohort must never touch a human number: one sentence, its own paragraph, as the pre-launch harness.</p>
+
+<div class="cols">
+<div>
+<h3>The form is the presentation</h3>
+<ul class="small">
+<li><b>How far along.</b> The table above filled in, one reach story with a screenshot, the one change the data caused. Rewritten 15–21 Oct from the day-14 pull.</li>
+<li><b>Are people using your product?</b> Yes. The first field a partner reads.</li>
+<li><b>Why this idea.</b> One student quote, first name with permission, about why they opened it.</li>
+<li><b>Anything else.</b> The one learning and what changed because of it, in two sentences.</li>
+<li><b>Founder video, 1 min, required.</b> You to camera, no slides. "[N] of my students are on it" with the real number.</li>
+<li><b>Demo, 3 min, optional but strongly recommended.</b> Real student pops, a like growing a radius on a second phone, the best reach story.</li>
+<li><b>Links.</b> www.poplur.ca and the TestFlight link, both checked from a phone with no account.</li>
+</ul>
+</div>
+<div>
+<h3>Interview readiness, November</h3>
+<ul class="small">
+<li>First question, every time: <b>what happened since you applied?</b> The tail numbers, 15–31 Oct, and retention after the prizes stopped are the answer.</li>
+<li>Know every number cold: installs, day-14 return, the loop count, the reach story. No looking anything up.</li>
+<li>One line each for: the biggest risk, why solo, why now and not 2017, what the $500K buys in the first city.</li>
+<li>Keep the beta running. Numbers on 11 Dec count as much as numbers on 27 Oct.</li>
+</ul>
+<h3>The deal, for reference</h3>
+<p class="small">Every accepted company gets $500,000: $125,000 for 7% on a post-money SAFE, plus $375,000 on an uncapped SAFE with a most-favoured-nation clause. No milestones, no fees, committed on acceptance. YC keeps pro rata rights. At 100% today you would hold 93% after YC.</p>
+</div>
+</div>
+
+<div class="story">
+<p><b>The story a partner should walk away with, in five sentences.</b> I applied in 2017 with a prototype and no users. I spent nine years teaching the people social media fails, and built the product. In October I launched to my students, opt-in, on both platforms. The radius loop fired between real people, [N] came back on day 14, and this is the one thing they taught me that changed the product. I am applying again because it is real now, and the next three months should be about the first city.</p>
+</div>
+
+<h2>The eight decisions</h2>
+<table>
+<tr><th style="width:21%">Item</th><th>Decision and reasoning</th></tr>
+<tr><td>NDA signing fee</td><td>Unlimited is not needed. The funnel is about 40 students in the two channels, roughly 35% opt-in, about 20 signed NDAs, soft ceiling 30, floor 10 active in one campus cluster. Jotform Sign free tier is 10 per month; Bronze was noted at 100 per month on 15 Sep. Wait for the day-2 join count, then buy one month only if the free route cannot cover it. Free fallback: a regular Jotform form with a Signature field, 100 submissions per month, or a Google Form. Check Jotform's pricing page first, the notes are five days old. This reverses the 17 Sep "must stay free" decision.</td></tr>
+<tr><td>IP agent meeting</td><td>Mark does this himself, before the invite, and gets the answers in writing. Four questions: (1) Does college policy allow faculty to involve current students in a private venture, pay them prizes, and have them sign an NDA? This can change the prize text. (2) Is an NDA-gated beta a public disclosure for patent purposes? (3) Does a click-through NDA in the app or Discord suffice, or must it be a signed document? This settles the Jotform question. (4) What is actually exposed? The radius rules run server-side in Cloud Functions and Firestore rules; the app ships only the display side. Also from the runbook: a legal clinic glance at the NDA, and a two-line heads-up to the program coordinator.</td></tr>
+<tr><td>How many students</td><td>Only the invite tells you. Discord joins over 48 hours are the count that sizes the NDA plan. Density beats spread: 12 on one campus beats 20 across five. Under 10 the radius loop never fires human-to-human. Over 30 the daily load eats the video and application time. Both platforms from day 0, decided 20 Sep: iPhone XS or newer on iOS 18.5+ via TestFlight, Android 8.0+ via the Play internal track that went live 20 Sep. Android testers are added by the Google account email collected on the NDA, and the Android build gets its own fresh-account walkthrough on the A03 before the invite.</td></tr>
+<tr><td>Incentives</td><td>Draft v4 of the invite, ready for your confirmation: $250 pool, $100 / $75 / $50 / $25 to the top four on a points board at 31 Oct, ties share, paid by Interac e-Transfer by Fri 7 Nov. Points reward testing work, not usage, so retention stays honest. Fewer than about 8 testers: drop to $100 / $75 / $50 and say so before anyone earns points. If the college objects to paying current students: founding-tester credit in the app and on the landing page, plus a demo night.</td></tr>
+<tr><td>The site shows students using the app</td><td>Already live. <b>www.poplur.ca</b> serves the "Live from the beta" scorecard and the live pops world. The scorecard function republishes every 15 minutes, counts people only, and labels the synthetic cohort apart. It reads 0 today because no human has installed. Before the invite: set the scorecard start date, close the sign-up email that mails the TestFlight link without the NDA, and supply 4–5 device captures for the feature media slots. Decide whether the in-app ONLINE NOW count keeps including the sims during the beta; it does today by the 11 Sep decision.</td></tr>
+<tr><td>Updating the application</td><td>During the beta, not after it. Day-14 numbers go in 15–21 Oct. Final refresh of the numbers Mon 26 Oct, the evening before submit. The form is the source of truth; re-sync the .codex draft after every edit. Only "Save changes" until Mark clicks Submit.</td></tr>
+<tr><td>The videos</td><td>Shoot week Mon 12 – Fri 16 Oct with the college's equipment, mid-beta. The founder video is one minute, Mark to camera, no slides, no music, from bullet points not a script; the "[N] of my students are on it" line needs a real two-week number. The demo needs real student pops on the map, which exist by day 12. Booking the equipment is a this-week task.</td></tr>
+<tr><td>How long the beta runs</td><td>Measured window 1–14 Oct. Intensive fortnight, then a low-touch tail to 31 Oct with the board open. The beta itself stays open through the December decision. Do not close the board on 14 Oct: retention after the prizes stop is exactly what an interviewer asks about, and a board that closes on day 14 followed by a drop is the worst possible story.</td></tr>
+</table>
+
+<h2>The beta cadence and points</h2>
+<div class="cols">
+<div>
+<table>
+<tr><th>Earns</th><th>Points</th></tr>
+<tr><td>Report, four in total: Sun 4 Oct, Sun 11 Oct, Wed 14 Oct, Sat 31 Oct</td><td>10 each, 5 if late but before the next is due</td></tr>
+<tr><td>Confirmed bug in #bugs with a screenshot, first reporter, ✅ = confirmed</td><td>5 each</td></tr>
+<tr><td>Voice chat: Thu 1, 8, 15 and 29 Oct</td><td>5 per attendance</td></tr>
+<tr><td>Referral who names you on their NDA and sends a first report</td><td>5 each, up to 5</td></tr>
+<tr><td class="muted">Full participation</td><td class="muted">≈ 40 + 20 + bugs; referrals capped at 25 so recruiting cannot outrank testing</td></tr>
+</table>
+</div>
+<div>
+<h3>Intensive, 1–14 Oct</h3>
+<ul><li>Daily prompt: "today, post from somewhere you have never posted from."</li><li>Fix build every 2–3 days; same version 0.1 needs no re-review; testers auto-update.</li><li>Daily triage of TestFlight feedback, #focus-group and #bugs; daily metrics post to Mark.</li><li>Day-7 check-in; DM to signed-but-not-installed.</li></ul>
+<h3>Tail, 15–31 Oct</h3>
+<ul><li>One weekly prompt; Monday standings; board open.</li><li>Wave 2: online students near the campus, and a labelled far cohort of about five who agree their map will look empty.</li><li>Optional: one campus café as a business account posting a real pop.</li></ul>
+</div>
+</div>
+
+<h2>Before the invite</h2>
+<div class="cols">
+<div>
+<h3><span class="tag m">Mark</span> only you can do these</h3>
+<ul>
+<li>IP agent meeting; college conflict-of-interest answer in writing.</li>
+<li>Legal clinic glance at the NDA: "anything in here that would embarrass me?"</li>
+<li>Discord: permanent invite link, no expiry, ~100 uses; Tester role; #focus-group Tester-only; #welcome and #nda public; #bugs.</li>
+<li>Voice slot day and time.</li>
+<li>NDA form with a "referred by" field; decide the tier after the day-2 count.</li>
+<li>Weekly report Google Form.</li>
+<li>Confirm $100 / $75 / $50 / $25 and the point values.</li>
+<li>Attach build 202609201549 to the TestFlight Beta Testers group. It uploaded 20 Sep 20:17Z and needs your App Store Connect sign-in.</li>
+<li>Play Console → Testing → Internal testing: tester email list and opt-in link; add each Android NDA's Google email as it arrives.</li>
+<li>Book the camera equipment for 12–16 Oct.</li>
+<li>Optional: two-line heads-up to the program coordinator.</li>
+</ul>
+</div>
+<div>
+<h3><span class="tag a">Agents</span> can start now</h3>
+<ul>
+<li>Fresh-account walkthrough on the attached build, end to end, including the push and the delete path.</li>
+<li>Re-run the A03 walkthrough on Android 1.0.3: both prompts appear, map loads, first pop lands from "My location".</li>
+<li>Confirm the claim-ladder functions deploy finished. Rules and backfill are live; the trigger's re-run result was never recorded.</li>
+<li>Verify campus-lane pops on both campuses in the Test Center map.</li>
+<li>Close the sign-up email NDA bypass.</li>
+<li>Set the scorecard start date on day 0 if Mark prefers.</li>
+<li>Draft the daily prompts, the day-7 check-in and the Monday standings; Mark approves every message before it posts.</li>
+</ul>
+<h3><span class="tag d">Done</span> already in place</h3>
+<ul class="small">
+<li>Landing page deployed with the live scorecard and pops world.</li>
+<li>Student demo responder ON since 20 Sep 01:04: likes, comments, DMs and replies to every real post.</li>
+<li>Android 1.0.3 with both permission prompts on the Play internal track, 20 Sep 21:39Z.</li>
+<li>iOS build 0.1 (202609201549) uploaded to App Store Connect, 20 Sep 20:17Z.</li>
+<li>Delete-post and report-user paths exist in the app.</li>
+<li>Invite draft v4 and runbook re-dated for 1 Oct, both platforms from day 0.</li>
+</ul>
+</div>
+</div>
+
+<h2>Risks</h2>
+<table>
+<tr><th style="width:34%">Risk</th><th>Move</th></tr>
+<tr><td>The college says no to paying current students, or to NDAs</td><td>Known by Wed 23 Sep. Switch to recognition incentives; the invite text changes before it posts.</td></tr>
+<tr><td>Walkthrough fails on a first-run step</td><td>Fix and re-attach before Thursday; slip the invite to Mon 28 Sep at the latest.</td></tr>
+<tr><td>Wave 1 too small or too dispersed</td><td>Under 10 active: take the class you see most and post the invite in every session. Density over total.</td></tr>
+<tr><td>Decay ×10 makes radii vanish overnight</td><td>Students will say so. Either fix it and say so in the form, or cite it as a learning.</td></tr>
+<tr><td>Jotform free tier, 10 signatures a month</td><td>Buy one month once the join count passes what the free route covers.</td></tr>
+<tr><td>Mark's time in October</td><td>Agents run the daily loop. Mark owns three things: the meetings and messages, the two videos, and the final read.</td></tr>
+<tr><td>Android is rougher than iOS on a low-end phone: the A03 showed a 14 s black splash and ads covering the map</td><td>Walkthrough on the A03 before Thursday; interstitials off for testers; the invite says Android 8.0 or newer.</td></tr>
+<tr><td>App Store review still pending</td><td>TestFlight is the beta channel regardless; the review status is one clause in the form, not a dependency.</td></tr>
+</table>
+
+<h2 class="nobreak">Where things live</h2>
+<table class="small">
+<tr><th style="width:30%">Thing</th><th>Location</th></tr>
+<tr><td>YC application form, source of truth</td><td>https://apply.ycombinator.com/apps/ebd517d0-56ce-4840-90a0-2d9b45d2c535/edit</td></tr>
+<tr><td>Application draft, script, shot list, verbatim answers</td><td><code>.codex/yc-w27-application-draft.md</code></td></tr>
+<tr><td>Runbook, the live week-by-week plan</td><td><code>.codex/yc-w27-runbook.md</code></td></tr>
+<tr><td>This plan, PDF and HTML source</td><td><code>.codex/yc-w27-plan-2026-09-20.pdf</code>, <code>.html</code></td></tr>
+<tr><td>Invite and server rules, draft v4</td><td><code>.codex/beta-focus-group/invite-and-beta-rules.md</code></td></tr>
+<tr><td>NDA, PDF and signing link</td><td><code>.codex/beta-focus-group/Poplur-Beta-Tester-NDA.pdf</code>, <code>SIGNING-LINK.md</code></td></tr>
+<tr><td>TestFlight public link</td><td>https://testflight.apple.com/join/Q4v1ChjU</td></tr>
+<tr><td>Company URL and live scorecard</td><td>https://www.poplur.ca</td></tr>
+<tr><td>Test Center, humans and sims counted apart</td><td>http://127.0.0.1:8084/test-control, Beta tab</td></tr>
+<tr><td>Scorecard config and window start</td><td>Firestore <code>testControl/betaScorecard</code>; published doc <code>public/betaScorecard</code></td></tr>
+<tr><td>Android beta</td><td>Play Console → Testing → Internal testing, tester email list; 1.0.3 (versionCode 4) on the track</td></tr>
+<tr><td>YC's deal terms</td><td>https://www.ycombinator.com/deal</td></tr>
+</table>
+
+</body></html>
