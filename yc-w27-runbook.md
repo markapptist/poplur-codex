@@ -43,6 +43,7 @@ a day-14 number for the form; the month is for the interview, not the applicatio
       for the public) to glance at the NDA. Ask one question: "anything in here that would embarrass me?"
 - [ ] [Mark] Check Humber's and Sheridan's policy on faculty involving students in a private venture
       (usually "conflict of interest" or "research involving students"). Keep the answer in writing.
+      **21 Sep: moot — no cash prizes (recognition only), so the instructor-pays-students question no longer arises; ask only if convenient.**
 
 **App** — the beta produces YC-grade numbers only if the measurement exists *before* the first install
 - [x] [Claude/Codex] Beta metrics report in the Test Center (Beta tab, 16 Sep; contamination split in progress): installs (TestFlight),
@@ -225,8 +226,9 @@ Real student pops on the map, not fixtures. If the wave-1 launch-day moment got 
 ## The course-channel invite (Mark posts it; edit freely)
 
 Superseded 17 Sep by `.codex/beta-focus-group/invite-and-beta-rules.md` — two messages (course-channel invite +
-pinned server rules) carrying the incentive — OWNER 17 Sep: **$250 total, to the MOST ACTIVE** → $100/$75/$50/$25 to the top
-four on a points board (report 10, confirmed bug 5, voice 5/wk, referral 5 cap 5), Monday standings post, e-Transfer by Fri 7 Nov, Google-Form reports due Sun 4 Oct, Sun 11 Oct, Wed 14 Oct + final by Sat 31 Oct (re-dated 20 Sep for day 0 = 1 Oct), optional weekly voice
+pinned server rules) carrying the incentive — **OWNER 21 Sep: NO CASH** (retires the 17 Sep $250 pool): resume line + reference for
+every tester who files all four reports, founding-tester credit by name for the top four on a points board (report 10, confirmed bug 5,
+voice 5/wk, referral 5 cap 5), first access, demo night; Monday standings post stays, Google-Form reports due Sun 4 Oct, Sun 11 Oct, Wed 14 Oct + final by Sat 31 Oct (re-dated 20 Sep for day 0 = 1 Oct), optional weekly voice
 slot, NDA-then-Tester-role gate, iPhone XS+/iOS 18.5+. Beta ends Fri 31 Oct. (Calendar check: 2 Nov 2026 is a
 **Monday**, not a Sunday.)
 
