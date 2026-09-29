@@ -128,6 +128,16 @@ async function capture(browser, task) {
   page.setDefaultTimeout(operationTimeoutMs)
   page.setDefaultNavigationTimeout(operationTimeoutMs)
   await page.addInitScript(() => {
+    // Captures must stay silent. --mute-audio covers media and Web Audio but
+    // not macOS speech synthesis, so drop every utterance before page code runs.
+    try {
+      if (window.speechSynthesis) {
+        const silent = function () {}
+        if (window.SpeechSynthesis) window.SpeechSynthesis.prototype.speak = silent
+        window.speechSynthesis.speak = silent
+        window.speechSynthesis.cancel()
+      }
+    } catch { /* ignore */ }
     window.addEventListener('DOMContentLoaded', () => {
       document.querySelectorAll('audio, video').forEach(media => {
         media.muted = true
@@ -209,7 +219,8 @@ async function main() {
 
     browser = await chromium.launch({
       headless: true,
-      executablePath: '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'
+      executablePath: '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',
+      args: ['--mute-audio']
     })
     let nextTask = 0
     const worker = async () => {

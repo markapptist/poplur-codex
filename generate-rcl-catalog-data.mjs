@@ -44,6 +44,8 @@ function walkFiles(root, include) {
   const visit = dir => {
     for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
       if (entry.name.startsWith('.') || ['node_modules', 'build', 'dist', 'DerivedData', 'Pods'].includes(entry.name)) continue
+      // File-sync conflict copies such as "index (1).tsx" are not app sources.
+      if (/ \(\d+\)(\.[^./]+)?$/.test(entry.name)) continue
       const full = path.join(dir, entry.name)
       if (entry.isDirectory()) visit(full)
       else if (include(full)) files.push(full)
@@ -225,7 +227,15 @@ function posterData(screen, surfaceId) {
 
 const goodCopySource = fs.readFileSync(goodCopyPath, 'utf8')
 const goodCopyArray = extractArray(goodCopySource, 'const surfaces = [')
-const goodCopySurfaces = vm.runInNewContext(`(${goodCopyArray.value})`, {
+// Good Copy builds its post-login entries with helpers declared just above the
+// surfaces array (postloginSrc, subscreenSrc, holdScreenSrc, postloginScreens).
+// Evaluate that block in the same context so the array can call them; without
+// it every run since the 11 Aug template threw "postloginSrc is not defined".
+// The generator's own preloginScreens stays authoritative for Rough Copy.
+const goodCopyHelperStart = goodCopySource.indexOf('const postloginSrc =')
+const goodCopyHelperEnd = goodCopyHelperStart < 0 ? -1 : goodCopySource.indexOf('const preloginScreens =', goodCopyHelperStart)
+const goodCopyHelpers = goodCopyHelperEnd > goodCopyHelperStart ? goodCopySource.slice(goodCopyHelperStart, goodCopyHelperEnd) : ''
+const goodCopySurfaces = vm.runInNewContext(`${goodCopyHelpers}\n;(${goodCopyArray.value})`, {
   workspace: 'http://127.0.0.1:8945/',
   artifacts: 'http://127.0.0.1:8945/.claude/artifacts/',
   preloginScreens,
