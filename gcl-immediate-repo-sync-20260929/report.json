@@ -1,0 +1,118 @@
+{
+  "checked_at": "2026-09-29T22:01:43.160148+00:00",
+  "status": "approved_branding_already_pushed; prior_unapproved_content_retained",
+  "trigger": "filesystem watcher; one-shot run; PAUSED timer unchanged",
+  "affected_screens": [
+    "Splash fallback image",
+    "Welcome and pre-login branding",
+    "Web favicon"
+  ],
+  "affected_features": [
+    "Pastel Clay logo and favicon only; no behavior changes relative to the previously reported file hashes"
+  ],
+  "observed_canonical_hashes": {
+    "good-copy-launch.html": "3a9630ea0edab033ae88c7dddeae643fe17f3b601eac91f949bccbc79126668f",
+    "good-copy-live.html": "25836b599a8ecd510715c363a25f6934a8f09b690b5ccc57c06230b1c69718e6",
+    "good-copy-splash.html": "c12f4ba16f32011098912dd7bf8c230496155eff2f7445458265b957700efd6c",
+    "good-copy-watch-radius.html": "06201d98e6a321befbb58ce18a3b3619c803ccf13a776a4f5579050f11412c6f",
+    "good-copy-welcome.html": "a03d9b1727ff394501f750ffa6424f987be940cea34bf947ae7749681701e896"
+  },
+  "canonical_baselines_promoted": false,
+  "canonical_baseline_reason": "The exact new branding delta is approved. Its before snapshots equal the already-reported unapproved Splash/Welcome hashes; branding approval does not approve the pre-existing changes. Keep the last fully approved canonical baselines.",
+  "approval_evidence": {
+    "thread_id": "01a0ca4d-115d-7b23-8fc0-3881e31dd863",
+    "session_path": "/Users/matrix/.codex/sessions/2026/09/22/rollout-2026-09-22T14-07-23-01a0ca4d-115d-7b23-8fc0-3881e31dd863.jsonl",
+    "user_messages": [
+      {
+        "line": 483,
+        "timestamp": "2026-09-22T18:50:52.050Z",
+        "text": "please update this logo for the web version favicon and also in the pre-login"
+      },
+      {
+        "line": 506,
+        "timestamp": "2026-09-22T18:51:35.572Z",
+        "question": "Should the pre-login logo change apply to the native iPhone/Android apps as well as the web version?",
+        "answer": "Web and native apps"
+      }
+    ],
+    "approved_replacement": "Use the selected iPhone Home Screen Pastel Clay branding for web favicon, Welcome/auth pre-login logos and Splash fallback; web and native apps.",
+    "scope_verification": "Normalized before/after HTML is identical after removing the new favicon link and replacing only the wLogo/fallback image src. Before hashes match reported_unapproved_hashes exactly."
+  },
+  "existing_pushed_commits": {
+    "Poplur2025-iOS": "cfc849687a10dfb0d866c12536e3345202c120e2",
+    "Poplur2025-Android": "3c40b10a91be2705e91e665874e7fc49cb52143c",
+    "poplur-clay-map": "c6cf19a66b08bef623b8b2f2844c8b3d8173ae8b"
+  },
+  "remote_branch": "trial/shared-ui-map-only-webgl-2026-09-07",
+  "verified_remote_tips": {
+    "Poplur2025-iOS": "44b1c9112c716d968db1c1a00fe4751cdc0455aa",
+    "Poplur2025-Android": "51bf0a8cc7e49e245cabc4a4f41041ea0cdc5fb0",
+    "poplur-clay-map": "0286d68422d04d81d224d379cd3240855488b684"
+  },
+  "remote_verification": "git ls-remote plus git merge-base --is-ancestor confirms all three existing branding commits are in the current remote branch. Native logo PNG, offline Welcome/Splash logo and favicon, and web favicon bytes match approved hashes at remote tips.",
+  "asset_hashes": {
+    "logo_png": "aca15cbea21cbac518f5206c8645166affbe6f423434a7c0f56dcb2de63b07ca",
+    "favicon_ico": "eb0a1562d4f625354e2ee967462476c1fb030c028aaa8f09e397a26099fdc81e"
+  },
+  "new_commits": {},
+  "new_pushes": [],
+  "pull_requests": {},
+  "pull_request_status": "No PR exists for the three integration branches (gh pr list --state all). No branch was pushed during this audit, so no new PR was created; the existing branches contain work beyond this branding delta. Nothing was merged.",
+  "no_diff_platforms": {
+    "iPhone/iPad": "Remote PreloginWeb Welcome/Splash HTML and NativePreloginLogo image already contain the exact approved branding. Shared tablet implementation needs no separate delta.",
+    "Android phone/tablet": "Remote prelogin Welcome/Splash HTML and native-prelogin PNG already contain the exact approved branding. Shared tablet implementation needs no separate delta.",
+    "Watch/Wear": "No matching pre-login Welcome/Splash surface for this branding change.",
+    "Map/web": "Remote clay-map favicon matches; canonical web pre-login and shared auth flow already use approved Pastel Clay artwork.",
+    "React Native/Expo": "Excluded from builds, installs and releases by the native-only workspace instruction. No Expo command was run."
+  },
+  "verification": {
+    "current_checks": [
+      "All canonical files hashed and stable for more than 30 seconds",
+      "Exact approved branding-only before/after comparison passed",
+      "PNG/ICO byte hashes match remote branch implementations",
+      "Existing focused commits pass git show --check",
+      "Protected Splash/Welcome remain read-only"
+    ],
+    "prior_release_checks": ".codex/branding-build-recovery-20260922/HANDOFF.md records successful web build/thermal gate, Android required check (47 tests passed), signed iOS build and verified iPhone/iPad installs. No builds or installs were repeated for an unchanged delta.",
+    "dirty_worktrees_preserved": {
+      "poplur-clay-map": 62,
+      "Poplur2025-iOS": 79,
+      "Poplur2025-Android": 50
+    }
+  },
+  "source_repo_blocker": "Canonical /Users/matrix/Developer/good-copy*.html still has no Git owner. No repository was created and no canonical source push is possible.",
+  "gcl_refresh": {
+    "mode": "catalog-only",
+    "reason": "Read-only repo audit with no application delta; full generation would run the unrelated shared-map build and browser thermal probes from mixed worktrees, contrary to the no-new-tabs constraint. Refresh catalog/tracking only.",
+    "status": "completed",
+    "catalog_generated_at": "2026-09-29T22:01:38.560Z",
+    "tracking_generated_at": "2026-09-29T22:03:06.162Z",
+    "http_verification": "Catalog, refresh metadata and screen-tracking served bytes match local files; browser reload unavailable."
+  },
+  "gcl_visible_refresh": "Unavailable: cua.getState returned apps=[] and browsers=[]. No tab was created or opened.",
+  "sidebar_status": {
+    "required": "red",
+    "reason": "Prior unapproved canonical content and downstream/integration/device gaps remain.",
+    "inventory": "No active Rough Copy, Good Copy or Poplur main task found in local thread databases. One archived Good copy (2) task already has a red prefix. No tasks renamed, created, or resurrected.",
+    "reevaluated_at": "2026-09-29T22:03:29.807729+00:00"
+  },
+  "remaining_blockers": [
+    "Previous unapproved content in Splash/Welcome remains quarantined; current hashes are not fully approved baselines.",
+    "Canonical Good Copy source has no Git repository.",
+    "Branding commits are on the verified integration branches, not remote main; no matching branch PRs exist.",
+    "Android physical installation remains unverified in the prior release evidence.",
+    "No existing GCL/subscreens browser surface is exposed to reload."
+  ],
+  "referenced_artifact_hashes": {
+    ".claude/artifacts/gcl-catalog-data.js": "78ba4f1d735d82ca50c369eb122eb54869f9246a35444607bead9fcf56d0f2c0",
+    ".claude/artifacts/gcl-prototype.html": "9b446789f2c24cb0ba9096c8778d19ad5e5dec26c6444cc5d195ef9d2827b94f",
+    ".claude/artifacts/gcl-refresh-meta.js": "1900136b55d6041ad95f9d56415b9c3cb01150173ed538ce53556a1358c8c4bb",
+    ".claude/artifacts/gcl-screen-tracking.js": "3b5d68b527bb4fcc4b4420abbae64f4c7fc7addcbfdc3a3748170c0d12c4ed69",
+    ".claude/artifacts/models/poplur-globe-lite.glb": "82fc7a21fad1e3991aa1c3560b2027ad79bede1b669f57150d5ae2a5e258b579",
+    ".claude/artifacts/models/poplur-wordmark-lite.glb": "13d70eaf1d9aea0f4facd6cd1f1c118c4e4b6e70f47ba1c7fe769f642a1230fd",
+    ".claude/artifacts/poplur-prelogin-flow.html": "eaac3ae6323e89f5e6e62129f56f28ad3d5ad9c045f9c356b7dcc849669e32f6",
+    ".claude/artifacts/poplur-subscreen-twins.html": "749dbef1438febf2fa7e85a984f83b9cb94c37362b487be2786f5ee23723fdf4"
+  },
+  "completed_at": "2026-09-29T22:03:29.807729+00:00",
+  "main_thread_notification": "No active Poplur main thread exists in available thread inventory; current catalog is available through the shared artifact server."
+}
